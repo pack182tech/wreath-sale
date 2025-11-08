@@ -3,6 +3,8 @@ import './styles/App.css'
 import config from './config/content.json'
 
 function App() {
+  const basePath = import.meta.env.BASE_URL
+
   return (
     <Router>
       <div className="App">
@@ -10,7 +12,7 @@ function App() {
         <section className="hero">
           <div className="hero-overlay">
             <img
-              src="/images/branding/pack182logo.png"
+              src={`${basePath}images/branding/pack182logo.png`}
               alt="Pack 182 Logo"
               className="hero-logo"
             />
@@ -31,7 +33,7 @@ function App() {
             {config.products.map(product => (
               <div key={product.id} className="product-card">
                 <img
-                  src={`/images/products/${product.image}`}
+                  src={`${basePath}images/products/${product.image}`}
                   alt={product.name}
                 />
                 <h3>{product.name}</h3>
