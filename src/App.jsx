@@ -1,4 +1,8 @@
 import { BrowserRouter as Router } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
+import Cart from './components/Cart'
+import CartIcon from './components/CartIcon'
+import ProductCard from './components/ProductCard'
 import './styles/App.css'
 import config from './config/content.json'
 
@@ -6,8 +10,11 @@ function App() {
   const basePath = import.meta.env.BASE_URL
 
   return (
-    <Router>
-      <div className="App">
+    <CartProvider>
+      <Router>
+        <div className="App">
+          <CartIcon />
+          <Cart />
         {/* Hero Section with Background */}
         <section className="hero">
           <div className="hero-overlay">
@@ -36,19 +43,7 @@ function App() {
             <h3 className="category-title">Wreaths - $35 Each</h3>
             <div className="products-grid">
               {config.products.filter(p => p.category === 'wreaths').map(product => (
-                <div key={product.id} className="product-card">
-                  <img
-                    src={`${basePath}images/products/${product.image}`}
-                    alt={product.name}
-                    onError={(e) => {
-                      e.target.src = `${basePath}images/products/placeholder.png`
-                      e.target.style.opacity = '0.5'
-                    }}
-                  />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p className="price">${product.price.toFixed(2)}</p>
-                </div>
+                <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>
           </div>
@@ -58,19 +53,7 @@ function App() {
             <h3 className="category-title">Poinsettias</h3>
             <div className="products-grid">
               {config.products.filter(p => p.category === 'poinsettias').map(product => (
-                <div key={product.id} className="product-card">
-                  <img
-                    src={`${basePath}images/products/${product.image}`}
-                    alt={product.name}
-                    onError={(e) => {
-                      e.target.src = `${basePath}images/products/placeholder.png`
-                      e.target.style.opacity = '0.5'
-                    }}
-                  />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p className="price">${product.price.toFixed(2)}</p>
-                </div>
+                <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>
           </div>
@@ -80,19 +63,7 @@ function App() {
             <h3 className="category-title">Other Plants</h3>
             <div className="products-grid">
               {config.products.filter(p => p.category === 'plants').map(product => (
-                <div key={product.id} className="product-card">
-                  <img
-                    src={`${basePath}images/products/${product.image}`}
-                    alt={product.name}
-                    onError={(e) => {
-                      e.target.src = `${basePath}images/products/placeholder.png`
-                      e.target.style.opacity = '0.5'
-                    }}
-                  />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p className="price">${product.price.toFixed(2)}</p>
-                </div>
+                <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>
           </div>
@@ -104,8 +75,9 @@ function App() {
             {config.scoutLaw.text} • {config.scoutLaw.text} • {config.scoutLaw.text}
           </div>
         </div>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </CartProvider>
   )
 }
 
