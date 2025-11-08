@@ -48,7 +48,7 @@
       "category": "poinsettias",
       "description": "Beautiful 6-inch red poinsettia plant, perfect for holiday decorating.",
       "price": 7.00,
-      "image": "poinsettia-6.png",
+      "image": "6inch-red-poinsettias.png",
       "active": true
     },
     {
@@ -57,7 +57,7 @@
       "category": "poinsettias",
       "description": "Stunning 10-inch red poinsettia plant, a festive centerpiece for your home.",
       "price": 35.00,
-      "image": "poinsettia-10.png",
+      "image": "10inch-red-poinsettias.png",
       "active": true
     },
     {
@@ -66,7 +66,7 @@
       "category": "plants",
       "description": "Elegant 10-inch lavender cone plant for holiday decor.",
       "price": 40.00,
-      "image": "lavender-cone.png",
+      "image": "10inch-lavender-cones.png",
       "active": true
     },
     {
@@ -75,7 +75,7 @@
       "category": "plants",
       "description": "Hardy 6-inch Zygocactus (Christmas Cactus) plant.",
       "price": 10.00,
-      "image": "zygocactus.png",
+      "image": "6inch-zygocactus.png",
       "active": true
     }
   ],
