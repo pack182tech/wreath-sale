@@ -1,0 +1,88 @@
+{
+  "campaign": {
+    "name": "Pack 182 Wreath Sale",
+    "startDate": "2025-11-08",
+    "endDate": "2025-12-05",
+    "pickupDate": "2025-12-15",
+    "pickupTime": "TBD",
+    "pickupLocation": "TBD",
+    "status": "active"
+  },
+  "pack": {
+    "name": "Cub Scout Pack 182",
+    "location": "Readington, NJ",
+    "leaderName": "Walter Serafyn",
+    "leaderEmail": "threebridgespack182@gmail.com"
+  },
+  "products": [
+    {
+      "id": "red-bow",
+      "name": "Red Bow Wreath",
+      "description": "Beautiful evergreen wreath adorned with a festive red bow and natural pinecones",
+      "price": 35.00,
+      "image": "red-bow.png",
+      "active": true
+    },
+    {
+      "id": "gold-bow",
+      "name": "Gold Bow Wreath",
+      "description": "Elegant evergreen wreath decorated with a golden bow and natural pinecones",
+      "price": 35.00,
+      "image": "gold-bow.png",
+      "active": true
+    },
+    {
+      "id": "plaid-bow",
+      "name": "Plaid Bow Wreath",
+      "description": "Charming evergreen wreath featuring a traditional plaid bow and natural pinecones",
+      "price": 35.00,
+      "image": "plaid-bow.png",
+      "active": true
+    }
+  ],
+  "donation": {
+    "enabled": true,
+    "recipient": "First United Methodist Church",
+    "description": "Support our local church's youth programs and community outreach",
+    "suggestedAmounts": [10, 25, 50, 100]
+  },
+  "zelle": {
+    "recipientName": "Boy Scouts of America",
+    "recipientContact": "threebridgespack182@gmail.com",
+    "instructions": "Please include your order number in the Zelle memo field. Orders are confirmed upon payment receipt.",
+    "qrCodeImage": "zelle-qrcode.png"
+  },
+  "scoutLaw": {
+    "enabled": true,
+    "text": "A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent"
+  },
+  "content": {
+    "heroTitle": "Support Pack 182 Scouts",
+    "heroSubtitle": "Beautiful handmade wreaths for the holiday season",
+    "aboutTitle": "About Our Wreath Sale",
+    "aboutText": "Cub Scout Pack 182 of Readington, NJ is raising funds through our annual wreath sale. Each wreath is carefully crafted and features beautiful evergreen and natural decorations. Your purchase supports our scouts' activities and helps develop future leaders in our community.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "How do I pay for my order?",
+        "answer": "We accept payment via Zelle to threebridgespack182@gmail.com (Boy Scouts of America). You can also pay with cash or check for in-person orders entered by scouts."
+      },
+      {
+        "question": "When will I receive my wreath?",
+        "answer": "All wreaths are made to order. Pickup is scheduled for December 15, 2025 (tentative). You'll receive an email with final pickup details and location confirmation."
+      },
+      {
+        "question": "Can I support a specific scout?",
+        "answer": "Yes! If you received a link from a scout, your purchase will automatically be attributed to them. You can also ask any scout for their unique link or QR code."
+      },
+      {
+        "question": "What if I just want to make a donation?",
+        "answer": "We appreciate donations! You can add a donation to First United Methodist Church during checkout. All donations are welcome and help support our local community."
+      }
+    ]
+  },
+  "images": {
+    "logo": "pack182logo.png",
+    "background": "background-optimized.jpg"
+  }
+}
