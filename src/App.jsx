@@ -20,7 +20,7 @@ function App() {
             <p className="hero-subtitle">{config.content.heroSubtitle}</p>
             <p className="hero-location">{config.pack.location}</p>
             <div className="hero-cta">
-              <button className="btn btn-primary">Shop Wreaths</button>
+              <button className="btn btn-primary">Shop All Products</button>
               <button className="btn btn-secondary">Make a Donation</button>
             </div>
           </div>
@@ -28,19 +28,73 @@ function App() {
 
         {/* Products Preview */}
         <section className="products-preview">
-          <h2>Our Wreaths - ${config.products[0].price} Each</h2>
-          <div className="products-grid">
-            {config.products.map(product => (
-              <div key={product.id} className="product-card">
-                <img
-                  src={`${basePath}images/products/${product.image}`}
-                  alt={product.name}
-                />
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <p className="price">${product.price.toFixed(2)}</p>
-              </div>
-            ))}
+          <h2>Our Holiday Products</h2>
+          <p className="product-disclaimer">{config.productDisclaimer}</p>
+
+          {/* Wreaths Section */}
+          <div className="product-category">
+            <h3 className="category-title">Wreaths - $35 Each</h3>
+            <div className="products-grid">
+              {config.products.filter(p => p.category === 'wreaths').map(product => (
+                <div key={product.id} className="product-card">
+                  <img
+                    src={`${basePath}images/products/${product.image}`}
+                    alt={product.name}
+                    onError={(e) => {
+                      e.target.src = `${basePath}images/products/placeholder.png`
+                      e.target.style.opacity = '0.5'
+                    }}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p className="price">${product.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Poinsettias Section */}
+          <div className="product-category">
+            <h3 className="category-title">Poinsettias</h3>
+            <div className="products-grid">
+              {config.products.filter(p => p.category === 'poinsettias').map(product => (
+                <div key={product.id} className="product-card">
+                  <img
+                    src={`${basePath}images/products/${product.image}`}
+                    alt={product.name}
+                    onError={(e) => {
+                      e.target.src = `${basePath}images/products/placeholder.png`
+                      e.target.style.opacity = '0.5'
+                    }}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p className="price">${product.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Other Plants Section */}
+          <div className="product-category">
+            <h3 className="category-title">Other Plants</h3>
+            <div className="products-grid">
+              {config.products.filter(p => p.category === 'plants').map(product => (
+                <div key={product.id} className="product-card">
+                  <img
+                    src={`${basePath}images/products/${product.image}`}
+                    alt={product.name}
+                    onError={(e) => {
+                      e.target.src = `${basePath}images/products/placeholder.png`
+                      e.target.style.opacity = '0.5'
+                    }}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p className="price">${product.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

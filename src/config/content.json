@@ -18,28 +18,68 @@
     {
       "id": "red-bow",
       "name": "Red Bow Wreath",
-      "description": "Beautiful evergreen wreath adorned with a festive red bow and natural pinecones",
+      "category": "wreaths",
+      "description": "12\" round evergreen wreath adorned with a festive red bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
       "price": 35.00,
       "image": "red-bow.png",
       "active": true
     },
     {
+      "id": "plaid-bow",
+      "name": "Plaid Bow Wreath",
+      "category": "wreaths",
+      "description": "12\" round evergreen wreath featuring a traditional plaid bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
+      "price": 35.00,
+      "image": "plaid-bow.png",
+      "active": true
+    },
+    {
       "id": "gold-bow",
       "name": "Gold Bow Wreath",
-      "description": "Elegant evergreen wreath decorated with a golden bow and natural pinecones",
+      "category": "wreaths",
+      "description": "12\" round evergreen wreath decorated with a golden bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
       "price": 35.00,
       "image": "gold-bow.png",
       "active": true
     },
     {
-      "id": "plaid-bow",
-      "name": "Plaid Bow Wreath",
-      "description": "Charming evergreen wreath featuring a traditional plaid bow and natural pinecones",
+      "id": "poinsettia-6",
+      "name": "6\" Red Poinsettia",
+      "category": "poinsettias",
+      "description": "Beautiful 6-inch red poinsettia plant, perfect for holiday decorating.",
+      "price": 7.00,
+      "image": "poinsettia-6.png",
+      "active": true
+    },
+    {
+      "id": "poinsettia-10",
+      "name": "10\" Red Poinsettia",
+      "category": "poinsettias",
+      "description": "Stunning 10-inch red poinsettia plant, a festive centerpiece for your home.",
       "price": 35.00,
-      "image": "plaid-bow.png",
+      "image": "poinsettia-10.png",
+      "active": true
+    },
+    {
+      "id": "lavender-cone",
+      "name": "10\" Lavender Cone",
+      "category": "plants",
+      "description": "Elegant 10-inch lavender cone plant for holiday decor.",
+      "price": 40.00,
+      "image": "lavender-cone.png",
+      "active": true
+    },
+    {
+      "id": "zygocactus",
+      "name": "6\" Zygocactus",
+      "category": "plants",
+      "description": "Hardy 6-inch Zygocactus (Christmas Cactus) plant.",
+      "price": 10.00,
+      "image": "zygocactus.png",
       "active": true
     }
   ],
+  "productDisclaimer": "Images shown are stock photos and may not reflect the exact product you will receive. Actual products may vary in appearance.",
   "donation": {
     "enabled": true,
     "recipient": "First United Methodist Church",
@@ -58,9 +98,9 @@
   },
   "content": {
     "heroTitle": "Support Pack 182 Scouts",
-    "heroSubtitle": "Beautiful handmade wreaths for the holiday season",
-    "aboutTitle": "About Our Wreath Sale",
-    "aboutText": "Cub Scout Pack 182 of Readington, NJ is raising funds through our annual wreath sale. Each wreath is carefully crafted and features beautiful evergreen and natural decorations. Your purchase supports our scouts' activities and helps develop future leaders in our community.",
+    "heroSubtitle": "Beautiful wreaths, poinsettias, and holiday plants",
+    "aboutTitle": "About Our Holiday Sale",
+    "aboutText": "Cub Scout Pack 182 of Readington, NJ is raising funds through our annual holiday sale. We offer beautiful wreaths, festive poinsettias, and other holiday plants. Each purchase supports our scouts' activities and helps develop future leaders in our community.",
     "faqTitle": "Frequently Asked Questions",
     "faq": [
       {
