@@ -15,7 +15,8 @@ function App() {
         <div className="App">
           <CartIcon />
           <Cart />
-        {/* Hero Section with Background */}
+
+          {/* Hero Section with Background */}
         <section className="hero">
           <div className="hero-overlay">
             <img
@@ -69,12 +70,12 @@ function App() {
           </div>
         </section>
 
-        {/* Scout Law Scroll */}
-        <div className="scout-law-scroll">
-          <div className="scroll-content">
-            {config.scoutLaw.text} • {config.scoutLaw.text} • {config.scoutLaw.text}
+          {/* Scout Law Scroll */}
+          <div className="scout-law-scroll">
+            <div className="scroll-content">
+              {config.scoutLaw.text} • {config.scoutLaw.text} • {config.scoutLaw.text}
+            </div>
           </div>
-        </div>
         </div>
       </Router>
     </CartProvider>
