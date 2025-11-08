@@ -1,8 +1,15 @@
 import { useCart } from '../context/CartContext'
+import { useNavigate } from 'react-router-dom'
 import './Cart.css'
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart()
+  const navigate = useNavigate()
+
+  const handleCheckout = () => {
+    setIsCartOpen(false)
+    navigate('/checkout')
+  }
 
   if (!isCartOpen) return null
 
@@ -60,7 +67,7 @@ function Cart() {
                 <span>Total:</span>
                 <span className="cart-total-amount">${getCartTotal().toFixed(2)}</span>
               </div>
-              <button className="btn btn-primary btn-checkout">
+              <button className="btn btn-primary btn-checkout" onClick={handleCheckout}>
                 Proceed to Checkout
               </button>
             </div>

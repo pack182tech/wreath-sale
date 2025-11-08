@@ -1,0 +1,195 @@
+.confirmation-container {
+  min-height: 100vh;
+  padding: 2rem;
+  padding-bottom: 100px;
+  background: linear-gradient(135deg, #f8fffe 0%, #f0f9ff 100%);
+}
+
+.confirmation-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 4px 12px rgba(26, 71, 42, 0.3);
+}
+
+.confirmation-content h1 {
+  color: #1a472a;
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.order-number-box {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #d4af37;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.order-number-box p {
+  margin: 0 0 0.5rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.order-number-box h2 {
+  margin: 0;
+  color: #1a472a;
+  font-size: 1.75rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+.confirmation-details {
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.detail-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+.detail-section h3 {
+  color: #1a472a;
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 0.5rem;
+}
+
+.detail-section p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.order-items-list {
+  margin-top: 1rem;
+}
+
+.confirmation-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.confirmation-item:last-child {
+  border-bottom: none;
+}
+
+.confirmation-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0 0 0;
+  margin-top: 1rem;
+  border-top: 2px solid #1a472a;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1a472a;
+}
+
+.confirmation-total span:last-child {
+  color: #c41e3a;
+}
+
+.payment-section {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #d4af37;
+}
+
+.zelle-info {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.zelle-info p {
+  margin: 0.5rem 0;
+}
+
+.zelle-info code {
+  background: #e8f4f8;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #1a472a;
+}
+
+.memo-reminder {
+  color: #c41e3a !important;
+  font-weight: 600;
+  margin-top: 1rem !important;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.confirmation-actions .btn {
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .confirmation-container {
+    padding: 1rem;
+  }
+
+  .confirmation-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .confirmation-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .order-number-box h2 {
+    font-size: 1.25rem;
+  }
+
+  .confirmation-actions {
+    flex-direction: column;
+  }
+
+  .confirmation-actions .btn {
+    width: 100%;
+  }
+}
