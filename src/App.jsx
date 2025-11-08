@@ -1,27 +1,41 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
 import { CartProvider } from './context/CartContext'
+import { ScoutProvider } from './context/ScoutContext'
 import Cart from './components/Cart'
 import CartIcon from './components/CartIcon'
 import ProductCard from './components/ProductCard'
 import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
+import Leaderboard from './pages/Leaderboard'
+import FAQ from './pages/FAQ'
+import { initializeMockData } from './utils/mockData'
 import './styles/App.css'
 import config from './config/content.json'
 
 function App() {
   const basePath = import.meta.env.BASE_URL
 
+  useEffect(() => {
+    // Initialize mock data on app load
+    initializeMockData()
+  }, [])
+
   return (
     <CartProvider>
       <Router>
-        <CartIcon />
-        <Cart />
+        <ScoutProvider>
+          <CartIcon />
+          <Cart />
 
-        <Routes>
-          <Route path="/" element={<HomePage basePath={basePath} config={config} />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/confirmation" element={<OrderConfirmation />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<HomePage basePath={basePath} config={config} />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/confirmation" element={<OrderConfirmation />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/faq" element={<FAQ />} />
+          </Routes>
+        </ScoutProvider>
       </Router>
     </CartProvider>
   )
@@ -42,14 +56,14 @@ function HomePage({ basePath, config }) {
             <p className="hero-subtitle">{config.content.heroSubtitle}</p>
             <p className="hero-location">{config.pack.location}</p>
             <div className="hero-cta">
-              <button className="btn btn-primary">Shop All Products</button>
-              <button className="btn btn-secondary">Make a Donation</button>
+              <a href="#products" className="btn btn-primary">Shop All Products</a>
+              <a href="/leaderboard" className="btn btn-secondary">View Leaderboard</a>
             </div>
           </div>
         </section>
 
         {/* Products Preview */}
-        <section className="products-preview">
+        <section id="products" className="products-preview">
           <h2>Our Holiday Products</h2>
           <p className="product-disclaimer">{config.productDisclaimer}</p>
 
