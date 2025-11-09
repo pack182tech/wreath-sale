@@ -1,6 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import { useState, useEffect } from 'react'
 import './EmailTemplateEditor.css'
 
 function EmailTemplateEditor({ templates, onSave }) {
@@ -44,30 +42,6 @@ function EmailTemplateEditor({ templates, onSave }) {
     { label: 'Leader Email', value: '{{leaderEmail}}', description: 'Pack leader email' },
     { label: 'Pack Name', value: '{{packName}}', description: 'Scout pack name' },
     { label: 'QR Code', value: '{{qrCode}}', description: 'Zelle payment QR code image' },
-  ]
-
-  // Custom toolbar with placeholder insertion
-  const modules = useMemo(() => ({
-    toolbar: {
-      container: [
-        [{ 'header': [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'align': [] }],
-        ['link', 'image'],
-        ['clean']
-      ]
-    }
-  }), [])
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike',
-    'color', 'background',
-    'list', 'bullet',
-    'align',
-    'link', 'image'
   ]
 
   const handleSave = () => {
@@ -201,16 +175,15 @@ function EmailTemplateEditor({ templates, onSave }) {
       {/* Side-by-Side Editor and Preview */}
       <div className="editor-split-view">
         <div className="editor-pane">
-          <h4>Edit Template</h4>
-          <ReactQuill
-            theme="snow"
+          <h4>Edit Template (HTML)</h4>
+          <textarea
             value={htmlBody}
-            onChange={setHtmlBody}
-            modules={modules}
-            formats={formats}
-            placeholder="Compose your email template..."
-            className="email-editor"
+            onChange={(e) => setHtmlBody(e.target.value)}
+            placeholder="Enter HTML email template with inline styles..."
+            className="html-editor"
+            spellCheck="false"
           />
+          <p className="editor-hint">💡 Use inline styles for email compatibility. Preview shows how it will look.</p>
         </div>
 
         <div className="preview-pane">

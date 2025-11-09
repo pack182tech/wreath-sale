@@ -222,28 +222,32 @@
   border: none;
 }
 
-.email-editor {
-  background: white;
+.html-editor {
+  width: 100%;
+  min-height: 500px;
+  padding: 15px;
+  border: 2px solid #ddd;
   border-radius: 8px;
-  min-height: 500px;
-}
-
-.email-editor .ql-toolbar {
-  border-radius: 8px 8px 0 0;
+  font-family: 'Courier New', Monaco, monospace;
+  font-size: 13px;
+  line-height: 1.5;
   background: #f8f9fa;
-  border: 1px solid #ddd;
+  color: #333;
+  resize: vertical;
+  tab-size: 2;
 }
 
-.email-editor .ql-container {
-  border-radius: 0 0 8px 8px;
-  border: 1px solid #ddd;
-  border-top: none;
-  min-height: 500px;
-  font-size: 16px;
+.html-editor:focus {
+  outline: none;
+  border-color: #1a472a;
+  background: white;
 }
 
-.email-editor .ql-editor {
-  min-height: 500px;
+.editor-hint {
+  margin: 10px 0 0 0;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
 }
 
 /* Editor Tips */
