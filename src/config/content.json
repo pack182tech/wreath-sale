@@ -92,6 +92,9 @@
     "instructions": "Please include your order number in the Zelle memo field. Orders are confirmed upon payment receipt.",
     "qrCodeImage": "zelle-qrcode.png"
   },
+  "scoutAttributionBanner": {
+    "text": "Supporting $scoutname in his scout journey!"
+  },
   "scoutLaw": {
     "enabled": true,
     "text": "A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent",

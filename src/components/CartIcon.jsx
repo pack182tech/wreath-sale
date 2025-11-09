@@ -1,9 +1,14 @@
 import { useCart } from '../context/CartContext'
+import { useLocation } from 'react-router-dom'
 import './CartIcon.css'
 
 function CartIcon() {
   const { getCartCount, setIsCartOpen } = useCart()
+  const location = useLocation()
   const count = getCartCount()
+
+  // Don't show cart icon on admin routes
+  if (location.pathname.includes('/admin')) return null
 
   return (
     <button className="cart-icon-button" onClick={() => setIsCartOpen(true)}>

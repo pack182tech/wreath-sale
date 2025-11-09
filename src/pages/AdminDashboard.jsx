@@ -648,7 +648,7 @@ function AdminDashboard() {
 
         {activeTab === 'config' && (
           <div className="config-tab">
-            <div className="section-header">
+            <div className="section-header config-sticky-header">
               <h2>Site Configuration</h2>
               <button onClick={handleSaveConfigChanges} className="btn btn-primary">
                 Save All Changes
@@ -764,6 +764,22 @@ function AdminDashboard() {
                     onChange={(e) => handleConfigChange('pack', 'leaderEmail', e.target.value)}
                   />
                 </div>
+              </div>
+            </div>
+
+            <div className="config-section">
+              <h3>Scout Attribution</h3>
+              <div className="form-group">
+                <label>Attribution Banner Text (use $scoutname as placeholder)</label>
+                <input
+                  type="text"
+                  value={siteConfig.scoutAttributionBanner?.text || 'Supporting $scoutname in his scout journey!'}
+                  onChange={(e) => handleConfigChange('scoutAttributionBanner', 'text', e.target.value)}
+                  placeholder="e.g., Supporting $scoutname in his scout journey!"
+                />
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Use "$scoutname" where you want the scout's name to appear. It will be displayed in bold.
+                </small>
               </div>
             </div>
 
@@ -1003,11 +1019,6 @@ function AdminDashboard() {
               </div>
             ))}
 
-            <div className="section-header" style={{ marginTop: '2rem' }}>
-              <button onClick={handleSaveConfigChanges} className="btn btn-primary">
-                Save All Changes
-              </button>
-            </div>
           </div>
         )}
       </div>

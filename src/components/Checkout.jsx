@@ -57,7 +57,7 @@ function Checkout() {
 
     // Create order object
     const order = {
-      orderId: `ORD-${Date.now()}`,
+      orderId: `ORD-${String(Date.now()).slice(-6)}`,
       customer: formData,
       items: cart,
       total: getCartTotal(),
