@@ -7,8 +7,10 @@ function CartIcon() {
   const location = useLocation()
   const count = getCartCount()
 
-  // Don't show cart icon on admin routes
-  if (location.pathname.includes('/admin')) return null
+  // Don't show cart icon on admin, login, or scout portal routes
+  if (location.pathname.includes('/admin') ||
+      location.pathname.includes('/login') ||
+      location.pathname.includes('/scout-portal')) return null
 
   return (
     <button className="cart-icon-button" onClick={() => setIsCartOpen(true)}>

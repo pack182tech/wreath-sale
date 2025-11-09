@@ -35,8 +35,12 @@ function DonationPopup() {
     setIsOpen(true)
   }
 
-  // Don't show on admin routes, leaderboard, or confirmation page
-  if (location.pathname.includes('/admin') || location.pathname.includes('/leaderboard') || location.pathname.includes('/confirmation')) return null
+  // Don't show on admin routes, leaderboard, confirmation page, login, or scout portal
+  if (location.pathname.includes('/admin') ||
+      location.pathname.includes('/leaderboard') ||
+      location.pathname.includes('/confirmation') ||
+      location.pathname.includes('/login') ||
+      location.pathname.includes('/scout-portal')) return null
 
   if (!config.donation?.enabled) return null
 
