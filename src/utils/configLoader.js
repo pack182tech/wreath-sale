@@ -5,15 +5,14 @@ export const getConfig = () => {
   if (savedConfig) {
     try {
       const parsed = JSON.parse(savedConfig)
-      // Merge saved config with default config to ensure new fields are included
+      // Merge saved config with default config
+      // For email templates, always use default config (they're managed in content.json)
       return {
         ...defaultConfig,
         ...parsed,
-        // Deep merge for nested objects
-        emailTemplates: {
-          ...defaultConfig.emailTemplates,
-          ...(parsed.emailTemplates || {})
-        },
+        // Always use default email templates from content.json
+        emailTemplates: defaultConfig.emailTemplates,
+        // Deep merge for other nested objects
         zelle: {
           ...defaultConfig.zelle,
           ...(parsed.zelle || {})
