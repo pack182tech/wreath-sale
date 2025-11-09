@@ -30,7 +30,12 @@ cp .env.example .env
 # Edit .env with your credentials
 ```
 
-See `BACKEND_SETUP.md` for detailed backend configuration.
+**Recommended**: Use Google Sheets (100% FREE, no credit card needed!)
+- See `BACKEND_SETUP_SHEETS.md` for step-by-step guide
+- Takes 15 minutes to set up
+- No monthly costs
+
+Alternative: See `BACKEND_SETUP.md` for Firebase/Supabase (requires billing)
 
 ---
 
