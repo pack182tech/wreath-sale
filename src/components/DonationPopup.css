@@ -1,0 +1,184 @@
+/* Donation Trigger Button - Below scout attribution banner on left */
+.donation-trigger-button {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  z-index: 999;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+  transition: all 0.3s ease;
+}
+
+.donation-trigger-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
+/* Modal Overlay */
+.donation-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Popup Card */
+.donation-popup {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.donation-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.donation-popup-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Content */
+.donation-popup-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 24px;
+  text-align: center;
+}
+
+.donation-popup-text {
+  margin-bottom: 2rem;
+}
+
+.donation-popup-text p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  text-align: center;
+}
+
+/* Buttons */
+.donation-popup-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.donation-popup-buttons .btn {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.donation-popup-buttons .btn-primary {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.donation-popup-buttons .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
+.donation-popup-buttons .btn-secondary-outline {
+  background: white;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.donation-popup-buttons .btn-secondary-outline:hover {
+  background: #f8f9fa;
+  border-color: #bbb;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .donation-trigger-button {
+    top: 70px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .donation-popup {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .donation-popup-content h2 {
+    font-size: 20px;
+  }
+
+  .donation-popup-text p {
+    font-size: 14px;
+  }
+
+  .donation-popup-buttons .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}

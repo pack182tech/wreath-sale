@@ -106,7 +106,7 @@
 .cart-item-image {
   width: 80px;
   height: 80px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
   flex-shrink: 0;
 }
@@ -200,6 +200,17 @@
 .cart-total-amount {
   color: #c41e3a;
   font-size: 1.5rem;
+}
+
+.cart-payment-info {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  color: #1565c0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 4px;
 }
 
 .btn-checkout {

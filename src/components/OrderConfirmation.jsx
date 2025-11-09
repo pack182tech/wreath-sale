@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import EmailModal from './EmailModal'
 import { getConfig } from '../utils/configLoader'
+import { getScouts } from '../utils/mockData'
 import './OrderConfirmation.css'
 
 function OrderConfirmation() {
@@ -24,54 +25,66 @@ function OrderConfirmation() {
     return null
   }
 
+  // Get scout info if applicable
+  const getScoutInfo = () => {
+    if (!order.scoutId) return { scoutName: null, scoutFirstName: null }
+    const scouts = getScouts()
+    const scout = scouts.find(s => s.id === order.scoutId)
+    if (!scout) return { scoutName: null, scoutFirstName: null }
+    return {
+      scoutName: scout.name,
+      scoutFirstName: scout.name.split(' ')[0]
+    }
+  }
+
+  const scoutInfo = getScoutInfo()
+
+  // Build order items table HTML
+  const orderItemsTable = order.items.map(item => `
+    <tr>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">${item.name}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: center;">x${item.quantity}</td>
+      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: right;">$${(item.price * item.quantity).toFixed(2)}</td>
+    </tr>
+  `).join('')
+
+  // Get email template
+  const template = config.emailTemplates?.orderConfirmation || {}
+
+  // Replace placeholders in subject
+  let subject = template.subject || 'Order Confirmation - {{orderId}}'
+  subject = subject.replace(/\{\{orderId\}\}/g, order.orderId)
+
+  // Replace placeholders in body
+  let body = template.htmlBody || ''
+  body = body
+    .replace(/\{\{customerName\}\}/g, order.customer.name)
+    .replace(/\{\{orderId\}\}/g, order.orderId)
+    .replace(/\{\{orderDate\}\}/g, new Date(order.orderDate).toLocaleDateString())
+    .replace(/\{\{total\}\}/g, order.total.toFixed(2))
+    .replace(/\{\{orderItemsTable\}\}/g, orderItemsTable)
+    .replace(/\{\{pickupDate\}\}/g, config.campaign.pickupDate)
+    .replace(/\{\{pickupTime\}\}/g, config.campaign.pickupTime)
+    .replace(/\{\{pickupLocation\}\}/g, config.campaign.pickupLocation)
+    .replace(/\{\{zelleRecipientFirstName\}\}/g, config.zelle.recipientFirstName || 'Boy Scouts')
+    .replace(/\{\{zelleRecipientLastName\}\}/g, config.zelle.recipientLastName || 'of America')
+    .replace(/\{\{zelleContact\}\}/g, config.zelle.recipientContact)
+    .replace(/\{\{leaderEmail\}\}/g, config.pack.leaderEmail)
+    .replace(/\{\{packName\}\}/g, config.pack.name)
+    .replace(/\{\{scoutName\}\}/g, scoutInfo.scoutName || '')
+    .replace(/\{\{scoutFirstName\}\}/g, scoutInfo.scoutFirstName || '')
+
+  // Handle conditional blocks
+  if (scoutInfo.scoutName) {
+    body = body.replace(/\{\{#if scoutName\}\}/g, '').replace(/\{\{\/if\}\}/g, '')
+  } else {
+    body = body.replace(/\{\{#if scoutName\}\}[\s\S]*?\{\{\/if\}\}/g, '')
+  }
+
   const emailContent = {
     to: order.customer.email,
-    subject: `Order Confirmation - ${order.orderId}`,
-    body: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1a472a;">Order Confirmation</h2>
-        <p>Dear ${order.customer.name},</p>
-        <p>Thank you for your order! Your order has been received and will be ready for pickup on <strong>${config.campaign.pickupDate}</strong>.</p>
-
-        <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;">Order Details</h3>
-        <p><strong>Order Number:</strong> ${order.orderId}</p>
-        <p><strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
-
-        <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;">Items Ordered</h3>
-        <table style="width: 100%; border-collapse: collapse;">
-          ${order.items.map(item => `
-            <tr>
-              <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">${item.name}</td>
-              <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: center;">x${item.quantity}</td>
-              <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: right;">$${(item.price * item.quantity).toFixed(2)}</td>
-            </tr>
-          `).join('')}
-          <tr>
-            <td colspan="2" style="padding: 1rem 0.5rem; font-weight: bold;">Total:</td>
-            <td style="padding: 1rem 0.5rem; text-align: right; font-weight: bold; color: #c41e3a; font-size: 1.2rem;">$${order.total.toFixed(2)}</td>
-          </tr>
-        </table>
-
-        <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-top: 2rem;">Payment Instructions</h3>
-        <p>Please send payment via Zelle to complete your order:</p>
-        <div style="background: #fffbeb; padding: 1rem; border-left: 4px solid #d4af37; border-radius: 4px;">
-          <p style="margin: 0.5rem 0;"><strong>Recipient:</strong> Boy Scouts of America</p>
-          <p style="margin: 0.5rem 0;"><strong>Email/Phone:</strong> ${config.zelle.recipientContact}</p>
-          <p style="margin: 0.5rem 0;"><strong>Memo:</strong> ${order.orderId}</p>
-        </div>
-        <p style="color: #c41e3a; font-weight: bold;">Important: Please include your order number (${order.orderId}) in the Zelle memo field.</p>
-
-        <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-top: 2rem;">Pickup Information</h3>
-        <p><strong>Date:</strong> ${config.campaign.pickupDate}</p>
-        <p><strong>Time:</strong> ${config.campaign.pickupTime}</p>
-        <p><strong>Location:</strong> ${config.campaign.pickupLocation}</p>
-
-        ${order.scoutId ? '<p style="margin-top: 2rem; padding: 1rem; background: #f0f9ff; border-radius: 4px;">🎗️ Thank you for supporting our Cub Scout!</p>' : ''}
-
-        <p style="margin-top: 2rem;">If you have any questions, please contact us at ${config.pack.leaderEmail}.</p>
-        <p>Thank you for supporting ${config.pack.name}!</p>
-      </div>
-    `
+    subject: subject,
+    body: body
   }
 
   return (
@@ -109,12 +122,20 @@ function OrderConfirmation() {
             <h3>Next Steps - Payment</h3>
             <p>Please send your payment via Zelle:</p>
             <div className="zelle-info">
-              <p><strong>Recipient:</strong> Boy Scouts of America</p>
+              <p><strong>Recipient:</strong> {config.zelle.recipientFirstName} {config.zelle.recipientLastName}</p>
               <p><strong>Email:</strong> {config.zelle.recipientContact}</p>
               <p><strong>Amount:</strong> ${order.total.toFixed(2)}</p>
               <p className="memo-reminder">
                 <strong>Important:</strong> Include order number <code>{order.orderId}</code> in memo
               </p>
+            </div>
+            <div className="zelle-qr-code">
+              <p><strong>{config.zelle.qrCodeText || 'Scan to Pay'}</strong></p>
+              <img
+                src={`${import.meta.env.BASE_URL}images/zelle/${config.zelle.qrCodeImage}`}
+                alt="Zelle QR Code"
+                className="qr-code-image"
+              />
             </div>
           </div>
 
@@ -124,6 +145,12 @@ function OrderConfirmation() {
             <p><strong>Time:</strong> {config.campaign.pickupTime}</p>
             <p><strong>Location:</strong> {config.campaign.pickupLocation}</p>
           </div>
+
+          {scoutInfo.scoutName && (
+            <div className="scout-thank-you">
+              🎗️ Thank you for supporting {scoutInfo.scoutName}!
+            </div>
+          )}
         </div>
 
         <div className="confirmation-actions">

@@ -105,7 +105,7 @@ function ScoutPortal() {
     const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
 
     const order = {
-      orderId: `ORD-${String(Date.now()).slice(-6)}`,
+      orderId: String(Date.now()).slice(-6),
       scoutId: scout.id,
       customer: {
         name: offlineFormData.customerName,

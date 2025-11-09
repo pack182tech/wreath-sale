@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Cart from './components/Cart'
 import CartIcon from './components/CartIcon'
 import ScoutAttributionBanner from './components/ScoutAttributionBanner'
+import DonationPopup from './components/DonationPopup'
 import ProductCard from './components/ProductCard'
 import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
@@ -36,6 +37,7 @@ function App() {
         <Router basename={basePath}>
           <ScoutProvider>
             <ScoutAttributionBanner />
+            <DonationPopup />
             <CartIcon />
             <Cart />
 
@@ -100,7 +102,7 @@ function HomePage({ basePath, config }) {
           <div className="product-category">
             <h3 className="category-title">Wreaths - $35 Each</h3>
             <div className="products-grid">
-              {config.products.filter(p => p.category === 'wreaths').map(product => (
+              {config.products.filter(p => p.category === 'wreaths' && p.active !== false).map(product => (
                 <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>
@@ -110,7 +112,7 @@ function HomePage({ basePath, config }) {
           <div className="product-category">
             <h3 className="category-title">Poinsettias</h3>
             <div className="products-grid">
-              {config.products.filter(p => p.category === 'poinsettias').map(product => (
+              {config.products.filter(p => p.category === 'poinsettias' && p.active !== false).map(product => (
                 <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>
@@ -120,7 +122,7 @@ function HomePage({ basePath, config }) {
           <div className="product-category">
             <h3 className="category-title">Other Plants</h3>
             <div className="products-grid">
-              {config.products.filter(p => p.category === 'plants').map(product => (
+              {config.products.filter(p => p.category === 'plants' && p.active !== false).map(product => (
                 <ProductCard key={product.id} product={product} basePath={basePath} />
               ))}
             </div>

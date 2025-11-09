@@ -4,7 +4,29 @@ export const getConfig = () => {
   const savedConfig = localStorage.getItem('siteConfig')
   if (savedConfig) {
     try {
-      return JSON.parse(savedConfig)
+      const parsed = JSON.parse(savedConfig)
+      // Merge saved config with default config to ensure new fields are included
+      return {
+        ...defaultConfig,
+        ...parsed,
+        // Deep merge for nested objects
+        emailTemplates: {
+          ...defaultConfig.emailTemplates,
+          ...(parsed.emailTemplates || {})
+        },
+        zelle: {
+          ...defaultConfig.zelle,
+          ...(parsed.zelle || {})
+        },
+        donation: {
+          ...defaultConfig.donation,
+          ...(parsed.donation || {})
+        },
+        cart: {
+          ...defaultConfig.cart,
+          ...(parsed.cart || {})
+        }
+      }
     } catch (e) {
       console.error('Error parsing saved config:', e)
       return defaultConfig

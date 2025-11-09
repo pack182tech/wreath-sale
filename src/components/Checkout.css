@@ -113,6 +113,36 @@
   margin-top: 0.25rem;
 }
 
+/* Donation Checkbox */
+.donation-checkbox {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.donation-checkbox .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.donation-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #2ecc71;
+}
+
+.donation-checkbox span {
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
 .btn-submit-order {
   width: 100%;
   padding: 1rem;
@@ -139,7 +169,7 @@
 .order-item img {
   width: 60px;
   height: 60px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
 }
 

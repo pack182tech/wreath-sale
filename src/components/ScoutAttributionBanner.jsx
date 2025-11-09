@@ -13,8 +13,8 @@ function ScoutAttributionBanner() {
     setScoutName(name)
   }, [])
 
-  // Don't show banner on admin routes
-  if (location.pathname.includes('/admin')) return null
+  // Don't show banner on admin routes or leaderboard
+  if (location.pathname.includes('/admin') || location.pathname.includes('/leaderboard')) return null
 
   if (!scoutName) return null
 

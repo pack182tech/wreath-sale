@@ -11,6 +11,7 @@ import {
   deleteScout
 } from '../utils/mockData'
 import { getConfig, saveConfig } from '../utils/configLoader'
+import EmailTemplateEditor from '../components/EmailTemplateEditor'
 import './AdminDashboard.css'
 
 function AdminDashboard() {
@@ -279,6 +280,12 @@ function AdminDashboard() {
           onClick={() => setActiveTab('config')}
         >
           Site Configuration
+        </button>
+        <button
+          className={`tab-btn ${activeTab === 'email-templates' ? 'active' : ''}`}
+          onClick={() => setActiveTab('email-templates')}
+        >
+          Email Templates
         </button>
       </div>
 
@@ -582,7 +589,6 @@ function AdminDashboard() {
                   <tr>
                     <th>Name</th>
                     <th>Rank</th>
-                    <th>Email</th>
                     <th>Parent</th>
                     <th>Orders</th>
                     <th>Revenue</th>
@@ -598,7 +604,6 @@ function AdminDashboard() {
                       <tr key={scout.id}>
                         <td><strong>{scout.name}</strong></td>
                         <td>{scout.rank}</td>
-                        <td className="sub-info">{scout.email}</td>
                         <td>
                           <div>{scout.parentName}</div>
                           <div className="sub-info">{scout.parentEmail}</div>
@@ -868,21 +873,29 @@ function AdminDashboard() {
               <h3>Zelle Payment Information</h3>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Recipient Name</label>
+                  <label>Recipient First Name</label>
                   <input
                     type="text"
-                    value={siteConfig.zelle.recipientName}
-                    onChange={(e) => handleConfigChange('zelle', 'recipientName', e.target.value)}
+                    value={siteConfig.zelle.recipientFirstName || 'Boy Scouts'}
+                    onChange={(e) => handleConfigChange('zelle', 'recipientFirstName', e.target.value)}
                   />
                 </div>
                 <div className="form-group">
-                  <label>Recipient Contact</label>
+                  <label>Recipient Last Name</label>
                   <input
                     type="text"
-                    value={siteConfig.zelle.recipientContact}
-                    onChange={(e) => handleConfigChange('zelle', 'recipientContact', e.target.value)}
+                    value={siteConfig.zelle.recipientLastName || 'of America'}
+                    onChange={(e) => handleConfigChange('zelle', 'recipientLastName', e.target.value)}
                   />
                 </div>
+              </div>
+              <div className="form-group">
+                <label>Recipient Contact</label>
+                <input
+                  type="text"
+                  value={siteConfig.zelle.recipientContact}
+                  onChange={(e) => handleConfigChange('zelle', 'recipientContact', e.target.value)}
+                />
               </div>
               <div className="form-group">
                 <label>Payment Instructions</label>
@@ -891,6 +904,16 @@ function AdminDashboard() {
                   value={siteConfig.zelle.instructions}
                   onChange={(e) => handleConfigChange('zelle', 'instructions', e.target.value)}
                 />
+              </div>
+              <div className="form-group">
+                <label>QR Code Text</label>
+                <input
+                  type="text"
+                  value={siteConfig.zelle.qrCodeText || 'Scan to Pay'}
+                  onChange={(e) => handleConfigChange('zelle', 'qrCodeText', e.target.value)}
+                  placeholder="e.g., Scan to Pay"
+                />
+                <small>Text displayed above the Zelle QR code</small>
               </div>
             </div>
 
@@ -921,6 +944,16 @@ function AdminDashboard() {
                   value={siteConfig.donation.description}
                   onChange={(e) => handleConfigChange('donation', 'description', e.target.value)}
                 />
+              </div>
+              <div className="form-group">
+                <label>Donation Popup Text</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation.popupText || ''}
+                  onChange={(e) => handleConfigChange('donation', 'popupText', e.target.value)}
+                  placeholder="e.g., You can direct your donation to [church name] at checkout."
+                />
+                <small>Text shown in the donation popup on the landing page</small>
               </div>
             </div>
 
@@ -1019,6 +1052,32 @@ function AdminDashboard() {
               </div>
             ))}
 
+          </div>
+        )}
+
+        {activeTab === 'email-templates' && (
+          <div className="email-templates-tab">
+            <h2>Email Templates</h2>
+            <p className="tab-description">
+              Customize email templates sent to customers and scouts. Use placeholders to insert dynamic content like customer names, order details, and scout information.
+            </p>
+
+            <EmailTemplateEditor
+              templates={siteConfig.emailTemplates || {}}
+              onSave={(templateKey, template) => {
+                const newConfig = { ...siteConfig }
+                if (!newConfig.emailTemplates) {
+                  newConfig.emailTemplates = {}
+                }
+                newConfig.emailTemplates[templateKey] = {
+                  ...newConfig.emailTemplates[templateKey],
+                  ...template
+                }
+                setSiteConfig(newConfig)
+                saveConfig(newConfig)
+                alert('Email template saved successfully!')
+              }}
+            />
           </div>
         )}
       </div>

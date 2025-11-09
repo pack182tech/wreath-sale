@@ -1,0 +1,300 @@
+/* Email Template Editor */
+.email-template-editor {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.editor-header-left {
+  flex: 1;
+}
+
+.editor-header h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1a472a;
+}
+
+.template-description {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Template Selector */
+.template-selector {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.template-selector label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.template-select-dropdown {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.template-select-dropdown:hover {
+  border-color: #1a472a;
+}
+
+.template-select-dropdown:focus {
+  outline: none;
+  border-color: #1a472a;
+  box-shadow: 0 0 0 3px rgba(26, 71, 42, 0.1);
+}
+
+.subject-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.subject-input:focus {
+  outline: none;
+  border-color: #1a472a;
+}
+
+/* Placeholders Panel */
+.placeholders-panel {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.placeholders-panel h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1a472a;
+}
+
+.placeholders-help {
+  color: #666;
+  font-size: 14px;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.placeholder-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.placeholder-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.placeholder-button:hover {
+  border-color: #1a472a;
+  background: #f0f5f1;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+}
+
+.placeholder-code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #1a472a;
+  background: #e8f5e9;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.conditional-info {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.conditional-info p {
+  margin: 0.5rem 0;
+  font-size: 14px;
+}
+
+.conditional-info code {
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+/* Editor Container */
+.editor-container {
+  margin: 2rem 0;
+}
+
+.email-editor {
+  background: white;
+  border-radius: 8px;
+  min-height: 400px;
+}
+
+.email-editor .ql-toolbar {
+  border-radius: 8px 8px 0 0;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+.email-editor .ql-container {
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #ddd;
+  border-top: none;
+  min-height: 400px;
+  font-size: 16px;
+}
+
+.email-editor .ql-editor {
+  min-height: 400px;
+}
+
+/* Editor Tips */
+.editor-tips {
+  background: #e3f2fd;
+  border: 1px solid #2196f3;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.editor-tips h4 {
+  margin: 0 0 1rem 0;
+  color: #1565c0;
+}
+
+.editor-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.editor-tips li {
+  margin: 0.5rem 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+.editor-tips code {
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #1565c0;
+}
+
+/* Email Preview */
+.email-preview {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.preview-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.preview-header h4 {
+  margin: 0 0 1rem 0;
+  color: #1a472a;
+}
+
+.preview-subject {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin: 0;
+}
+
+.preview-body {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  min-height: 400px;
+}
+
+/* Make preview look like an email */
+.preview-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.preview-body a {
+  color: #1a472a;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .email-template-editor {
+    padding: 1rem;
+  }
+
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .placeholder-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .email-editor .ql-editor {
+    min-height: 300px;
+  }
+}

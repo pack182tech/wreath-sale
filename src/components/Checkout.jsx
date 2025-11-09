@@ -9,6 +9,10 @@ function Checkout() {
   const navigate = useNavigate()
   const config = getConfig()
   const basePath = import.meta.env.BASE_URL
+
+  // Check if user wants to donate from popup response
+  const wantsToDonate = sessionStorage.getItem('wantsToDonate') === 'true'
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +20,7 @@ function Checkout() {
     supportingScout: '',
     comments: ''
   })
+  const [isDonating, setIsDonating] = useState(wantsToDonate)
   const [errors, setErrors] = useState({})
 
   const handleChange = (e) => {
@@ -57,11 +62,12 @@ function Checkout() {
 
     // Create order object
     const order = {
-      orderId: `ORD-${String(Date.now()).slice(-6)}`,
+      orderId: String(Date.now()).slice(-6),
       customer: formData,
       items: cart,
       total: getCartTotal(),
       scoutId: scoutAttribution || null,
+      isDonation: isDonating,
       orderDate: new Date().toISOString(),
       paymentStatus: 'pending'
     }
@@ -173,6 +179,19 @@ function Checkout() {
                 />
               </div>
 
+              {config.donation?.enabled && (
+                <div className="form-group donation-checkbox">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={isDonating}
+                      onChange={(e) => setIsDonating(e.target.checked)}
+                    />
+                    <span>Donate my purchase to {config.donation.recipient}</span>
+                  </label>
+                </div>
+              )}
+
               <button type="submit" className="btn btn-primary btn-submit-order">
                 Place Order
               </button>
@@ -205,13 +224,13 @@ function Checkout() {
               <h3>Payment Instructions</h3>
               <p>Please pay via Zelle after placing your order:</p>
               <div className="zelle-details">
-                <p><strong>Recipient:</strong> {config.zelle.recipientName}</p>
+                <p><strong>Recipient:</strong> {config.zelle.recipientFirstName} {config.zelle.recipientLastName}</p>
                 <p><strong>Email:</strong> {config.zelle.recipientContact}</p>
                 <p>{config.zelle.instructions}</p>
               </div>
               {config.zelle.qrCodeImage && (
                 <div className="zelle-qr-code">
-                  <p><strong>Scan to Pay:</strong></p>
+                  <p><strong>{config.zelle.qrCodeText || 'Scan to Pay'}</strong></p>
                   <img
                     src={`${basePath}images/zelle/${config.zelle.qrCodeImage}`}
                     alt="Zelle QR Code"
