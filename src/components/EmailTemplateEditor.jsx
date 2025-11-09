@@ -138,12 +138,6 @@ function EmailTemplateEditor({ templates, onSave }) {
           )}
         </div>
         <div className="editor-actions">
-          <button
-            className={`btn ${showPreview ? 'btn-secondary' : 'btn-primary'}`}
-            onClick={() => setShowPreview(!showPreview)}
-          >
-            {showPreview ? 'Edit' : 'Preview'}
-          </button>
           <button className="btn btn-primary" onClick={handleSave}>
             Save Template
           </button>
@@ -167,76 +161,75 @@ function EmailTemplateEditor({ templates, onSave }) {
         </select>
       </div>
 
-      {!showPreview ? (
-        <>
-          <div className="form-group">
-            <label>Email Subject Line</label>
-            <input
-              type="text"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              placeholder="e.g., Order Confirmation - {{orderId}}"
-              className="subject-input"
-            />
-            <small>Use placeholders like {'{{orderId}}'} or {'{{customerName}}'}</small>
-          </div>
+      {/* Subject Line */}
+      <div className="form-group">
+        <label>Email Subject Line</label>
+        <input
+          type="text"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="e.g., Order Confirmation - {{orderId}}"
+          className="subject-input"
+        />
+        <small>Use placeholders like {'{{orderId}}'} or {'{{customerName}}'}</small>
+      </div>
 
-          <div className="placeholders-panel">
-            <h4>Available Placeholders</h4>
-            <p className="placeholders-help">Click to insert into email body:</p>
-            <div className="placeholder-buttons">
-              {placeholders.map(ph => (
-                <button
-                  key={ph.value}
-                  className="placeholder-button"
-                  onClick={() => insertPlaceholder(ph.value)}
-                  title={ph.description}
-                >
-                  <span className="placeholder-label">{ph.label}</span>
-                  <code className="placeholder-code">{ph.value}</code>
-                </button>
-              ))}
-            </div>
-            <div className="conditional-info">
-              <p><strong>Conditional Content:</strong></p>
-              <p>Use <code>{'{{#if scoutName}}'}...{'{{/if}}'}</code> to show content only when a scout is attributed.</p>
-              <p>Use <code>{'{{#if isDonation}}'}...{'{{/if}}'}</code> to show content only for donation orders.</p>
-            </div>
-          </div>
+      {/* Placeholders Panel */}
+      <div className="placeholders-panel">
+        <h4>Available Placeholders</h4>
+        <p className="placeholders-help">Click to insert into email body:</p>
+        <div className="placeholder-buttons">
+          {placeholders.map(ph => (
+            <button
+              key={ph.value}
+              className="placeholder-button"
+              onClick={() => insertPlaceholder(ph.value)}
+              title={ph.description}
+            >
+              <span className="placeholder-label">{ph.label}</span>
+              <code className="placeholder-code">{ph.value}</code>
+            </button>
+          ))}
+        </div>
+        <div className="conditional-info">
+          <p><strong>Conditional Content:</strong></p>
+          <p>Use <code>{'{{#if scoutName}}'}...{'{{/if}}'}</code> to show content only when a scout is attributed.</p>
+          <p>Use <code>{'{{#if isDonation}}'}...{'{{/if}}'}</code> to show content only for donation orders.</p>
+        </div>
+      </div>
 
-          <div className="form-group editor-container">
-            <label>Email Body (HTML)</label>
-            <ReactQuill
-              theme="snow"
-              value={htmlBody}
-              onChange={setHtmlBody}
-              modules={modules}
-              formats={formats}
-              placeholder="Compose your email template..."
-              className="email-editor"
-            />
-          </div>
+      {/* Side-by-Side Editor and Preview */}
+      <div className="editor-split-view">
+        <div className="editor-pane">
+          <h4>Edit Template</h4>
+          <ReactQuill
+            theme="snow"
+            value={htmlBody}
+            onChange={setHtmlBody}
+            modules={modules}
+            formats={formats}
+            placeholder="Compose your email template..."
+            className="email-editor"
+          />
+        </div>
 
-          <div className="editor-tips">
-            <h4>Tips:</h4>
-            <ul>
-              <li>Use placeholders to insert dynamic content (customer name, order details, etc.)</li>
-              <li>The QR code placeholder {'{{qrCode}}'} will insert the Zelle payment QR code</li>
-              <li>Wrap scout-specific content with {'{{#if scoutName}}'}...{'{{/if}}'} to hide when no scout is attributed</li>
-              <li>Use the formatting toolbar to style your email</li>
-              <li>Click "Preview" to see how the email will look with sample data</li>
-            </ul>
-          </div>
-        </>
-      ) : (
-        <div className="email-preview">
-          <div className="preview-header">
-            <h4>Email Preview (with sample data)</h4>
-            <p className="preview-subject"><strong>Subject:</strong> {subject.replace(/\{\{orderId\}\}/g, 'ORD-123456')}</p>
-          </div>
+        <div className="preview-pane">
+          <h4>Live Preview</h4>
+          <p className="preview-subject"><strong>Subject:</strong> {subject.replace(/\{\{orderId\}\}/g, '123456')}</p>
           <div className="preview-body" dangerouslySetInnerHTML={{ __html: getPreviewHtml() }} />
         </div>
-      )}
+      </div>
+
+      <div className="editor-tips">
+        <h4>Tips:</h4>
+        <ul>
+          <li>Use placeholders to insert dynamic content (customer name, order details, etc.)</li>
+          <li>The QR code placeholder {'{{qrCode}}'} will insert the Zelle payment QR code</li>
+          <li>Wrap scout-specific content with {'{{#if scoutName}}'}...{'{{/if}}'} to hide when no scout is attributed</li>
+          <li>Use the formatting toolbar to style your email</li>
+          <li>Preview updates automatically as you type</li>
+        </ul>
+      </div>
     </div>
   )
 }
