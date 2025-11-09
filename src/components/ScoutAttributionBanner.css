@@ -1,0 +1,27 @@
+.scout-attribution-corner-banner {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #d4af37;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #666;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.scout-attribution-corner-banner strong {
+  color: #1a472a;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .scout-attribution-corner-banner {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+}

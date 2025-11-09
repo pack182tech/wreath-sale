@@ -215,6 +215,30 @@
   color: #1a472a;
 }
 
+.zelle-qr-code {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.zelle-qr-code p {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  color: #1a472a;
+}
+
+.qr-code-image {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: white;
+}
+
 @media (max-width: 968px) {
   .checkout-grid {
     grid-template-columns: 1fr;

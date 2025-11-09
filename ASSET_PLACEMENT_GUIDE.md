@@ -134,7 +134,7 @@ This file will be created for you, but you'll need to provide the following info
 - **Sale End Date:** Last day for orders (e.g., "2025-12-15")
 - **Pickup Date:** When customers pick up wreaths (e.g., "2025-12-20")
 - **Pickup Time:** Time window (e.g., "4:00 PM - 6:00 PM")
-- **Pickup Location:** Full address (e.g., "First United Methodist Church, 123 Main St, Anytown, USA")
+- **Pickup Location:** Full address (e.g., "Three Bridges Reformed Church, 123 Main St, Anytown, USA")
 
 #### Wreath Products:
 For EACH ribbon color, provide:
@@ -149,7 +149,7 @@ For EACH ribbon color, provide:
 - **Payment Instructions:** Custom text for customers (e.g., "Please include your order number in the Zelle memo")
 
 #### Donation Information:
-- **Recipient Organization:** Who receives the donations (e.g., "First United Methodist Church")
+- **Recipient Organization:** Who receives the donations (e.g., "Three Bridges Reformed Church")
 - **Donation Description:** Purpose text (e.g., "Support our local church's youth programs and community outreach")
 
 #### Pack Information:
@@ -262,7 +262,7 @@ Here's what your `/src/config/content.json` file will look like (we'll create th
     "endDate": "2025-12-15",
     "pickupDate": "2025-12-20",
     "pickupTime": "4:00 PM - 6:00 PM",
-    "pickupLocation": "First United Methodist Church, 123 Main St, Anytown, USA"
+    "pickupLocation": "Three Bridges Reformed Church, 123 Main St, Anytown, USA"
   },
   "pack": {
     "name": "Cub Scout Pack 182",
@@ -287,7 +287,7 @@ Here's what your `/src/config/content.json` file will look like (we'll create th
     }
   ],
   "donation": {
-    "recipient": "First United Methodist Church",
+    "recipient": "Three Bridges Reformed Church",
     "description": "Support our local church's youth programs and community outreach"
   },
   "zelle": {

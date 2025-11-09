@@ -1,14 +1,15 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import EmailModal from './EmailModal'
+import { getConfig } from '../utils/configLoader'
 import './OrderConfirmation.css'
-import config from '../config/content.json'
 
 function OrderConfirmation() {
   const location = useLocation()
   const navigate = useNavigate()
   const [showEmailModal, setShowEmailModal] = useState(false)
   const order = location.state?.order
+  const config = getConfig()
 
   useEffect(() => {
     if (!order) {

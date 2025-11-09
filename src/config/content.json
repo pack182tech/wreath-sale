@@ -3,7 +3,7 @@
     "name": "Pack 182 Wreath Sale",
     "startDate": "2025-11-08",
     "endDate": "2025-12-05",
-    "pickupDate": "December 15, 2025",
+    "pickupDate": "TBD",
     "pickupTime": "10:00 AM - 2:00 PM",
     "pickupLocation": "Readington Elementary School Parking Lot",
     "status": "active"
@@ -19,7 +19,7 @@
       "id": "red-bow",
       "name": "Red Bow Wreath",
       "category": "wreaths",
-      "description": "12\" round evergreen wreath adorned with a festive red bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
+      "description": "Evergreen wreath adorned with a festive red bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
       "price": 35.00,
       "image": "red-bow.png",
       "active": true
@@ -28,7 +28,7 @@
       "id": "plaid-bow",
       "name": "Plaid Bow Wreath",
       "category": "wreaths",
-      "description": "12\" round evergreen wreath featuring a traditional plaid bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
+      "description": "Evergreen wreath featuring a traditional plaid bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
       "price": 35.00,
       "image": "plaid-bow.png",
       "active": true
@@ -37,7 +37,7 @@
       "id": "gold-bow",
       "name": "Gold Bow Wreath",
       "category": "wreaths",
-      "description": "12\" round evergreen wreath decorated with a golden bow and natural pinecones. Exact bow color may vary. 12\" diameter is the inner ring diameter.",
+      "description": "Evergreen wreath decorated with a golden bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
       "price": 35.00,
       "image": "gold-bow.png",
       "active": true
@@ -82,7 +82,7 @@
   "productDisclaimer": "Images shown are stock photos and may not reflect the exact product you will receive. Actual products may vary in appearance.",
   "donation": {
     "enabled": true,
-    "recipient": "First United Methodist Church",
+    "recipient": "Three Bridges Reformed Church",
     "description": "Support our local church's youth programs and community outreach",
     "suggestedAmounts": [10, 25, 50, 100]
   },
@@ -94,7 +94,45 @@
   },
   "scoutLaw": {
     "enabled": true,
-    "text": "A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent"
+    "text": "A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent",
+    "examples": [
+      "A Scout is Trustworthy ... by always telling the truth, even when it's difficult",
+      "A Scout is Trustworthy ... by keeping promises to friends and family",
+      "A Scout is Trustworthy ... by returning lost items to their rightful owner",
+      "A Scout is Loyal ... by standing by their friends in good times and bad",
+      "A Scout is Loyal ... by supporting their pack and fellow scouts",
+      "A Scout is Loyal ... by showing respect for their country and community",
+      "A Scout is Helpful ... by volunteering in their community",
+      "A Scout is Helpful ... by offering to assist someone who needs it",
+      "A Scout is Helpful ... by doing chores without being asked",
+      "A Scout is Friendly ... by welcoming the new scout who is sitting alone",
+      "A Scout is Friendly ... by smiling and greeting others warmly",
+      "A Scout is Friendly ... by including everyone in games and activities",
+      "A Scout is Courteous ... by saying please and thank you",
+      "A Scout is Courteous ... by holding the door open for others",
+      "A Scout is Courteous ... by listening when someone is speaking",
+      "A Scout is Kind ... by helping a younger sibling with homework",
+      "A Scout is Kind ... by comforting a friend who is upset",
+      "A Scout is Kind ... by being gentle with animals",
+      "A Scout is Obedient ... by following their parents' rules",
+      "A Scout is Obedient ... by listening to their scout leader's instructions",
+      "A Scout is Obedient ... by respecting authority and guidelines",
+      "A Scout is Cheerful ... by staying positive during challenging times",
+      "A Scout is Cheerful ... by bringing joy to others with a smile",
+      "A Scout is Cheerful ... by finding the good in every situation",
+      "A Scout is Thrifty ... by saving money for important goals",
+      "A Scout is Thrifty ... by not wasting food or resources",
+      "A Scout is Thrifty ... by reusing and recycling whenever possible",
+      "A Scout is Brave ... by standing up for what is right",
+      "A Scout is Brave ... by trying new things even when scared",
+      "A Scout is Brave ... by facing challenges with courage",
+      "A Scout is Clean ... by tidying up their room every weekend",
+      "A Scout is Clean ... by keeping their scout uniform neat and tidy",
+      "A Scout is Clean ... by washing their hands before meals",
+      "A Scout is Reverent ... by respecting others' beliefs and faiths",
+      "A Scout is Reverent ... by showing gratitude for what they have",
+      "A Scout is Reverent ... by taking time to reflect and be thankful"
+    ]
   },
   "content": {
     "heroTitle": "Support Pack 182 Scouts",
@@ -117,7 +155,7 @@
       },
       {
         "question": "What if I just want to make a donation?",
-        "answer": "We appreciate donations! You can add a donation to First United Methodist Church during checkout. All donations are welcome and help support our local community."
+        "answer": "We appreciate donations! You can add a donation to Three Bridges Reformed Church during checkout. All donations are welcome and help support our local community."
       }
     ]
   },

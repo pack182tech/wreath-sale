@@ -8,6 +8,7 @@ export const initializeMockData = () => {
         name: 'Tommy Anderson',
         slug: 'tommy-anderson',
         rank: 'Bear',
+        email: 'tommy.anderson@email.com',
         parentName: 'John Anderson',
         parentEmail: 'john.anderson@email.com',
         active: true
@@ -17,6 +18,7 @@ export const initializeMockData = () => {
         name: 'Sarah Martinez',
         slug: 'sarah-martinez',
         rank: 'Wolf',
+        email: 'sarah.martinez@email.com',
         parentName: 'Maria Martinez',
         parentEmail: 'maria.martinez@email.com',
         active: true
@@ -26,6 +28,7 @@ export const initializeMockData = () => {
         name: 'Michael Chen',
         slug: 'michael-chen',
         rank: 'Webelos',
+        email: 'michael.chen@email.com',
         parentName: 'David Chen',
         parentEmail: 'david.chen@email.com',
         active: true
@@ -35,6 +38,7 @@ export const initializeMockData = () => {
         name: 'Emma Johnson',
         slug: 'emma-johnson',
         rank: 'Tiger',
+        email: 'emma.johnson@email.com',
         parentName: 'Lisa Johnson',
         parentEmail: 'lisa.johnson@email.com',
         active: true
@@ -44,6 +48,7 @@ export const initializeMockData = () => {
         name: 'Alex Rivera',
         slug: 'alex-rivera',
         rank: 'Arrow of Light',
+        email: 'alex.rivera@email.com',
         parentName: 'Carlos Rivera',
         parentEmail: 'carlos.rivera@email.com',
         active: true
@@ -52,7 +57,7 @@ export const initializeMockData = () => {
     localStorage.setItem('scouts', JSON.stringify(scouts))
   }
 
-  // Initialize admin user if not exists
+  // Initialize admin and scout users if not exists
   if (!localStorage.getItem('users')) {
     const users = [
       {
@@ -61,6 +66,27 @@ export const initializeMockData = () => {
         password: 'admin123', // In production, this would be hashed
         role: 'admin',
         name: 'Pack Leader'
+      },
+      {
+        id: 'user-scout-1',
+        email: 'tommy.anderson@email.com',
+        password: 'scout123',
+        role: 'scout',
+        name: 'Tommy Anderson'
+      },
+      {
+        id: 'user-scout-2',
+        email: 'sarah.martinez@email.com',
+        password: 'scout123',
+        role: 'scout',
+        name: 'Sarah Martinez'
+      },
+      {
+        id: 'user-scout-3',
+        email: 'michael.chen@email.com',
+        password: 'scout123',
+        role: 'scout',
+        name: 'Michael Chen'
       }
     ]
     localStorage.setItem('users', JSON.stringify(users))
@@ -100,4 +126,32 @@ export const updateOrder = (orderId, updates) => {
     return orders[index]
   }
   return null
+}
+
+export const deleteOrder = (orderId) => {
+  const orders = getOrders()
+  const filtered = orders.filter(o => o.orderId !== orderId)
+  localStorage.setItem('orders', JSON.stringify(filtered))
+  return true
+}
+
+export const saveScout = (scout) => {
+  const scouts = getScouts()
+  const existing = scouts.findIndex(s => s.id === scout.id)
+
+  if (existing !== -1) {
+    scouts[existing] = scout
+  } else {
+    scouts.push(scout)
+  }
+
+  localStorage.setItem('scouts', JSON.stringify(scouts))
+  return scout
+}
+
+export const deleteScout = (scoutId) => {
+  const scouts = getScouts()
+  const filtered = scouts.filter(s => s.id !== scoutId)
+  localStorage.setItem('scouts', JSON.stringify(filtered))
+  return true
 }

@@ -3,6 +3,7 @@ import './Leaderboard.css'
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([])
+  const [rankStats, setRankStats] = useState([])
   const [viewMode, setViewMode] = useState('revenue') // revenue or units
 
   useEffect(() => {
@@ -37,6 +38,34 @@ function Leaderboard() {
     leaderboardData.sort((a, b) => b[viewMode] - a[viewMode])
 
     setLeaderboard(leaderboardData)
+
+    // Calculate rank statistics
+    const rankData = {}
+    leaderboardData.forEach(scout => {
+      if (!rankData[scout.rank]) {
+        rankData[scout.rank] = {
+          rank: scout.rank,
+          totalRevenue: 0,
+          totalUnits: 0,
+          scoutCount: 0
+        }
+      }
+      rankData[scout.rank].totalRevenue += scout.revenue
+      rankData[scout.rank].totalUnits += scout.units
+      rankData[scout.rank].scoutCount += 1
+    })
+
+    // Convert to array and calculate averages
+    const rankStatsData = Object.values(rankData).map(rank => ({
+      ...rank,
+      avgRevenue: rank.scoutCount > 0 ? rank.totalRevenue / rank.scoutCount : 0,
+      avgUnits: rank.scoutCount > 0 ? rank.totalUnits / rank.scoutCount : 0
+    }))
+
+    // Sort by total revenue (descending)
+    rankStatsData.sort((a, b) => b[viewMode === 'revenue' ? 'totalRevenue' : 'totalUnits'] - a[viewMode === 'revenue' ? 'totalRevenue' : 'totalUnits'])
+
+    setRankStats(rankStatsData)
   }, [viewMode])
 
   const getRankBadge = (index) => {
@@ -116,6 +145,51 @@ function Leaderboard() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Rank Statistics */}
+        {rankStats.length > 0 && (
+          <div className="rank-stats-section">
+            <h2>Sales by Rank</h2>
+            <p className="section-subtitle">
+              Performance breakdown by Cub Scout rank
+            </p>
+
+            <div className="rank-stats-grid">
+              {rankStats.map((rankStat, index) => (
+                <div key={rankStat.rank} className="rank-stat-card">
+                  <div className="rank-stat-header">
+                    <h3>{rankStat.rank}</h3>
+                    <span className="scout-count">{rankStat.scoutCount} scout{rankStat.scoutCount !== 1 ? 's' : ''}</span>
+                  </div>
+
+                  <div className="rank-stat-body">
+                    <div className="stat-row">
+                      <span className="stat-label">Total Sales:</span>
+                      <span className="stat-value total">
+                        {viewMode === 'revenue'
+                          ? `$${rankStat.totalRevenue.toFixed(2)}`
+                          : `${rankStat.totalUnits} units`}
+                      </span>
+                    </div>
+
+                    <div className="stat-row">
+                      <span className="stat-label">Average per Scout:</span>
+                      <span className="stat-value average">
+                        {viewMode === 'revenue'
+                          ? `$${rankStat.avgRevenue.toFixed(2)}`
+                          : `${rankStat.avgUnits.toFixed(1)} units`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {index === 0 && (
+                    <div className="top-rank-badge">🏆 Top Rank</div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

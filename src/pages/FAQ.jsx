@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import config from '../config/content.json'
+import { getConfig } from '../utils/configLoader'
 import './FAQ.css'
 
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
+  const config = getConfig()
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index)

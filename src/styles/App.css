@@ -8,7 +8,7 @@
 /* Hero Section */
 .hero {
   min-height: 70vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
     url('/wreath-site/images/branding/background-optimized.jpg');
   background-size: cover;
   background-position: center;
@@ -58,6 +58,27 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* Scout Attribution Banner */
+.scout-attribution-banner {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-left: 4px solid #d4af37;
+  padding: 1rem 1.5rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.scout-attribution-banner p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.scout-attribution-banner strong {
+  color: #1a472a;
 }
 
 /* Buttons */
@@ -206,7 +227,7 @@
 .scroll-content {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll 30s linear infinite;
+  animation: scroll 180s linear infinite;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.5px;

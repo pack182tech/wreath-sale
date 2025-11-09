@@ -1,25 +1,31 @@
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
+import { getConfig } from '../utils/configLoader'
 import './Checkout.css'
 
 function Checkout() {
   const { cart, getCartTotal, clearCart } = useCart()
   const navigate = useNavigate()
+  const config = getConfig()
+  const basePath = import.meta.env.BASE_URL
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    supportingScout: '',
     comments: ''
   })
   const [errors, setErrors] = useState({})
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    // Map specialComments back to comments for state
+    const fieldName = name === 'specialComments' ? 'comments' : name
+    setFormData(prev => ({ ...prev, [fieldName]: value }))
     // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+    if (errors[fieldName]) {
+      setErrors(prev => ({ ...prev, [fieldName]: '' }))
     }
   }
 
@@ -93,12 +99,6 @@ function Checkout() {
       <div className="checkout-content">
         <h1>Checkout</h1>
 
-        {scoutName && (
-          <div className="scout-attribution-banner">
-            <p>🎗️ Supporting Cub Scout: <strong>{scoutName}</strong></p>
-          </div>
-        )}
-
         <div className="checkout-grid">
           <div className="checkout-form-section">
             <h2>Contact Information</h2>
@@ -142,14 +142,34 @@ function Checkout() {
                 {errors.phone && <span className="error-message">{errors.phone}</span>}
               </div>
 
+              {!scoutName && (
+                <div className="form-group">
+                  <label htmlFor="supportingScout">If you're supporting a specific Scout, let us know who</label>
+                  <input
+                    type="text"
+                    id="supportingScout"
+                    name="supportingScout"
+                    value={formData.supportingScout}
+                    onChange={handleChange}
+                    placeholder="Enter scout's name"
+                    autoComplete="off"
+                  />
+                </div>
+              )}
+
               <div className="form-group">
                 <label htmlFor="comments">Special Requests or Comments</label>
                 <textarea
                   id="comments"
-                  name="comments"
+                  name="specialComments"
                   value={formData.comments}
                   onChange={handleChange}
                   rows="4"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  data-form-type="other"
                 />
               </div>
 
@@ -185,10 +205,20 @@ function Checkout() {
               <h3>Payment Instructions</h3>
               <p>Please pay via Zelle after placing your order:</p>
               <div className="zelle-details">
-                <p><strong>Recipient:</strong> Boy Scouts of America</p>
-                <p><strong>Email:</strong> threebridgespack182@gmail.com</p>
-                <p>Include your order number in the memo field.</p>
+                <p><strong>Recipient:</strong> {config.zelle.recipientName}</p>
+                <p><strong>Email:</strong> {config.zelle.recipientContact}</p>
+                <p>{config.zelle.instructions}</p>
               </div>
+              {config.zelle.qrCodeImage && (
+                <div className="zelle-qr-code">
+                  <p><strong>Scan to Pay:</strong></p>
+                  <img
+                    src={`${basePath}images/zelle/${config.zelle.qrCodeImage}`}
+                    alt="Zelle QR Code"
+                    className="qr-code-image"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

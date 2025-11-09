@@ -1,17 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+// Pack 182 Wreath Sale Platform
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { CartProvider } from './context/CartContext'
 import { ScoutProvider } from './context/ScoutContext'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
 import Cart from './components/Cart'
 import CartIcon from './components/CartIcon'
+import ScoutAttributionBanner from './components/ScoutAttributionBanner'
 import ProductCard from './components/ProductCard'
 import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
 import Leaderboard from './pages/Leaderboard'
 import FAQ from './pages/FAQ'
+import Login from './pages/Login'
+import ScoutPortal from './pages/ScoutPortal'
+import AdminDashboard from './pages/AdminDashboard'
 import { initializeMockData } from './utils/mockData'
+import { getConfig } from './utils/configLoader'
 import './styles/App.css'
-import config from './config/content.json'
 
 function App() {
   const basePath = import.meta.env.BASE_URL
@@ -21,23 +28,45 @@ function App() {
     initializeMockData()
   }, [])
 
-  return (
-    <CartProvider>
-      <Router>
-        <ScoutProvider>
-          <CartIcon />
-          <Cart />
+  const config = getConfig()
 
-          <Routes>
-            <Route path="/" element={<HomePage basePath={basePath} config={config} />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/confirmation" element={<OrderConfirmation />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/faq" element={<FAQ />} />
-          </Routes>
-        </ScoutProvider>
-      </Router>
-    </CartProvider>
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <Router basename={basePath}>
+          <ScoutProvider>
+            <ScoutAttributionBanner />
+            <CartIcon />
+            <Cart />
+
+            <Routes>
+              <Route path="/" element={<HomePage basePath={basePath} config={config} />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/confirmation" element={<OrderConfirmation />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/scout-portal"
+                element={
+                  <ProtectedRoute>
+                    <ScoutPortal />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute requireAdmin={true}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </ScoutProvider>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   )
 }
 
@@ -57,7 +86,7 @@ function HomePage({ basePath, config }) {
             <p className="hero-location">{config.pack.location}</p>
             <div className="hero-cta">
               <a href="#products" className="btn btn-primary">Shop All Products</a>
-              <a href="/leaderboard" className="btn btn-secondary">View Leaderboard</a>
+              <Link to="/leaderboard" className="btn btn-secondary">View Leaderboard</Link>
             </div>
           </div>
         </section>
@@ -101,7 +130,15 @@ function HomePage({ basePath, config }) {
       {/* Scout Law Scroll */}
       <div className="scout-law-scroll">
         <div className="scroll-content">
-          {config.scoutLaw.text} • {config.scoutLaw.text} • {config.scoutLaw.text}
+          {config.scoutLaw.examples?.map((example, index) => (
+            <span key={index}>{example} • </span>
+          ))}
+          {config.scoutLaw.examples?.map((example, index) => (
+            <span key={`repeat-${index}`}>{example} • </span>
+          ))}
+          {config.scoutLaw.examples?.map((example, index) => (
+            <span key={`repeat2-${index}`}>{example} • </span>
+          ))}
         </div>
       </div>
     </div>
