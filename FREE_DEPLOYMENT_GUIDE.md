@@ -57,6 +57,8 @@ Row 2: siteConfig | (paste your config JSON here)
 
 1. Copy URL of your sheet
 2. Extract the ID from: `https://docs.google.com/spreadsheets/d/[THIS_IS_THE_ID]/edit`
+   1. Actual URL: https://docs.google.com/spreadsheets/d/1KEYQDpX5k8umyACkc9ynyUD7QN0BJh10iOBjMI33S3A/edit?gid=1153100398#gid=1153100398
+   2. ID: 1KEYQDpX5k8umyACkc9ynyUD7QN0BJh10iOBjMI33S3A
 3. Save this ID for later
 
 ### Step 3: Make Sheet Public

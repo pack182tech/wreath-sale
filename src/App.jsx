@@ -17,6 +17,7 @@ import FAQ from './pages/FAQ'
 import Login from './pages/Login'
 import ScoutPortal from './pages/ScoutPortal'
 import AdminDashboard from './pages/AdminDashboard'
+import ScoutLawAnimated from './components/ScoutLawAnimated'
 import { initializeMockData } from './utils/mockData'
 import { getConfig } from './utils/configLoader'
 import './styles/App.css'
@@ -129,20 +130,8 @@ function HomePage({ basePath, config }) {
           </div>
         </section>
 
-      {/* Scout Law Scroll */}
-      <div className="scout-law-scroll">
-        <div className="scroll-content">
-          {config.scoutLaw.examples?.map((example, index) => (
-            <span key={index}>{example} • </span>
-          ))}
-          {config.scoutLaw.examples?.map((example, index) => (
-            <span key={`repeat-${index}`}>{example} • </span>
-          ))}
-          {config.scoutLaw.examples?.map((example, index) => (
-            <span key={`repeat2-${index}`}>{example} • </span>
-          ))}
-        </div>
-      </div>
+      {/* Scout Law Animated Display */}
+      <ScoutLawAnimated examples={config.scoutLaw.examples} />
     </div>
   )
 }

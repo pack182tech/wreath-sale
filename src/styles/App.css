@@ -210,37 +210,7 @@
   font-size: 1rem;
 }
 
-/* Scout Law Scroll */
-.scout-law-scroll {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #1a472a;
-  color: white;
-  padding: 0.75rem 0;
-  overflow: hidden;
-  z-index: 1000;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.scroll-content {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll 180s linear infinite;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
-}
+/* Scout Law Animated - styles moved to ScoutLawAnimated.css */
 
 /* Responsive Design */
 @media (max-width: 768px) {
