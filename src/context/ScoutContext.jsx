@@ -16,6 +16,14 @@ export const ScoutProvider = ({ children }) => {
   const [scoutAttribution, setScoutAttribution] = useState(null)
 
   useEffect(() => {
+    // Clear old scout attribution if it's from the demo/example scouts
+    const existingScoutName = sessionStorage.getItem('scoutName')
+    const demoScouts = ['Tommy Anderson', 'Sarah Martinez', 'Michael Chen', 'Emma Johnson', 'Alex Rivera']
+    if (existingScoutName && demoScouts.includes(existingScoutName)) {
+      sessionStorage.removeItem('scoutAttribution')
+      sessionStorage.removeItem('scoutName')
+    }
+
     // Check if there's a scout parameter in the URL
     const scoutSlug = searchParams.get('scout')
     if (scoutSlug) {
@@ -32,9 +40,9 @@ export const ScoutProvider = ({ children }) => {
     } else {
       // Check if there's existing attribution in sessionStorage
       const existingScoutId = sessionStorage.getItem('scoutAttribution')
-      const existingScoutName = sessionStorage.getItem('scoutName')
-      if (existingScoutId && existingScoutName) {
-        setScoutAttribution({ id: existingScoutId, name: existingScoutName })
+      const cleanScoutName = sessionStorage.getItem('scoutName')
+      if (existingScoutId && cleanScoutName) {
+        setScoutAttribution({ id: existingScoutId, name: cleanScoutName })
       }
     }
   }, [searchParams])
