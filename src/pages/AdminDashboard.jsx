@@ -41,6 +41,13 @@ function AdminDashboard() {
   })
   const [siteConfig, setSiteConfig] = useState(getConfig())
 
+  // Table controls state
+  const [sortBy, setSortBy] = useState('name')
+  const [sortDirection, setSortDirection] = useState('asc')
+  const [filterRank, setFilterRank] = useState('')
+  const [filterStatus, setFilterStatus] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+
   useEffect(() => {
     loadData()
   }, [])
@@ -162,6 +169,86 @@ function AdminDashboard() {
       sum + order.items.reduce((itemSum, item) => itemSum + item.quantity, 0), 0
     )
     return { revenue, units, orderCount: scoutOrders.length }
+  }
+
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortBy(column)
+      setSortDirection('asc')
+    }
+  }
+
+  const getFilteredAndSortedScouts = () => {
+    let filtered = [...scouts]
+
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter(scout =>
+        scout.name.toLowerCase().includes(query) ||
+        scout.parentName?.toLowerCase().includes(query) ||
+        scout.parentEmail?.toLowerCase().includes(query) ||
+        scout.rank.toLowerCase().includes(query)
+      )
+    }
+
+    // Apply rank filter
+    if (filterRank) {
+      filtered = filtered.filter(scout => scout.rank === filterRank)
+    }
+
+    // Apply status filter
+    if (filterStatus) {
+      filtered = filtered.filter(scout =>
+        filterStatus === 'active' ? scout.active : !scout.active
+      )
+    }
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      let aVal, bVal
+
+      switch (sortBy) {
+        case 'name':
+          aVal = a.name.toLowerCase()
+          bVal = b.name.toLowerCase()
+          break
+        case 'rank':
+          aVal = a.rank
+          bVal = b.rank
+          break
+        case 'parent':
+          aVal = (a.parentName || '').toLowerCase()
+          bVal = (b.parentName || '').toLowerCase()
+          break
+        case 'orders':
+          aVal = getScoutStats(a.id).orderCount
+          bVal = getScoutStats(b.id).orderCount
+          break
+        case 'revenue':
+          aVal = getScoutStats(a.id).revenue
+          bVal = getScoutStats(b.id).revenue
+          break
+        case 'units':
+          aVal = getScoutStats(a.id).units
+          bVal = getScoutStats(b.id).units
+          break
+        case 'status':
+          aVal = a.active ? 1 : 0
+          bVal = b.active ? 1 : 0
+          break
+        default:
+          return 0
+      }
+
+      if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1
+      if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1
+      return 0
+    })
+
+    return filtered
   }
 
   const getScoutUrl = (scout) => {
@@ -583,22 +670,79 @@ function AdminDashboard() {
               </form>
             )}
 
+            <div className="table-controls">
+              <input
+                type="text"
+                placeholder="Search scouts, parents, rank..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+              <select
+                value={filterRank}
+                onChange={(e) => setFilterRank(e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Ranks</option>
+                <option value="Lion">Lion</option>
+                <option value="Tiger">Tiger</option>
+                <option value="Wolf">Wolf</option>
+                <option value="Bear">Bear</option>
+                <option value="Webelos">Webelos</option>
+              </select>
+              <select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+              {(searchQuery || filterRank || filterStatus) && (
+                <button
+                  onClick={() => {
+                    setSearchQuery('')
+                    setFilterRank('')
+                    setFilterStatus('')
+                  }}
+                  className="btn-clear-filters"
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
+
             <div className="scouts-table">
               <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Rank</th>
-                    <th>Parent</th>
-                    <th>Orders</th>
-                    <th>Revenue</th>
-                    <th>Units</th>
-                    <th>Status</th>
+                    <th onClick={() => handleSort('name')} className="sortable">
+                      Name {sortBy === 'name' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('rank')} className="sortable">
+                      Rank {sortBy === 'rank' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('parent')} className="sortable">
+                      Parent {sortBy === 'parent' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('orders')} className="sortable">
+                      Orders {sortBy === 'orders' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('revenue')} className="sortable">
+                      Revenue {sortBy === 'revenue' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('units')} className="sortable">
+                      Units {sortBy === 'units' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th onClick={() => handleSort('status')} className="sortable">
+                      Status {sortBy === 'status' && (sortDirection === 'asc' ? '↑' : '↓')}
+                    </th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {scouts.map(scout => {
+                  {getFilteredAndSortedScouts().map(scout => {
                     const scoutStats = getScoutStats(scout.id)
                     return (
                       <tr key={scout.id}>
