@@ -26,16 +26,24 @@ export const ScoutProvider = ({ children }) => {
 
     // Check if there's a scout parameter in the URL
     const scoutSlug = searchParams.get('scout')
+    console.log('[ScoutContext] Scout slug from URL:', scoutSlug)
+
     if (scoutSlug) {
       // Load scout data from localStorage (would be from API in production)
       const scouts = JSON.parse(localStorage.getItem('scouts') || '[]')
+      console.log('[ScoutContext] Total scouts in localStorage:', scouts.length)
+
       const scout = scouts.find(s => s.slug === scoutSlug)
+      console.log('[ScoutContext] Found scout:', scout)
 
       if (scout) {
         setScoutAttribution(scout)
         // Store in sessionStorage to persist across page navigation
         sessionStorage.setItem('scoutAttribution', scout.id)
         sessionStorage.setItem('scoutName', scout.name)
+        console.log('[ScoutContext] Set scout attribution:', scout.name)
+      } else {
+        console.warn('[ScoutContext] No scout found with slug:', scoutSlug)
       }
     } else {
       // Check if there's existing attribution in sessionStorage
