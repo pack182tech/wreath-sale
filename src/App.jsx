@@ -138,11 +138,9 @@ function HomePage({ basePath, config }) {
         <div className="footer-content">
           <div className="footer-links">
             <Link to="/faq" className="footer-link">Frequently Asked Questions</Link>
-            <Link to="/leaderboard" className="footer-link">Leaderboard</Link>
-            <a href="#products" className="footer-link">Shop Products</a>
           </div>
           <div className="footer-info">
-            <p>&copy; 2024 {config.pack.name} - {config.pack.location}</p>
+            <p>&copy; 2025 {config.pack.name} - {config.pack.location}</p>
             <p className="footer-small">Supporting our scouts through the holiday season</p>
           </div>
         </div>
