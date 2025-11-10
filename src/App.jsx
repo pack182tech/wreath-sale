@@ -1,5 +1,5 @@
 // Pack 182 Wreath Sale Platform
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { CartProvider } from './context/CartContext'
 import { ScoutProvider } from './context/ScoutContext'
