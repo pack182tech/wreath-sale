@@ -35,7 +35,7 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Router>
+        <Router basename="/wreath-sale">
           <ScoutProvider>
             <ScoutAttributionBanner />
             <DonationPopup />
