@@ -76,11 +76,6 @@ function App() {
 function HomePage({ basePath, config }) {
   return (
     <div className="App">
-      {/* Top Navigation */}
-      <nav className="top-nav">
-        <Link to="/login" className="nav-link">Scout/Admin Login</Link>
-      </nav>
-
       {/* Hero Section with Background */}
       <section className="hero">
           <div className="hero-overlay">
