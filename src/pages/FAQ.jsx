@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
 import './FAQ.css'
 
@@ -13,6 +14,8 @@ function FAQ() {
   return (
     <div className="faq-container">
       <div className="faq-content">
+        <Link to="/" className="back-to-home">← Back to Home</Link>
+
         {/* About Section */}
         <section className="about-section">
           <h1>About Our Holiday Sale</h1>

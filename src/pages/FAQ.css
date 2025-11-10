@@ -10,6 +10,26 @@
   margin: 0 auto;
 }
 
+.back-to-home {
+  display: inline-block;
+  color: #1a472a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.back-to-home:hover {
+  background: #1a472a;
+  color: white;
+  transform: translateX(-5px);
+}
+
 .about-section {
   background: white;
   padding: 3rem 2rem;
