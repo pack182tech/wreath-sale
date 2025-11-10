@@ -18,26 +18,33 @@ function FAQ() {
 
         {/* About Section */}
         <section className="about-section">
-          <h1>About Our Holiday Sale</h1>
+          <h1 className="about-title">About Our Holiday Sale</h1>
           <div className="about-text">
             <p>{config.content.aboutText}</p>
           </div>
 
           <div className="campaign-details">
-            <div className="detail-card">
+            <div className="detail-card sale-period">
+              <div className="card-icon">📅</div>
               <h3>Sale Period</h3>
-              <p>{config.campaign.startDate} - {config.campaign.endDate}</p>
+              <p className="date-range">{config.campaign.startDate} - {config.campaign.endDate}</p>
             </div>
-            <div className="detail-card">
+            <div className="detail-card pickup-info">
+              <div className="card-icon">🎄</div>
               <h3>Pickup Information</h3>
-              <p><strong>Date:</strong> {config.campaign.pickupDate}</p>
-              <p><strong>Time:</strong> {config.campaign.pickupTime}</p>
-              <p><strong>Location:</strong> {config.campaign.pickupLocation}</p>
+              <div className="info-details">
+                <p><span className="label">Date:</span> {config.campaign.pickupDate}</p>
+                <p><span className="label">Time:</span> {config.campaign.pickupTime}</p>
+                <p><span className="label">Location:</span> {config.campaign.pickupLocation}</p>
+              </div>
             </div>
-            <div className="detail-card">
+            <div className="detail-card contact-info">
+              <div className="card-icon">📧</div>
               <h3>Contact Us</h3>
-              <p><strong>Pack Leader:</strong> {config.pack.leaderName}</p>
-              <p><strong>Email:</strong> {config.pack.leaderEmail}</p>
+              <div className="info-details">
+                <p><span className="label">Pack Leader:</span> {config.pack.leaderName}</p>
+                <p><span className="label">Email:</span> <a href={`mailto:${config.pack.leaderEmail}`}>{config.pack.leaderEmail}</a></p>
+              </div>
             </div>
           </div>
         </section>
@@ -67,17 +74,6 @@ function FAQ() {
             ))}
           </div>
         </section>
-
-        {/* Donation Section */}
-        {config.donation.enabled && (
-          <section className="donation-section">
-            <h2>Support Our Community</h2>
-            <p>{config.donation.description}</p>
-            <div className="donation-recipient">
-              <p><strong>Recipient Organization:</strong> {config.donation.recipient}</p>
-            </div>
-          </section>
-        )}
       </div>
     </div>
   )
