@@ -36,7 +36,7 @@ function AdminDashboard() {
     rank: '',
     email: '',
     parentName: '',
-    parentEmail: '',
+    parentEmails: [], // Changed to array
     active: true
   })
   const [siteConfig, setSiteConfig] = useState(getConfig())
@@ -90,7 +90,11 @@ function AdminDashboard() {
 
   const handleEditScout = (scout) => {
     setEditingScout(scout.id)
-    setScoutFormData({ ...scout })
+    // Ensure parentEmails is an array
+    setScoutFormData({
+      ...scout,
+      parentEmails: Array.isArray(scout.parentEmails) ? scout.parentEmails : []
+    })
   }
 
   const handleSaveScout = (e) => {
@@ -109,7 +113,7 @@ function AdminDashboard() {
       rank: '',
       email: '',
       parentName: '',
-      parentEmail: '',
+      parentEmails: [],
       active: true
     })
     loadData()
@@ -130,7 +134,7 @@ function AdminDashboard() {
       rank: '',
       email: '',
       parentName: '',
-      parentEmail: '',
+      parentEmails: [],
       active: true
     })
   }
@@ -186,12 +190,14 @@ function AdminDashboard() {
     // Apply search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(scout =>
-        scout.name.toLowerCase().includes(query) ||
-        scout.parentName?.toLowerCase().includes(query) ||
-        scout.parentEmail?.toLowerCase().includes(query) ||
-        scout.rank.toLowerCase().includes(query)
-      )
+      filtered = filtered.filter(scout => {
+        const parentEmailsMatch = Array.isArray(scout.parentEmails) &&
+          scout.parentEmails.some(email => email.toLowerCase().includes(query))
+        return scout.name.toLowerCase().includes(query) ||
+          scout.parentName?.toLowerCase().includes(query) ||
+          parentEmailsMatch ||
+          scout.rank.toLowerCase().includes(query)
+      })
     }
 
     // Apply rank filter
@@ -267,8 +273,11 @@ function AdminDashboard() {
     // For now, we'll include a placeholder and instructions
     const scoutUrl = getScoutUrl(scout)
 
+    // Use all parent emails if available, otherwise empty string
+    const parentEmails = Array.isArray(scout.parentEmails) ? scout.parentEmails.join(', ') : ''
+
     return {
-      to: scout.parentEmail,
+      to: parentEmails,
       subject: `Pack 182 Wreath Sale - ${scout.name}'s Unique Sales Link & QR Code`,
       body: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -635,11 +644,19 @@ function AdminDashboard() {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Parent Email</label>
+                    <label>Parent Emails (comma-separated)</label>
                     <input
-                      type="email"
-                      value={scoutFormData.parentEmail}
-                      onChange={(e) => setScoutFormData({...scoutFormData, parentEmail: e.target.value})}
+                      type="text"
+                      value={Array.isArray(scoutFormData.parentEmails) ? scoutFormData.parentEmails.join(', ') : ''}
+                      onChange={(e) => {
+                        // Split by comma and trim whitespace
+                        const emails = e.target.value
+                          .split(',')
+                          .map(email => email.trim())
+                          .filter(email => email.length > 0)
+                        setScoutFormData({...scoutFormData, parentEmails: emails})
+                      }}
+                      placeholder="email1@example.com, email2@example.com"
                     />
                   </div>
                 </div>
@@ -750,7 +767,11 @@ function AdminDashboard() {
                         <td>{scout.rank}</td>
                         <td>
                           <div>{scout.parentName}</div>
-                          <div className="sub-info">{scout.parentEmail}</div>
+                          <div className="sub-info">
+                            {Array.isArray(scout.parentEmails) && scout.parentEmails.length > 0
+                              ? scout.parentEmails.join(', ')
+                              : ''}
+                          </div>
                         </td>
                         <td>{scoutStats.orderCount}</td>
                         <td>${scoutStats.revenue.toFixed(2)}</td>
