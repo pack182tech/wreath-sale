@@ -61,12 +61,12 @@
       "active": true
     },
     {
-      "id": "lavender-cone",
-      "name": "10\" Lavender Cone",
+      "id": "alberta-spruce",
+      "name": "10\" Alberta Spruce",
       "category": "plants",
-      "description": "Elegant 10-inch lavender cone plant for holiday decor.",
-      "price": 40.00,
-      "image": "10inch-lavender-cones.png",
+      "description": "Beautiful 10-inch Alberta Spruce plant, perfect for holiday decorating.",
+      "price": 45.00,
+      "image": "10inch-alberta-spruce.png",
       "active": true
     },
     {
