@@ -5,6 +5,9 @@ import './DonationPopup.css'
 
 function DonationPopup() {
   const [isOpen, setIsOpen] = useState(false)
+  const [wantsToDonate, setWantsToDonate] = useState(
+    sessionStorage.getItem('wantsToDonate') === 'true'
+  )
   const location = useLocation()
   const config = getConfig()
 
@@ -22,12 +25,14 @@ function DonationPopup() {
   const handleYes = () => {
     sessionStorage.setItem('donationResponse', 'yes')
     sessionStorage.setItem('wantsToDonate', 'true')
+    setWantsToDonate(true)
     setIsOpen(false)
   }
 
   const handleNo = () => {
     sessionStorage.setItem('donationResponse', 'no')
     sessionStorage.setItem('wantsToDonate', 'false')
+    setWantsToDonate(false)
     setIsOpen(false)
   }
 
@@ -48,7 +53,7 @@ function DonationPopup() {
     <>
       {/* Donation Button - Always visible */}
       <button className="donation-trigger-button" onClick={handleManualOpen}>
-        Looking to Donate?
+        {wantsToDonate ? "You're donating! 🎁" : "Looking to Donate?"}
       </button>
 
       {/* Donation Popup Modal */}
