@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
 import './DonationPopup.css'
@@ -10,6 +10,18 @@ function DonationPopup() {
   )
   const location = useLocation()
   const config = getConfig()
+
+  // Listen for donation state changes from checkout
+  useEffect(() => {
+    const handleDonationStateChange = (event) => {
+      setWantsToDonate(event.detail.wantsToDonate)
+    }
+
+    window.addEventListener('donationStateChanged', handleDonationStateChange)
+    return () => {
+      window.removeEventListener('donationStateChanged', handleDonationStateChange)
+    }
+  }, [])
 
   // Don't auto-popup on load - only show when button is clicked
   // useEffect(() => {

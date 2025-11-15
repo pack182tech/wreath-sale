@@ -185,7 +185,15 @@ function Checkout() {
                     <input
                       type="checkbox"
                       checked={isDonating}
-                      onChange={(e) => setIsDonating(e.target.checked)}
+                      onChange={(e) => {
+                        const checked = e.target.checked
+                        setIsDonating(checked)
+                        // Sync with donation banner state
+                        sessionStorage.setItem('wantsToDonate', checked.toString())
+                        sessionStorage.setItem('donationResponse', checked ? 'yes' : 'no')
+                        // Dispatch custom event to notify DonationPopup
+                        window.dispatchEvent(new CustomEvent('donationStateChanged', { detail: { wantsToDonate: checked } }))
+                      }}
                     />
                     <span>Donate my purchase to {config.donation.recipient}</span>
                   </label>
