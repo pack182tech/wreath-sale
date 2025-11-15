@@ -218,12 +218,12 @@ function AdminDashboard() {
 
       switch (sortBy) {
         case 'name':
-          aVal = a.name.toLowerCase()
-          bVal = b.name.toLowerCase()
+          aVal = (a.name || '').toLowerCase()
+          bVal = (b.name || '').toLowerCase()
           break
         case 'rank':
-          aVal = a.rank
-          bVal = b.rank
+          aVal = a.rank || ''
+          bVal = b.rank || ''
           break
         case 'parent':
           aVal = (a.parentName || '').toLowerCase()
