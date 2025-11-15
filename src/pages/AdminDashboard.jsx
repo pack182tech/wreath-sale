@@ -917,17 +917,44 @@ function AdminDashboard() {
             </div>
 
             <div className="config-section">
-              <h3>Scout Attribution</h3>
+              <h3>Scout Attribution Banner</h3>
+
               <div className="form-group">
-                <label>Attribution Banner Text (use $scoutname as placeholder)</label>
+                <label>Banner Text for Scouts (use $scoutname as placeholder)</label>
                 <input
                   type="text"
-                  value={siteConfig.scoutAttributionBanner?.text || 'Supporting $scoutname in his scout journey!'}
-                  onChange={(e) => handleConfigChange('scoutAttributionBanner', 'text', e.target.value)}
-                  placeholder="e.g., Supporting $scoutname in his scout journey!"
+                  value={siteConfig.scoutAttributionBanner?.scoutText || ''}
+                  onChange={(e) => handleConfigChange('scoutAttributionBanner', 'scoutText', e.target.value)}
+                  placeholder="Supporting $scoutname Scouting adventure!"
                 />
                 <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
-                  Use "$scoutname" where you want the scout's name to appear. It will be displayed in bold.
+                  Example: "Supporting $scoutname Scouting adventure!" → "Supporting Dylan McGowan's Scouting adventure!"
+                </small>
+              </div>
+
+              <div className="form-group">
+                <label>Banner Text for Pack 182 (no scout)</label>
+                <input
+                  type="text"
+                  value={siteConfig.scoutAttributionBanner?.defaultText || ''}
+                  onChange={(e) => handleConfigChange('scoutAttributionBanner', 'defaultText', e.target.value)}
+                  placeholder="Supporting Pack 182's Scouting adventure!"
+                />
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Shown when no scout is specified in the URL
+                </small>
+              </div>
+
+              <div className="form-group">
+                <label>Banner Text for Scout Not Found</label>
+                <input
+                  type="text"
+                  value={siteConfig.scoutAttributionBanner?.notFoundText || ''}
+                  onChange={(e) => handleConfigChange('scoutAttributionBanner', 'notFoundText', e.target.value)}
+                  placeholder="We'll attribute to the correct scout at pick up"
+                />
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Shown when scout link is invalid but order can still proceed
                 </small>
               </div>
             </div>

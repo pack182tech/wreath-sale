@@ -22,11 +22,22 @@ function ScoutAttributionBanner() {
   // Don't show banner on admin routes or leaderboard
   if (location.pathname.includes('/admin') || location.pathname.includes('/leaderboard')) return null
 
-  // Use default message if no scout attributed
-  if (!scoutName) {
+  // Handle scout not found case
+  if (scoutName === 'SCOUT_NOT_FOUND') {
+    const notFoundText = config.scoutAttributionBanner?.notFoundText || "We'll attribute to the correct scout at pick up"
     return (
       <div className="scout-attribution-corner-banner">
-        Supporting <strong>Pack 182's</strong> Scouting adventure!
+        {notFoundText}
+      </div>
+    )
+  }
+
+  // Use default message if no scout attributed
+  if (!scoutName) {
+    const defaultText = config.scoutAttributionBanner?.defaultText || "Supporting Pack 182's Scouting adventure!"
+    return (
+      <div className="scout-attribution-corner-banner">
+        {defaultText}
       </div>
     )
   }
@@ -35,8 +46,8 @@ function ScoutAttributionBanner() {
   const possessiveSuffix = scoutName.toLowerCase().endsWith('s') ? "'" : "'s"
 
   // Replace $scoutname placeholder with actual scout name
-  const bannerText = config.scoutAttributionBanner?.text || `Supporting $scoutname${possessiveSuffix} Scouting adventure!`
-  const displayText = bannerText.replace('$scoutname', scoutName)
+  const bannerTemplate = config.scoutAttributionBanner?.scoutText || `Supporting $scoutname${possessiveSuffix} Scouting adventure!`
+  const displayText = bannerTemplate.replace(/\$scoutname/g, scoutName)
 
   return (
     <div className="scout-attribution-corner-banner">

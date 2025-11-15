@@ -99,7 +99,10 @@
     "paymentInfoMessage": "Payment information will be sent to you via email after checkout."
   },
   "scoutAttributionBanner": {
-    "enabled": true
+    "enabled": true,
+    "scoutText": "Supporting $scoutname Scouting adventure!",
+    "defaultText": "Supporting Pack 182's Scouting adventure!",
+    "notFoundText": "We'll attribute to the correct scout at pick up"
   },
   "emailTemplates": {
     "orderConfirmation": {

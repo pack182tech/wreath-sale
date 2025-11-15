@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import ScoutNotFoundModal from '../components/ScoutNotFoundModal'
 
 const ScoutContext = createContext()
 
@@ -14,6 +15,7 @@ export const useScout = () => {
 export const ScoutProvider = ({ children }) => {
   const [searchParams] = useSearchParams()
   const [scoutAttribution, setScoutAttribution] = useState(null)
+  const [showNotFoundModal, setShowNotFoundModal] = useState(false)
 
   useEffect(() => {
     // Check data version and clear sessionStorage if mismatched
@@ -52,7 +54,22 @@ export const ScoutProvider = ({ children }) => {
         sessionStorage.setItem('scoutName', scout.name)
         console.log('[ScoutContext] Set scout attribution:', scout.name)
       } else {
+        // Scout slug provided but not found - still allow order with placeholder
         console.warn('[ScoutContext] No scout found with slug:', scoutSlug)
+
+        const notFoundName = 'SCOUT_NOT_FOUND'
+        setScoutAttribution({ id: 'not-found', name: notFoundName, slug: scoutSlug })
+        sessionStorage.setItem('scoutAttribution', 'not-found')
+        sessionStorage.setItem('scoutName', notFoundName)
+        sessionStorage.setItem('scoutSlug', scoutSlug)
+
+        // Show modal notification (only once per session)
+        if (!sessionStorage.getItem('scoutNotFoundModalShown')) {
+          setTimeout(() => {
+            setShowNotFoundModal(true)
+            sessionStorage.setItem('scoutNotFoundModalShown', 'true')
+          }, 500)
+        }
       }
     } else {
       // Check if there's existing attribution in sessionStorage
@@ -72,6 +89,10 @@ export const ScoutProvider = ({ children }) => {
 
   return (
     <ScoutContext.Provider value={{ scoutAttribution, clearAttribution }}>
+      <ScoutNotFoundModal
+        show={showNotFoundModal}
+        onClose={() => setShowNotFoundModal(false)}
+      />
       {children}
     </ScoutContext.Provider>
   )
