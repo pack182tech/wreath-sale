@@ -582,9 +582,9 @@ function AdminDashboard() {
               </button>
             </div>
 
-            {editingScout && (
+            {editingScout === 'new' && (
               <form onSubmit={handleSaveScout} className="scout-form">
-                <h3>{editingScout === 'new' ? 'Add New Scout' : 'Edit Scout'}</h3>
+                <h3>Add New Scout</h3>
                 <div className="form-row">
                   <div className="form-group">
                     <label>Scout Name *</label>
@@ -761,53 +761,163 @@ function AdminDashboard() {
                 <tbody>
                   {getFilteredAndSortedScouts().map(scout => {
                     const scoutStats = getScoutStats(scout.id)
+                    const isEditing = editingScout === scout.id
                     return (
-                      <tr key={scout.id}>
-                        <td><strong>{scout.name}</strong></td>
-                        <td>{scout.rank}</td>
-                        <td>
-                          <div>{scout.parentName}</div>
-                          <div className="sub-info">
-                            {Array.isArray(scout.parentEmails) && scout.parentEmails.length > 0
-                              ? scout.parentEmails.join(', ')
-                              : ''}
-                          </div>
-                        </td>
-                        <td>{scoutStats.orderCount}</td>
-                        <td>${scoutStats.revenue.toFixed(2)}</td>
-                        <td>{scoutStats.units}</td>
-                        <td>
-                          <span className={`status-badge ${scout.active ? 'active' : 'inactive'}`}>
-                            {scout.active ? 'Active' : 'Inactive'}
-                          </span>
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => setSelectedScoutQR(scout)}
-                            className="btn-view"
-                          >
-                            View QR
-                          </button>
-                          <button
-                            onClick={() => setSelectedScoutEmail(scout)}
-                            className="btn-view"
-                          >
-                            Welcome Email
-                          </button>
-                          <button
-                            onClick={() => handleEditScout(scout)}
-                            className="btn-view"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDeleteScout(scout.id)}
-                            className="btn-delete"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
+                      <>
+                        <tr key={scout.id}>
+                          <td><strong>{scout.name}</strong></td>
+                          <td>{scout.rank}</td>
+                          <td>
+                            <div>{scout.parentName}</div>
+                            <div className="sub-info">
+                              {Array.isArray(scout.parentEmails) && scout.parentEmails.length > 0
+                                ? scout.parentEmails.join(', ')
+                                : ''}
+                            </div>
+                          </td>
+                          <td>{scoutStats.orderCount}</td>
+                          <td>${scoutStats.revenue.toFixed(2)}</td>
+                          <td>{scoutStats.units}</td>
+                          <td>
+                            <span className={`status-badge ${scout.active ? 'active' : 'inactive'}`}>
+                              {scout.active ? 'Active' : 'Inactive'}
+                            </span>
+                          </td>
+                          <td>
+                            <button
+                              onClick={() => setSelectedScoutQR(scout)}
+                              className="btn-view"
+                            >
+                              View QR
+                            </button>
+                            <button
+                              onClick={() => setSelectedScoutEmail(scout)}
+                              className="btn-view"
+                            >
+                              Welcome Email
+                            </button>
+                            <button
+                              onClick={() => handleEditScout(scout)}
+                              className="btn-view"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleDeleteScout(scout.id)}
+                              className="btn-delete"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                        {isEditing && (
+                          <tr key={`${scout.id}-edit`} className="scout-edit-row">
+                            <td colSpan="8">
+                              <form onSubmit={handleSaveScout} className="scout-form inline-edit">
+                                <h3>Edit Scout: {scout.name}</h3>
+                                <div className="form-row">
+                                  <div className="form-group">
+                                    <label>Scout Name *</label>
+                                    <input
+                                      type="text"
+                                      value={scoutFormData.name}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, name: e.target.value})}
+                                      required
+                                    />
+                                  </div>
+                                  <div className="form-group">
+                                    <label>Slug (URL) *</label>
+                                    <input
+                                      type="text"
+                                      value={scoutFormData.slug}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, slug: e.target.value})}
+                                      placeholder="firstname-lastname"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="form-row">
+                                  <div className="form-group">
+                                    <label>Rank *</label>
+                                    <select
+                                      value={scoutFormData.rank}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, rank: e.target.value})}
+                                      required
+                                    >
+                                      <option value="">Select Rank</option>
+                                      <option value="Lion">Lion</option>
+                                      <option value="Tiger">Tiger</option>
+                                      <option value="Wolf">Wolf</option>
+                                      <option value="Bear">Bear</option>
+                                      <option value="Webelos">Webelos</option>
+                                      <option value="Arrow of Light">Arrow of Light</option>
+                                    </select>
+                                  </div>
+                                  <div className="form-group">
+                                    <label>Scout Email</label>
+                                    <input
+                                      type="email"
+                                      value={scoutFormData.email}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, email: e.target.value})}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="form-row">
+                                  <div className="form-group">
+                                    <label>Parent Name</label>
+                                    <input
+                                      type="text"
+                                      value={scoutFormData.parentName}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, parentName: e.target.value})}
+                                    />
+                                  </div>
+                                  <div className="form-group">
+                                    <label>Parent Emails (comma-separated)</label>
+                                    <input
+                                      type="text"
+                                      value={Array.isArray(scoutFormData.parentEmails) ? scoutFormData.parentEmails.join(', ') : ''}
+                                      onChange={(e) => {
+                                        const emails = e.target.value
+                                          .split(',')
+                                          .map(email => email.trim())
+                                          .filter(email => email.length > 0)
+                                        setScoutFormData({...scoutFormData, parentEmails: emails})
+                                      }}
+                                      placeholder="email1@example.com, email2@example.com"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="form-group">
+                                  <label>
+                                    <input
+                                      type="checkbox"
+                                      checked={scoutFormData.active}
+                                      onChange={(e) => setScoutFormData({...scoutFormData, active: e.target.checked})}
+                                    />
+                                    Active
+                                  </label>
+                                </div>
+
+                                <div className="form-actions">
+                                  <button type="submit" className="btn btn-primary">
+                                    Save Scout
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={handleCancelEdit}
+                                    className="btn btn-secondary"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </form>
+                            </td>
+                          </tr>
+                        )}
+                      </>
                     )
                   })}
                 </tbody>

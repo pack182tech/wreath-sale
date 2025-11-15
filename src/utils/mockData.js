@@ -385,7 +385,30 @@ export const initializeMockData = () => {
     ]
   }
 ]
-    localStorage.setItem('scouts', JSON.stringify(scoutLookup))
+
+    // Merge with existing scout data to preserve custom fields
+    const existingScouts = JSON.parse(localStorage.getItem('scouts') || '[]')
+    const mergedScouts = scoutLookup.map(newScout => {
+      // Find existing scout data by ID
+      const existing = existingScouts.find(s => s.id === newScout.id)
+      if (existing) {
+        // Merge: keep existing custom fields, update lookup fields
+        return {
+          ...existing,           // Keep all existing fields (rank, parentName, email, active, etc.)
+          ...newScout,          // Update with new lookup data (name, slug, parentEmails)
+        }
+      }
+      // New scout - add default fields
+      return {
+        ...newScout,
+        rank: '',
+        email: '',
+        parentName: '',
+        active: true
+      }
+    })
+
+    localStorage.setItem('scouts', JSON.stringify(mergedScouts))
     localStorage.setItem('scoutDataVersion', SCOUT_DATA_VERSION)
   }
 
