@@ -193,10 +193,10 @@ function AdminDashboard() {
       filtered = filtered.filter(scout => {
         const parentEmailsMatch = Array.isArray(scout.parentEmails) &&
           scout.parentEmails.some(email => email.toLowerCase().includes(query))
-        return scout.name.toLowerCase().includes(query) ||
-          scout.parentName?.toLowerCase().includes(query) ||
+        return scout.name?.toLowerCase()?.includes(query) ||
+          scout.parentName?.toLowerCase()?.includes(query) ||
           parentEmailsMatch ||
-          scout.rank.toLowerCase().includes(query)
+          scout.rank?.toLowerCase()?.includes(query)
       })
     }
 
