@@ -18,6 +18,7 @@ import Login from './pages/Login'
 import ScoutPortal from './pages/ScoutPortal'
 import AdminDashboard from './pages/AdminDashboard'
 import ScoutLawAnimated from './components/ScoutLawAnimated'
+import VersionDisplay from './components/VersionDisplay'
 import { initializeMockData } from './utils/mockData'
 import { getConfig } from './utils/configLoader'
 import './styles/App.css'
@@ -37,6 +38,7 @@ function App() {
       <CartProvider>
         <Router basename="/wreath-sale">
           <ScoutProvider>
+            <VersionDisplay />
             <ScoutAttributionBanner />
             <DonationPopup />
             <CartIcon />

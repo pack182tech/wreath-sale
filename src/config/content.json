@@ -99,7 +99,7 @@
     "paymentInfoMessage": "Payment information will be sent to you via email after checkout."
   },
   "scoutAttributionBanner": {
-    "text": "Supporting $scoutname in his scout journey!"
+    "enabled": true
   },
   "emailTemplates": {
     "orderConfirmation": {

@@ -16,6 +16,15 @@ export const ScoutProvider = ({ children }) => {
   const [scoutAttribution, setScoutAttribution] = useState(null)
 
   useEffect(() => {
+    // Check data version and clear sessionStorage if mismatched
+    const CURRENT_DATA_VERSION = '2.5'
+    const storedVersion = localStorage.getItem('scoutDataVersion')
+
+    if (storedVersion !== CURRENT_DATA_VERSION) {
+      console.log('[ScoutContext] Data version mismatch, clearing sessionStorage')
+      sessionStorage.clear()
+    }
+
     // Clear old scout attribution if it's from the demo/example scouts
     const existingScoutName = sessionStorage.getItem('scoutName')
     const demoScouts = ['Tommy Anderson', 'Sarah Martinez', 'Michael Chen', 'Emma Johnson', 'Alex Rivera']

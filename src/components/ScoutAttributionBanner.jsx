@@ -22,10 +22,20 @@ function ScoutAttributionBanner() {
   // Don't show banner on admin routes or leaderboard
   if (location.pathname.includes('/admin') || location.pathname.includes('/leaderboard')) return null
 
-  if (!scoutName) return null
+  // Use default message if no scout attributed
+  if (!scoutName) {
+    return (
+      <div className="scout-attribution-corner-banner">
+        Supporting <strong>Pack 182's</strong> Scouting adventure!
+      </div>
+    )
+  }
+
+  // Determine proper possessive form based on whether name ends in 's'
+  const possessiveSuffix = scoutName.toLowerCase().endsWith('s') ? "'" : "'s"
 
   // Replace $scoutname placeholder with actual scout name
-  const bannerText = config.scoutAttributionBanner?.text || 'Supporting $scoutname in his scout journey!'
+  const bannerText = config.scoutAttributionBanner?.text || `Supporting $scoutname${possessiveSuffix} Scouting adventure!`
   const displayText = bannerText.replace('$scoutname', scoutName)
 
   return (

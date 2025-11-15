@@ -1,0 +1,22 @@
+.version-display {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(26, 71, 42, 0.9);
+  color: #d4af37;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d4af37;
+  letter-spacing: 0.5px;
+}
+
+.version-display:hover {
+  background: rgba(26, 71, 42, 1);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
