@@ -12,10 +12,24 @@ function VersionDisplay() {
     setShowVersion(shouldShow)
   }, [searchParams])
 
+  const handleClick = () => {
+    // Clear all storage and reload page for testing
+    if (window.confirm('Reset all data and reload as a new user?')) {
+      localStorage.clear()
+      sessionStorage.clear()
+      window.location.reload()
+    }
+  }
+
   if (!showVersion) return null
 
   return (
-    <div className="version-display">
+    <div
+      className="version-display"
+      onClick={handleClick}
+      title="Click to reset all data and reload as new user"
+      style={{ cursor: 'pointer' }}
+    >
       v{import.meta.env.VITE_APP_VERSION || '1.3.0'}
     </div>
   )
