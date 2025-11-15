@@ -2,7 +2,7 @@
 export const initializeMockData = () => {
   // Initialize scouts - Pack 182 Real Scout Data (Force update to latest)
   // Always update scouts to ensure we have the latest roster
-  const SCOUT_DATA_VERSION = '2.5'; // Increment this to force update all users
+  const SCOUT_DATA_VERSION = '2.6'; // Increment this to force update all users
   const currentVersion = localStorage.getItem('scoutDataVersion');
 
   if (!localStorage.getItem('scouts') || currentVersion !== SCOUT_DATA_VERSION) {

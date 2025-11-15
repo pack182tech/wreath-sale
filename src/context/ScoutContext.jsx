@@ -19,7 +19,7 @@ export const ScoutProvider = ({ children }) => {
 
   useEffect(() => {
     // Check data version and clear sessionStorage if mismatched
-    const CURRENT_DATA_VERSION = '2.5'
+    const CURRENT_DATA_VERSION = '2.6'
     const storedVersion = localStorage.getItem('scoutDataVersion')
 
     if (storedVersion !== CURRENT_DATA_VERSION) {
@@ -40,6 +40,9 @@ export const ScoutProvider = ({ children }) => {
     console.log('[ScoutContext] Scout slug from URL:', scoutSlug)
 
     if (scoutSlug) {
+      // Mark that this session was initiated with a scout slug
+      sessionStorage.setItem('hasActiveScoutSession', 'true')
+
       // Load scout data from localStorage (would be from API in production)
       const scouts = JSON.parse(localStorage.getItem('scouts') || '[]')
       console.log('[ScoutContext] Total scouts in localStorage:', scouts.length)
@@ -72,11 +75,22 @@ export const ScoutProvider = ({ children }) => {
         }
       }
     } else {
-      // Check if there's existing attribution in sessionStorage
-      const existingScoutId = sessionStorage.getItem('scoutAttribution')
-      const cleanScoutName = sessionStorage.getItem('scoutName')
-      if (existingScoutId && cleanScoutName) {
-        setScoutAttribution({ id: existingScoutId, name: cleanScoutName })
+      // No scout slug in URL
+      // Only restore from sessionStorage if this session was initiated with a scout slug
+      const hasActiveSession = sessionStorage.getItem('hasActiveScoutSession') === 'true'
+
+      if (hasActiveSession) {
+        // Restore attribution for internal navigation within scout session
+        const existingScoutId = sessionStorage.getItem('scoutAttribution')
+        const cleanScoutName = sessionStorage.getItem('scoutName')
+        if (existingScoutId && cleanScoutName) {
+          setScoutAttribution({ id: existingScoutId, name: cleanScoutName })
+          console.log('[ScoutContext] Restored scout attribution from session:', cleanScoutName)
+        }
+      } else {
+        // No active scout session, clear any stale attribution
+        console.log('[ScoutContext] No scout slug and no active session - clearing attribution')
+        setScoutAttribution(null)
       }
     }
   }, [searchParams])
@@ -85,6 +99,7 @@ export const ScoutProvider = ({ children }) => {
     setScoutAttribution(null)
     sessionStorage.removeItem('scoutAttribution')
     sessionStorage.removeItem('scoutName')
+    sessionStorage.removeItem('hasActiveScoutSession')
   }
 
   return (
