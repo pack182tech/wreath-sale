@@ -228,24 +228,9 @@ function Checkout() {
               <span className="total-amount">${getCartTotal().toFixed(2)}</span>
             </div>
 
-            <div className="payment-info">
-              <h3>Payment Instructions</h3>
-              <p>Please pay via Zelle after placing your order:</p>
-              <div className="zelle-details">
-                <p><strong>Recipient:</strong> {config.zelle.recipientFirstName} {config.zelle.recipientLastName}</p>
-                <p><strong>Email:</strong> {config.zelle.recipientContact}</p>
-                <p>{config.zelle.instructions}</p>
-              </div>
-              {config.zelle.qrCodeImage && (
-                <div className="zelle-qr-code">
-                  <p><strong>{config.zelle.qrCodeText || 'Scan to Pay'}</strong></p>
-                  <img
-                    src={`${basePath}images/zelle/${config.zelle.qrCodeImage}`}
-                    alt="Zelle QR Code"
-                    className="qr-code-image"
-                  />
-                </div>
-              )}
+            <div className="payment-info-message">
+              <span className="info-icon">ℹ️</span>
+              <p>{config.cart?.paymentInfoMessage || "Payment instructions will be on the next screen."}</p>
             </div>
           </div>
         </div>

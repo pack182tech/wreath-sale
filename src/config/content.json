@@ -20,7 +20,7 @@
       "name": "Red Bow Wreath",
       "category": "wreaths",
       "description": "Evergreen wreath adorned with a festive red bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
-      "price": 35.00,
+      "price": 35,
       "image": "red-bow.png",
       "active": true
     },
@@ -29,7 +29,7 @@
       "name": "Plaid Bow Wreath",
       "category": "wreaths",
       "description": "Evergreen wreath featuring a traditional plaid bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
-      "price": 35.00,
+      "price": 35,
       "image": "plaid-bow.png",
       "active": true
     },
@@ -38,7 +38,7 @@
       "name": "Gold Bow Wreath",
       "category": "wreaths",
       "description": "Evergreen wreath decorated with a golden bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
-      "price": 35.00,
+      "price": 35,
       "image": "gold-bow.png",
       "active": true
     },
@@ -47,7 +47,7 @@
       "name": "6\" Red Poinsettia",
       "category": "poinsettias",
       "description": "Beautiful 6-inch red poinsettia plant, perfect for holiday decorating.",
-      "price": 7.00,
+      "price": 7,
       "image": "6inch-red-poinsettias.png",
       "active": true
     },
@@ -56,7 +56,7 @@
       "name": "10\" Red Poinsettia",
       "category": "poinsettias",
       "description": "Stunning 10-inch red poinsettia plant, a festive centerpiece for your home.",
-      "price": 35.00,
+      "price": 35,
       "image": "10inch-red-poinsettias.png",
       "active": true
     },
@@ -65,7 +65,7 @@
       "name": "10\" Alberta Spruce",
       "category": "plants",
       "description": "Beautiful 10-inch Alberta Spruce plant, perfect for holiday decorating.",
-      "price": 45.00,
+      "price": 45,
       "image": "10inch-alberta-spruce.png",
       "active": true
     },
@@ -74,7 +74,7 @@
       "name": "6\" Zygocactus",
       "category": "plants",
       "description": "Hardy 6-inch Zygocactus (Christmas Cactus) plant.",
-      "price": 10.00,
+      "price": 10,
       "image": "6inch-zygocactus.png",
       "active": true
     }
@@ -92,7 +92,12 @@
     "confirmationYesButton": "That's great!",
     "confirmationNoButton": "Maybe another time",
     "description": "Support our local church's youth programs and community outreach",
-    "suggestedAmounts": [10, 25, 50, 100]
+    "suggestedAmounts": [
+      10,
+      25,
+      50,
+      100
+    ]
   },
   "zelle": {
     "recipientFirstName": "Boy Scouts",
@@ -116,7 +121,7 @@
       "name": "Order Confirmation",
       "description": "Sent to customers after they place an order",
       "subject": "Order Confirmation - {{orderId}}",
-      "htmlBody": "<div style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px;\"><div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 25px; text-align: center; border-radius: 8px; margin-bottom: 30px;\"><h1 style=\"color: white; margin: 0; font-size: 28px;\">✅ Order Confirmed!</h1></div><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Dear <strong>{{customerName}}</strong>,</p><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Thank you for your order! Your order has been received and will be ready for pickup on <strong style=\"color: #1a472a;\">{{pickupDate}}</strong>.</p><div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #1a472a;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📦 Order Details</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Order Number:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{orderId}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Order Date:</strong> {{orderDate}}</p></div><div style=\"background: white; padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px; margin: 25px 0;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;\">🛍️ Items Ordered</h3><table style=\"width: 100%; border-collapse: collapse;\">{{orderItemsTable}}<tr style=\"border-top: 3px solid #1a472a;\"><td colspan=\"2\" style=\"padding: 15px 10px; font-weight: bold; font-size: 16px; color: #1a472a;\">Total:</td><td style=\"padding: 15px 10px; text-align: right; font-weight: bold; color: #c41e3a; font-size: 22px;\">${{total}}</td></tr></table></div>{{#if isDonation}}<div style=\"background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 10px; margin: 25px 0; border: 2px solid #4caf50; text-align: center;\"><p style=\"margin: 0 0 10px 0; font-size: 20px; color: #1a472a;\"><strong>🙏 Thank You for Your Generous Donation!</strong></p><p style=\"margin: 0; color: #2e7d32; font-size: 16px; line-height: 1.6;\">Your contribution of <strong>${{total}}</strong> to <strong>{{donationRecipient}}</strong> will make a meaningful difference in our community. We deeply appreciate your support!</p></div>{{/if}}<div style=\"background: linear-gradient(135deg, #fffbeb 0%, #fff9e6 100%); padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #d4af37;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">💳 Payment Instructions</h3><p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">Please send payment via <strong>Zelle</strong> to complete your order:</p><div style=\"background: white; padding: 15px; border-radius: 6px; margin: 15px 0;\"><p style=\"margin: 8px 0; color: #333;\"><strong>Recipient:</strong> {{zelleRecipientFirstName}} {{zelleRecipientLastName}}</p><p style=\"margin: 8px 0; color: #333;\"><strong>Email/Phone:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{zelleContact}}</span></p><p style=\"margin: 8px 0; color: #333;\"><strong>Memo:</strong> <span style=\"background: #ffeb3b; padding: 3px 8px; border-radius: 4px; font-weight: bold;\">{{orderId}}</span></p></div><div style=\"background: #fff3cd; border: 2px solid #ffc107; border-radius: 6px; padding: 12px; margin-top: 15px;\"><p style=\"margin: 0; color: #856404; font-weight: bold; font-size: 14px;\">⚠️ Important: Please include your order number (<strong>{{orderId}}</strong>) in the Zelle memo field.</p></div></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #2196f3;\"><p style=\"margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;\"><strong>💡 Alternative Payment Option:</strong> If you are unable to use Zelle, you may pay {{scoutFirstName}}'s parents directly.</p></div>{{/if}}<div style=\"background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #2196f3;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📍 Pickup Information</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Date:</strong> <span style=\"color: #1a472a;\">{{pickupDate}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Time:</strong> <span style=\"color: #1a472a;\">{{pickupTime}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Location:</strong> <span style=\"color: #1a472a;\">{{pickupLocation}}</span></p></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 25px 0;\"><p style=\"margin: 0; font-size: 18px; color: white; font-weight: bold;\">🎗️ Thank you for supporting {{scoutName}}!</p></div>{{/if}}<div style=\"border-top: 3px solid #e0e0e0; margin-top: 30px; padding-top: 20px; text-align: center;\"><p style=\"margin: 10px 0; color: #666; font-size: 14px;\">If you have any questions, please contact us at <a href=\"mailto:{{leaderEmail}}\" style=\"color: #1a472a; text-decoration: none; font-weight: bold;\">{{leaderEmail}}</a></p><p style=\"margin: 10px 0; color: #1a472a; font-size: 16px; font-weight: bold;\">Thank you for supporting {{packName}}!</p></div></div>"
+      "htmlBody": "<div style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px;\"><div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 25px; text-align: center; border-radius: 8px; margin-bottom: 30px;\"><h1 style=\"color: white; margin: 0; font-size: 28px;\">✅ Order Confirmed!</h1></div><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Dear <strong>{{customerName}}</strong>,</p><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Thank you for your order! Your order has been received and will be ready for pickup on <strong style=\"color: #1a472a;\">{{pickupDate}}</strong>.</p><div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #1a472a;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📦 Order Details</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Order Number:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{orderId}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Order Date:</strong> {{orderDate}}</p></div><div style=\"background: white; padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px; margin: 25px 0;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;\">🛍️ Items Ordered</h3><table style=\"width: 100%; border-collapse: collapse;\">{{orderItemsTable}}<tr style=\"border-top: 3px solid #1a472a;\"><td colspan=\"2\" style=\"padding: 15px 10px; font-weight: bold; font-size: 16px; color: #1a472a;\">Total:</td><td style=\"padding: 15px 10px; text-align: right; font-weight: bold; color: #c41e3a; font-size: 22px;\">${{total}}</td></tr></table></div>{{#if isDonation}}<div style=\"background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 10px; margin: 25px 0; border: 2px solid #4caf50; text-align: center;\"><p style=\"margin: 0 0 10px 0; font-size: 20px; color: #1a472a;\"><strong>🙏 Thank You for Your Generous Donation!</strong></p><p style=\"margin: 0; color: #2e7d32; font-size: 16px; line-height: 1.6;\">Your contribution of <strong>${{total}}</strong> to <strong>{{donationRecipient}}</strong> will make a meaningful difference in our community. We deeply appreciate your support!</p></div>{{/if}}<div style=\"background: linear-gradient(135deg, #fffbeb 0%, #fff9e6 100%); padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #d4af37;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">💳 Payment Instructions</h3><p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">Please send payment via <strong>Zelle</strong> to complete your order:</p><div style=\"background: white; padding: 15px; border-radius: 6px; margin: 15px 0;\"><p style=\"margin: 8px 0; color: #333;\"><strong>First name:</strong> {{zelleRecipientFirstName}}</p><p style=\"margin: 8px 0; color: #333;\"><strong>Last name:</strong> {{zelleRecipientLastName}}</p><p style=\"margin: 8px 0; color: #333;\"><strong>Email/Phone:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{zelleContact}}</span></p><p style=\"margin: 8px 0; color: #333;\"><strong>Memo:</strong> <span style=\"background: #ffeb3b; padding: 3px 8px; border-radius: 4px; font-weight: bold;\">{{orderId}}</span></p></div><div style=\"background: #fff3cd; border: 2px solid #ffc107; border-radius: 6px; padding: 12px; margin-top: 15px;\"><p style=\"margin: 0; color: #856404; font-weight: bold; font-size: 14px;\">⚠️ Important: Please include your order number (<strong>{{orderId}}</strong>) in the Zelle memo field.</p></div></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #2196f3;\"><p style=\"margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;\"><strong>💡 Alternative Payment Option:</strong> If you are unable to use Zelle, you may pay {{scoutFirstName}}'s parents directly.</p></div>{{/if}}<div style=\"background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #2196f3;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📍 Pickup Information</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Date:</strong> <span style=\"color: #1a472a;\">{{pickupDate}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Time:</strong> <span style=\"color: #1a472a;\">{{pickupTime}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Location:</strong> <span style=\"color: #1a472a;\">{{pickupLocation}}</span></p></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 25px 0;\"><p style=\"margin: 0; font-size: 18px; color: white; font-weight: bold;\">🎗️ Thank you for supporting {{scoutName}}!</p></div>{{/if}}<div style=\"border-top: 3px solid #e0e0e0; margin-top: 30px; padding-top: 20px; text-align: center;\"><p style=\"margin: 10px 0; color: #666; font-size: 14px;\">If you have any questions, please contact us at <a href=\"mailto:{{leaderEmail}}\" style=\"color: #1a472a; text-decoration: none; font-weight: bold;\">{{leaderEmail}}</a></p><p style=\"margin: 10px 0; color: #1a472a; font-size: 16px; font-weight: bold;\">Thank you for supporting {{packName}}!</p></div></div>"
     },
     "scoutParentWelcome": {
       "name": "Scout Parent Welcome",

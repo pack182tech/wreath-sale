@@ -122,11 +122,12 @@ function OrderConfirmation() {
             <h3>Next Steps - Payment</h3>
             <p>Please send your payment via Zelle:</p>
             <div className="zelle-info">
-              <p><strong>Recipient:</strong> {config.zelle.recipientFirstName} {config.zelle.recipientLastName}</p>
+              <p><strong>First name:</strong> {config.zelle.recipientFirstName}</p>
+              <p><strong>Last name:</strong> {config.zelle.recipientLastName}</p>
               <p><strong>Email:</strong> {config.zelle.recipientContact}</p>
               <p><strong>Amount:</strong> ${order.total.toFixed(2)}</p>
               <p className="memo-reminder">
-                <strong>Important:</strong> Include order number <code>{order.orderId}</code> in memo
+                <strong>Important:</strong> Include order number <code style={{ fontSize: '200%' }}>{order.orderId}</code> in memo
               </p>
             </div>
             <div className="zelle-qr-code">

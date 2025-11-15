@@ -1089,6 +1089,22 @@ function AdminDashboard() {
             </div>
 
             <div className="config-section">
+              <h3>Cart / Checkout Settings</h3>
+              <div className="form-group">
+                <label>Payment Info Message (Checkout Page)</label>
+                <input
+                  type="text"
+                  value={siteConfig.cart?.paymentInfoMessage || ''}
+                  onChange={(e) => handleConfigChange('cart', 'paymentInfoMessage', e.target.value)}
+                  placeholder="Payment instructions will be on the next screen."
+                />
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Message shown on checkout page informing users about payment details
+                </small>
+              </div>
+            </div>
+
+            <div className="config-section">
               <h3>Donation Settings</h3>
               <div className="form-group">
                 <label>
