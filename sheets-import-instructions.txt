@@ -1,0 +1,104 @@
+
+========================================
+GOOGLE SHEETS IMPORT DATA GENERATOR
+========================================
+
+1. SCOUTS SHEET
+------------------------------------------
+Copy the data below and paste into your "Scouts" sheet:
+
+id	name	slug	rank	email	parentName	parentEmails	active
+scout-1	Brandt, Mason	brandt-mason	Bear	shaylynroll@yahoo.com			TRUE
+scout-2	Cambria, Logan	cambria-logan	Bear	smithcambria2016@gmail.com	Rebecca	smithcambria2016@gmail.com	TRUE
+scout-3	Canning, Declan	canning-declan	Tiger		Brittany	brittanycanning@gmail.com	TRUE
+scout-4	Cofoni, SJ	cofoni-sj	Bear		James	jcofoni@gmail.com;mille4ja@gmail.com	TRUE
+scout-5	Cofoni, Will	cofoni-will	Tiger		James	jcofoni@gmail.com;mille4ja@gmail.com	TRUE
+scout-6	Conte, Beau	conte-beau	Webelos		Melissa	mbodaj@comcast.net;nconte0927@hotmail.com	TRUE
+scout-7	DaGraca, Ethan	dagraca-ethan	Bear		Catherine	cpdagraca@gmail.com	TRUE
+scout-8	DaGraca, Frank	dagraca-frank	Tiger		Catherine	cpdagraca@gmail.com	TRUE
+scout-9	Doherty, River	doherty-river	Wolf	dohertym1@gmail.com	Matthew	dohertym1@gmail.com	TRUE
+scout-10	Facchina, Luca	facchina-luca	Bear		Dianna	dianna.facchina@gmail.com	TRUE
+scout-11	Gamboa, John	gamboa-john	Bear		Elizabeth	lizneub@gmail.com;Mr.pcg004@gmail.com	TRUE
+scout-12	Giroud, Henry	giroud-henry	Webelos		Jason	jason.giroud@gmail.com;lgiroud81@gmail.com	TRUE
+scout-13	Gregorio, Russell	gregorio-russell	Wolf		Nicholas	ngregorio70@gmail.com	TRUE
+scout-14	Haines, Jackson	haines-jackson	Lion		Jessica	jessicarae.haines@yahoo.com	TRUE
+scout-15	Herman, Arlo	herman-arlo	Wolf		Luke	j.lucas.herman@gmail.com;natalia.l.herman@gmail.com	TRUE
+scout-16	Hettenbach, Wesley	hettenbach-wesley	Tiger		Marisa	marisahandren@gmail.com	TRUE
+scout-17	Hosgood, Zachery	hosgood-zachery	Wolf		Stefanie	hosgoods2017@gmail.com	TRUE
+scout-18	Kalladeen, Sahil	kalladeen-sahil	Lion		Priyanka	ppkk02018@gmail.com	TRUE
+scout-19	Kilanowski, Gabriel	kilanowski-gabriel	Tiger		Megan	kilanowskifam@gmail.com	TRUE
+scout-20	Kilanowski, Raphael	kilanowski-raphael	Lion		Megan	kilanowskifam@gmail.com	TRUE
+scout-21	Lutz-Polizzi, Parker	lutz-polizzi-parker	Bear	biancapolizzi66@gmail.com	Bianca	biancapolizzi66@gmail.com	TRUE
+scout-22	Mamay, Jack	mamay-jack	Webelos	adriana.kuzyszyn@gmail.com	Adriana	adriana.kuzyszyn@gmail.com	TRUE
+scout-23	Marsh, Alex	marsh-alex	Bear	Joncmarsh19@gmail.com	John	Joncmarsh19@gmail.com	TRUE
+scout-24	Mcewan, Jacob	mcewan-jacob	Lion		Eva	yang.eva.yang@gmail.com	TRUE
+scout-25	McGowan, Dylan	mcgowan-dylan	Bear		James	jimmcgowan@live.com;khorbatt@gmail.com	TRUE
+scout-26	Mest, Declan	mest-declan	Bear		Jason	jasonmest@gmail.com;melissamest@gmail.com	TRUE
+scout-27	Molchan, Carter	molchan-carter	Wolf		Chris	chrismolchan@gmail.com	TRUE
+scout-28	Morgan Allen, Clay	morgan-allen-clay	Lion		Jamie	jamiemorgannj@yahoo.com	TRUE
+scout-29	Mutz, Owen	mutz-owen	Lion		Robert	robmutz85@gmail.com	TRUE
+scout-30	Peterson, Levi	peterson-levi	Tiger		Ashley	abaron26@gmail.com	TRUE
+scout-31	Pidiath, Alexander	pidiath-alexander	Tiger		Jennifer	jen.pidiath@gmail.com	TRUE
+scout-32	Ranallo, Joshua	ranallo-joshua	Bear		Lee	ranallo.lee.j@gmail.com	TRUE
+scout-33	Rodriguez, Julian	rodriguez-julian	Webelos	evelynszabela@yahoo.com	Evelyn	evelynszabela@yahoo.com	TRUE
+scout-34	Rodriguez, Sam	rodriguez-sam	Webelos		Brienne	briennerod@gmail.com;coryrodriguez@gmail.com	TRUE
+scout-35	Serafyn, Anthony	serafyn-anthony	Bear	wserafyn@gmail.com	Josephine	jomauceri@gmail.com;wserafyn@gmail.com	TRUE
+scout-36	Serafyn, Matthew	serafyn-matthew	Wolf	wserafyn@gmail.com	Josephine	jomauceri@gmail.com;wserafyn@gmail.com	TRUE
+scout-37	Shiminsky, Nathan	shiminsky-nathan	Tiger		Matt	matt.shiminsky@gmail.com	TRUE
+scout-38	Solberg, Alistair	solberg-alistair	Bear		Ashleigh	lambert7@tcnj.edu	TRUE
+scout-39	Sullivan, Rory	sullivan-rory	Wolf	daniel.sullivan72@gmail.com	Daniel	daniel.sullivan72@gmail.com	TRUE
+scout-40	Thompson, Garrett	thompson-garrett	Webelos		Brad	bradthompson51@gmail.com;nickithompson113@gmail.com	TRUE
+scout-41	Thompson, Whitaker	thompson-whitaker	Tiger		Jake	jake.taylor.thompson@gmail.com	TRUE
+scout-42	Uzarski, Maverick	uzarski-maverick	Lion		Genna	genna.uzarski@gmail.com;jonuzarski@gmail.com	TRUE
+scout-43	Waidelich, Jacob	waidelich-jacob	Wolf		Thomas	tomwaidelich@gmail.com	TRUE
+scout-44	Wallace, Ronan	wallace-ronan	Webelos		Kevin	kevinwallace01@gmail.com;PTWallace34@gmail.com	TRUE
+scout-45	Wilson, Quinn	wilson-quinn	Bear		Theresa	theresaewilson@yahoo.com	TRUE
+
+------------------------------------------
+
+2. ORDERS SHEET (Template)
+------------------------------------------
+Copy the headers below and paste into your "Orders" sheet:
+
+id	orderId	scoutId	customerName	customerEmail	customerPhone	comments	supportingScout	total	status	type	orderDate
+
+------------------------------------------
+
+3. ORDER ITEMS SHEET (Template)
+------------------------------------------
+Copy the headers below and paste into your "OrderItems" sheet:
+
+id	orderId	productId	productName	price	quantity
+
+------------------------------------------
+
+4. CONFIG SHEET (Template)
+------------------------------------------
+Copy the headers below and paste into your "Config" sheet:
+
+key	value
+siteConfig	(Paste your config JSON here)
+
+------------------------------------------
+
+📁 TSV FILES GENERATED
+------------------------------------------
+TSV files saved to: sheets-import/
+  - scouts.tsv
+  - orders.tsv (template)
+  - order-items.tsv (template)
+  - config.tsv (template)
+
+========================================
+NEXT STEPS:
+========================================
+1. Create a new Google Sheet named "Pack 182 Wreath Sale Database"
+2. Create 4 sheets (tabs): Scouts, Orders, OrderItems, Config
+3. Copy-paste the data above into each sheet
+   OR import the TSV files from sheets-import/
+4. Make the sheet public (Anyone with link can VIEW)
+5. Copy the Sheet ID from the URL
+6. Set up Google Sheets API key (see BACKEND_SETUP_SHEETS.md)
+7. Update .env with VITE_GOOGLE_SHEET_ID and VITE_GOOGLE_API_KEY
+========================================
+
