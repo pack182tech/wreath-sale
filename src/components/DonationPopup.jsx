@@ -39,6 +39,8 @@ function DonationPopup() {
     sessionStorage.setItem('wantsToDonate', 'true')
     setWantsToDonate(true)
     setIsOpen(false)
+    // Notify checkout page to check the donation checkbox
+    window.dispatchEvent(new CustomEvent('donationStateChanged', { detail: { wantsToDonate: true } }))
   }
 
   const handleNo = () => {
@@ -46,6 +48,8 @@ function DonationPopup() {
     sessionStorage.setItem('wantsToDonate', 'false')
     setWantsToDonate(false)
     setIsOpen(false)
+    // Notify checkout page to uncheck the donation checkbox
+    window.dispatchEvent(new CustomEvent('donationStateChanged', { detail: { wantsToDonate: false } }))
   }
 
   const handleManualOpen = () => {

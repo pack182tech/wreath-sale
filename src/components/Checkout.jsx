@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
@@ -22,6 +22,18 @@ function Checkout() {
   })
   const [isDonating, setIsDonating] = useState(wantsToDonate)
   const [errors, setErrors] = useState({})
+
+  // Listen for donation state changes from banner popup
+  useEffect(() => {
+    const handleDonationStateChange = (event) => {
+      setIsDonating(event.detail.wantsToDonate)
+    }
+
+    window.addEventListener('donationStateChanged', handleDonationStateChange)
+    return () => {
+      window.removeEventListener('donationStateChanged', handleDonationStateChange)
+    }
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
