@@ -1116,15 +1116,90 @@ function AdminDashboard() {
                   onChange={(e) => handleConfigChange('donation', 'description', e.target.value)}
                 />
               </div>
+
+              <h4 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#1a472a' }}>Initial Donation Popup</h4>
               <div className="form-group">
-                <label>Donation Popup Text</label>
+                <label>Popup Title</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.popupTitle || ''}
+                  onChange={(e) => handleConfigChange('donation', 'popupTitle', e.target.value)}
+                  placeholder="Support Our Community"
+                />
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Title shown when asking if they want to donate
+                </small>
+              </div>
+              <div className="form-group">
+                <label>Popup Message</label>
                 <input
                   type="text"
                   value={siteConfig.donation.popupText || ''}
                   onChange={(e) => handleConfigChange('donation', 'popupText', e.target.value)}
-                  placeholder="e.g., You can direct your donation to [church name] at checkout."
+                  placeholder="You can direct your donation to Three Bridges Reformed Church at checkout."
                 />
-                <small>Text shown in the donation popup on the landing page</small>
+                <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
+                  Message explaining how donations work
+                </small>
+              </div>
+              <div className="form-group">
+                <label>Yes Button Text</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.popupYesButton || ''}
+                  onChange={(e) => handleConfigChange('donation', 'popupYesButton', e.target.value)}
+                  placeholder="Yes, I want to donate"
+                />
+              </div>
+              <div className="form-group">
+                <label>No Button Text</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.popupNoButton || ''}
+                  onChange={(e) => handleConfigChange('donation', 'popupNoButton', e.target.value)}
+                  placeholder="Maybe another time"
+                />
+              </div>
+
+              <h4 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#1a472a' }}>Donation Confirmation Popup</h4>
+              <small style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem', display: 'block' }}>
+                Shown when user clicks the "You're donating! 🎁" button
+              </small>
+              <div className="form-group">
+                <label>Confirmation Title</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.confirmationTitle || ''}
+                  onChange={(e) => handleConfigChange('donation', 'confirmationTitle', e.target.value)}
+                  placeholder="Supporting Our Community"
+                />
+              </div>
+              <div className="form-group">
+                <label>Confirmation Message</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.confirmationText || ''}
+                  onChange={(e) => handleConfigChange('donation', 'confirmationText', e.target.value)}
+                  placeholder="Your donation will be directed to Three Bridges Reformed Church."
+                />
+              </div>
+              <div className="form-group">
+                <label>Confirm Button Text (Green)</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.confirmationYesButton || ''}
+                  onChange={(e) => handleConfigChange('donation', 'confirmationYesButton', e.target.value)}
+                  placeholder="That's great!"
+                />
+              </div>
+              <div className="form-group">
+                <label>Cancel Button Text</label>
+                <input
+                  type="text"
+                  value={siteConfig.donation?.confirmationNoButton || ''}
+                  onChange={(e) => handleConfigChange('donation', 'confirmationNoButton', e.target.value)}
+                  placeholder="Maybe another time"
+                />
               </div>
             </div>
 

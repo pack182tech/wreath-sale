@@ -65,20 +65,43 @@ function DonationPopup() {
             </button>
 
             <div className="donation-popup-content">
-              <h2>Support Our Community</h2>
+              {wantsToDonate ? (
+                <>
+                  {/* Confirmation popup when already opted in to donate */}
+                  <h2>{config.donation?.confirmationTitle || "Supporting Our Community"}</h2>
 
-              <div className="donation-popup-text">
-                <p>{config.donation.popupText || `You can direct your donation to ${config.donation.recipient} at checkout.`}</p>
-              </div>
+                  <div className="donation-popup-text">
+                    <p>{config.donation?.confirmationText || `Your donation will be directed to ${config.donation.recipient}.`}</p>
+                  </div>
 
-              <div className="donation-popup-buttons">
-                <button className="btn btn-primary" onClick={handleYes}>
-                  Yes, I want to donate
-                </button>
-                <button className="btn btn-secondary-outline" onClick={handleNo}>
-                  Maybe another time
-                </button>
-              </div>
+                  <div className="donation-popup-buttons">
+                    <button className="btn btn-primary" onClick={() => setIsOpen(false)}>
+                      {config.donation?.confirmationYesButton || "That's great!"}
+                    </button>
+                    <button className="btn btn-secondary-outline" onClick={handleNo}>
+                      {config.donation?.confirmationNoButton || "Maybe another time"}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Initial donation ask popup */}
+                  <h2>{config.donation?.popupTitle || "Support Our Community"}</h2>
+
+                  <div className="donation-popup-text">
+                    <p>{config.donation?.popupText || `You can direct your donation to ${config.donation.recipient} at checkout.`}</p>
+                  </div>
+
+                  <div className="donation-popup-buttons">
+                    <button className="btn btn-primary" onClick={handleYes}>
+                      {config.donation?.popupYesButton || "Yes, I want to donate"}
+                    </button>
+                    <button className="btn btn-secondary-outline" onClick={handleNo}>
+                      {config.donation?.popupNoButton || "Maybe another time"}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

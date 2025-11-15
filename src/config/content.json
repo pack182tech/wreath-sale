@@ -83,7 +83,14 @@
   "donation": {
     "enabled": true,
     "recipient": "Three Bridges Reformed Church",
+    "popupTitle": "Support Our Community",
     "popupText": "You can direct your donation to Three Bridges Reformed Church at checkout.",
+    "popupYesButton": "Yes, I want to donate",
+    "popupNoButton": "Maybe another time",
+    "confirmationTitle": "Supporting Our Community",
+    "confirmationText": "Your donation will be directed to Three Bridges Reformed Church.",
+    "confirmationYesButton": "That's great!",
+    "confirmationNoButton": "Maybe another time",
     "description": "Support our local church's youth programs and community outreach",
     "suggestedAmounts": [10, 25, 50, 100]
   },
