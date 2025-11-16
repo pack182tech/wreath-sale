@@ -34,9 +34,16 @@ function OrderConfirmation() {
     const scouts = getScouts()
     const scout = scouts.find(s => s.id === order.scoutId)
     if (!scout) return { scoutName: null, scoutFirstName: null }
+
+    // Parse scout name from "Lastname, Firstname" to get first name
+    const nameParts = scout.name.split(',').map(part => part.trim())
+    const firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
+    const lastName = nameParts.length > 1 ? nameParts[0] : ''
+    const formattedName = lastName ? `${firstName} ${lastName}` : firstName
+
     return {
-      scoutName: scout.name,
-      scoutFirstName: scout.name.split(' ')[0]
+      scoutName: formattedName,
+      scoutFirstName: firstName
     }
   }
 
