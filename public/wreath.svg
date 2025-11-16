@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wreath -->
+  <circle cx="60" cy="60" r="40" fill="none" stroke="green" stroke-width="18"/>
+
+  <!-- Bow bloom -->
+  <circle cx="60" cy="18" r="10" fill="red"/>
+
+  <!-- Bow strands -->
+  <path d="M60 28 L52 95" stroke="red" stroke-width="7" stroke-linecap="round"/>
+  <path d="M60 28 L68 95" stroke="red" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Pinecones ON the green stroke -->
+  <circle cx="94" cy="80" r="5" fill="brown"/>  <!-- ~5 o'clock -->
+  <circle cx="26" cy="80" r="5" fill="brown"/>  <!-- ~7 o'clock -->
+</svg>
