@@ -19,6 +19,7 @@ import ScoutPortal from './pages/ScoutPortal'
 import AdminDashboard from './pages/AdminDashboard'
 import ScoutLawAnimated from './components/ScoutLawAnimated'
 import VersionDisplay from './components/VersionDisplay'
+import SnowEffect from './components/SnowEffect'
 import { initializeMockData } from './utils/mockData'
 import { getConfig } from './utils/configLoader'
 import './styles/App.css'
@@ -38,6 +39,7 @@ function App() {
       <CartProvider>
         <Router basename="/wreath-sale">
           <ScoutProvider>
+            <SnowEffect />
             <VersionDisplay />
             <ScoutAttributionBanner />
             <DonationPopup />
