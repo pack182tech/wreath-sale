@@ -788,7 +788,7 @@ function AdminDashboard() {
                               onClick={() => setSelectedScoutQR(scout)}
                               className="btn-view"
                             >
-                              View QR
+                              View QR/Link
                             </button>
                             <button
                               onClick={() => setSelectedScoutEmail(scout)}
