@@ -1,16 +1,23 @@
 import { useCart } from '../context/CartContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
 import './Cart.css'
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const config = getConfig()
 
   const handleCheckout = () => {
     setIsCartOpen(false)
-    navigate('/checkout')
+    // Preserve scout parameter when navigating to checkout
+    const scoutSlug = searchParams.get('scout')
+    if (scoutSlug) {
+      navigate(`/checkout?scout=${scoutSlug}`)
+    } else {
+      navigate('/checkout')
+    }
   }
 
   if (!isCartOpen) return null

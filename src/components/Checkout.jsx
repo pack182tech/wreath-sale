@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
 import './Checkout.css'
 
 function Checkout() {
   const { cart, getCartTotal, clearCart } = useCart()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const config = getConfig()
   const basePath = import.meta.env.BASE_URL
 
@@ -92,8 +93,13 @@ function Checkout() {
     // Clear cart
     clearCart()
 
-    // Navigate to confirmation
-    navigate('/confirmation', { state: { order } })
+    // Navigate to confirmation, preserving scout parameter
+    const scoutSlug = searchParams.get('scout')
+    if (scoutSlug) {
+      navigate(`/confirmation?scout=${scoutSlug}`, { state: { order } })
+    } else {
+      navigate('/confirmation', { state: { order } })
+    }
   }
 
   if (cart.length === 0) {
@@ -102,7 +108,10 @@ function Checkout() {
         <div className="empty-checkout">
           <h2>Your cart is empty</h2>
           <p>Add some items to your cart before checking out.</p>
-          <button className="btn btn-primary" onClick={() => navigate('/')}>
+          <button className="btn btn-primary" onClick={() => {
+            const scoutSlug = searchParams.get('scout')
+            navigate(scoutSlug ? `/?scout=${scoutSlug}` : '/')
+          }}>
             Continue Shopping
           </button>
         </div>

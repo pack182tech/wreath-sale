@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import EmailModal from './EmailModal'
 import { getConfig } from '../utils/configLoader'
@@ -8,18 +8,21 @@ import './OrderConfirmation.css'
 function OrderConfirmation() {
   const location = useLocation()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [showEmailModal, setShowEmailModal] = useState(false)
   const order = location.state?.order
   const config = getConfig()
 
   useEffect(() => {
     if (!order) {
-      navigate('/')
+      // Preserve scout parameter when redirecting
+      const scoutSlug = searchParams.get('scout')
+      navigate(scoutSlug ? `/?scout=${scoutSlug}` : '/')
       return
     }
     // Show email modal automatically
     setShowEmailModal(true)
-  }, [order, navigate])
+  }, [order, navigate, searchParams])
 
   if (!order) {
     return null
@@ -155,7 +158,10 @@ function OrderConfirmation() {
         </div>
 
         <div className="confirmation-actions">
-          <button className="btn btn-primary" onClick={() => navigate('/')}>
+          <button className="btn btn-primary" onClick={() => {
+            const scoutSlug = searchParams.get('scout')
+            navigate(scoutSlug ? `/?scout=${scoutSlug}` : '/')
+          }}>
             Return to Home
           </button>
           <button className="btn btn-secondary" onClick={() => setShowEmailModal(true)}>
