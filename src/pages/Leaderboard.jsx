@@ -23,7 +23,7 @@ function Leaderboard() {
     const salesByScout = {}
 
     orders.forEach(order => {
-      if (order.scoutId) {
+      if (order.scoutId && !order.isDonation) {
         if (!salesByScout[order.scoutId]) {
           salesByScout[order.scoutId] = {
             revenue: 0,
@@ -127,16 +127,37 @@ function Leaderboard() {
           />
         ))}
 
-        {/* Camping Tents */}
-        <div className="tent tent-1">
+        {/* Camping Tents - 6 large family tents and 3 small ones */}
+        <div className="tent tent-large tent-1">
           <div className="tent-light"></div>
         </div>
-        <div className="tent tent-2">
+        <div className="tent tent-large tent-2">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-large tent-3">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-large tent-4">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-large tent-5">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-large tent-6">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-small tent-7">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-small tent-8">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-small tent-9">
           <div className="tent-light"></div>
         </div>
 
-        {/* Campfire */}
-        <div className="campfire">
+        {/* Campfires - 3 fires */}
+        <div className="campfire campfire-1">
           <div className="fire-flame flame-1"></div>
           <div className="fire-flame flame-2"></div>
           <div className="fire-flame flame-3"></div>
@@ -148,16 +169,36 @@ function Leaderboard() {
           ))}
         </div>
 
-        {/* Scouts Around Fire */}
-        <div className="scout-figure scout-1">
-          <div className="marshmallow-stick"></div>
+        <div className="campfire campfire-2">
+          <div className="fire-flame flame-1"></div>
+          <div className="fire-flame flame-2"></div>
+          <div className="fire-flame flame-3"></div>
+          <div className="fire-glow"></div>
+          {[...Array(10)].map((_, i) => (
+            <div key={`fire2-${i}`} className="ember" style={{
+              animationDelay: `${i * 0.5}s`
+            }} />
+          ))}
         </div>
-        <div className="scout-figure scout-2">
-          <div className="hotdog-stick"></div>
+
+        <div className="campfire campfire-3">
+          <div className="fire-flame flame-1"></div>
+          <div className="fire-flame flame-2"></div>
+          <div className="fire-flame flame-3"></div>
+          <div className="fire-glow"></div>
+          {[...Array(10)].map((_, i) => (
+            <div key={`fire3-${i}`} className="ember" style={{
+              animationDelay: `${i * 0.5}s`
+            }} />
+          ))}
         </div>
-        <div className="scout-figure scout-3">
-          <div className="marshmallow-stick"></div>
-        </div>
+
+        {/* Scouts Around Fires - 15 scouts total (5 per fire) */}
+        {[...Array(15)].map((_, i) => (
+          <div key={i} className={`scout-figure scout-${i + 1}`}>
+            <div className={i % 2 === 0 ? 'marshmallow-stick' : 'hotdog-stick'}></div>
+          </div>
+        ))}
 
         {/* Smoke Wisps */}
         {[...Array(5)].map((_, i) => (
@@ -225,7 +266,7 @@ function Leaderboard() {
                 </div>
 
                 <div className="scout-info">
-                  <h3>{scout.name.toLowerCase()}</h3>
+                  <h3>{scout.name}</h3>
                 </div>
 
                 <div className="scout-stats">
