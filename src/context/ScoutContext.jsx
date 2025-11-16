@@ -82,24 +82,24 @@ export const ScoutProvider = ({ children }) => {
           // Show error to user - this is a critical failure
           alert('Unable to load scout information. Please check your internet connection and try again.')
         }
-      }
-    } else {
-      // No scout slug in URL
-      // Only restore from sessionStorage if this session was initiated with a scout slug
-      const hasActiveSession = sessionStorage.getItem('hasActiveScoutSession') === 'true'
-
-      if (hasActiveSession) {
-        // Restore attribution for internal navigation within scout session
-        const existingScoutId = sessionStorage.getItem('scoutAttribution')
-        const cleanScoutName = sessionStorage.getItem('scoutName')
-        if (existingScoutId && cleanScoutName) {
-          setScoutAttribution({ id: existingScoutId, name: cleanScoutName })
-          console.log('[ScoutContext] Restored scout attribution from session:', cleanScoutName)
-        }
       } else {
-        // No active scout session, clear any stale attribution
-        console.log('[ScoutContext] No scout slug and no active session - clearing attribution')
-        setScoutAttribution(null)
+        // No scout slug in URL
+        // Only restore from sessionStorage if this session was initiated with a scout slug
+        const hasActiveSession = sessionStorage.getItem('hasActiveScoutSession') === 'true'
+
+        if (hasActiveSession) {
+          // Restore attribution for internal navigation within scout session
+          const existingScoutId = sessionStorage.getItem('scoutAttribution')
+          const cleanScoutName = sessionStorage.getItem('scoutName')
+          if (existingScoutId && cleanScoutName) {
+            setScoutAttribution({ id: existingScoutId, name: cleanScoutName })
+            console.log('[ScoutContext] Restored scout attribution from session:', cleanScoutName)
+          }
+        } else {
+          // No active scout session, clear any stale attribution
+          console.log('[ScoutContext] No scout slug and no active session - clearing attribution')
+          setScoutAttribution(null)
+        }
       }
     }
 
