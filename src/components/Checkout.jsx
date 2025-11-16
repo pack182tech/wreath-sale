@@ -81,6 +81,7 @@ function Checkout() {
       items: cart,
       total: getCartTotal(),
       scoutId: scoutAttribution || null,
+      supportingScout: formData.supportingScout || '',
       isDonation: isDonating,
       orderDate: new Date().toISOString(),
       paymentStatus: 'pending'
