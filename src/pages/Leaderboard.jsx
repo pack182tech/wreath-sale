@@ -114,9 +114,18 @@ function Leaderboard() {
         <div className="moon"></div>
 
         {/* Pine Trees */}
-        <div className="pine-tree tree-1"></div>
-        <div className="pine-tree tree-2"></div>
-        <div className="pine-tree tree-3"></div>
+        {[...Array(43)].map((_, i) => (
+          <div
+            key={i}
+            className="pine-tree"
+            style={{
+              left: `${(i * 2.4)}%`,
+              transform: `scale(${0.4 + Math.random() * 0.5})`,
+              animationDelay: `${i * 0.3}s`,
+              bottom: `${10 + Math.random() * 10}%`
+            }}
+          />
+        ))}
 
         {/* Camping Tents */}
         <div className="tent tent-1">
@@ -156,12 +165,6 @@ function Leaderboard() {
             animationDelay: `${i * 0.8}s`
           }} />
         ))}
-
-        {/* Pinewood Derby Cars */}
-        <div className="derby-car car-red"></div>
-        <div className="derby-car car-blue"></div>
-        <div className="derby-car car-green"></div>
-        <div className="derby-car car-yellow"></div>
 
         {/* Fireflies */}
         {[...Array(15)].map((_, i) => (
@@ -222,7 +225,7 @@ function Leaderboard() {
                 </div>
 
                 <div className="scout-info">
-                  <h3>{scout.name}</h3>
+                  <h3>{scout.name.toLowerCase()}</h3>
                 </div>
 
                 <div className="scout-stats">

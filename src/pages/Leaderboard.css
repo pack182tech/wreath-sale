@@ -127,23 +127,6 @@
   border-bottom: 60px solid #234d3e;
 }
 
-.tree-1 {
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.tree-2 {
-  left: 85%;
-  transform: scale(0.8);
-  animation-delay: 1s;
-}
-
-.tree-3 {
-  left: 92%;
-  transform: scale(0.6);
-  animation-delay: 2s;
-}
-
 @keyframes treeSway {
   0%, 100% { transform: rotate(-2deg); }
   50% { transform: rotate(2deg); }
@@ -749,9 +732,10 @@
 .scout-info h3 {
   margin: 0;
   color: #ffd700;
-  font-size: 4.2rem;
+  font-size: 3.15rem;
   font-weight: 700;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-transform: capitalize;
 }
 
 .scout-rank {
@@ -780,11 +764,17 @@
 }
 
 .stat-value {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #ff6b6b;
-  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5),
-               1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #4ade80;
+  text-shadow: 0 0 15px rgba(74, 222, 128, 0.8),
+               0 0 30px rgba(74, 222, 128, 0.4),
+               2px 2px 4px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.6));
 }
 
 .stat-label {
@@ -1055,7 +1045,7 @@
   }
 
   .scout-info h3 {
-    font-size: 3.6rem;
+    font-size: 2.7rem;
   }
 
   .scout-stats {
@@ -1089,11 +1079,6 @@
 
   .toggle-btn {
     width: 100%;
-  }
-
-  /* Reduce pine tree count on mobile */
-  .tree-3 {
-    display: none;
   }
 
   /* Reduce tent count on mobile */
