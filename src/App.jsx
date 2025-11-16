@@ -78,6 +78,14 @@ function App() {
 }
 
 function HomePage({ basePath, config }) {
+  const handleShopClick = (e) => {
+    e.preventDefault()
+    const productsSection = document.getElementById('products')
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <div className="App">
       {/* Hero Section with Background */}
@@ -92,8 +100,10 @@ function HomePage({ basePath, config }) {
             <p className="hero-subtitle">{config.content.heroSubtitle}</p>
             <p className="hero-location">{config.pack.location}</p>
             <div className="hero-cta">
-              <a href="#products" className="btn btn-primary">Shop All Products</a>
-              <Link to="/leaderboard" className="btn btn-secondary">View Leaderboard</Link>
+              <a href="#products" className="btn btn-primary shop-btn" onClick={handleShopClick}>
+                <span>Shop All Products</span>
+                <span className="down-arrow">↓</span>
+              </a>
             </div>
           </div>
         </section>
