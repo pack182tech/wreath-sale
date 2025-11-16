@@ -247,11 +247,11 @@ function Leaderboard() {
           </button>
         </div>
 
-        {leaderboard.length === 0 ? (
+        {!loading && leaderboard.length === 0 ? (
           <div className="no-data">
             <p>No sales data yet. Be the first scout to make a sale!</p>
           </div>
-        ) : (
+        ) : !loading ? (
           <div className="leaderboard-list">
             {leaderboard.map((scout, index) => (
               <div
@@ -287,7 +287,7 @@ function Leaderboard() {
               </div>
             ))}
           </div>
-        )}
+        ) : null}
 
         {/* Rank Statistics */}
         {rankStats.length > 0 && (
