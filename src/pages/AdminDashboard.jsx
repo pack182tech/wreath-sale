@@ -1362,6 +1362,30 @@ function AdminDashboard() {
             </div>
 
             <div className="config-section">
+              <h3>Checkout Button Text</h3>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Place Order Button</label>
+                  <input
+                    type="text"
+                    value={siteConfig.checkout?.placeOrderButton || 'Place Order'}
+                    onChange={(e) => handleConfigChange('checkout', 'placeOrderButton', e.target.value)}
+                    placeholder="Place Order"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Continue Shopping Button</label>
+                  <input
+                    type="text"
+                    value={siteConfig.checkout?.continueShoppingButton || '← Take me back to shopping!'}
+                    onChange={(e) => handleConfigChange('checkout', 'continueShoppingButton', e.target.value)}
+                    placeholder="← Take me back to shopping!"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="config-section">
               <h3>Scout Law</h3>
               <div className="form-group">
                 <label>

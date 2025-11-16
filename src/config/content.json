@@ -110,6 +110,10 @@
   "cart": {
     "paymentInfoMessage": "Payment information will be sent to you via email after checkout."
   },
+  "checkout": {
+    "placeOrderButton": "Place Order",
+    "continueShoppingButton": "← Take me back to shopping!"
+  },
   "scoutAttributionBanner": {
     "enabled": true,
     "scoutText": "Supporting $scoutname Scouting adventure!",

@@ -221,6 +221,10 @@ function Checkout() {
                 </div>
               )}
 
+              <button type="submit" className="btn btn-primary btn-submit-order">
+                {config.content.checkout.placeOrderButton}
+              </button>
+
               <button
                 type="button"
                 className="btn btn-secondary btn-continue-shopping"
@@ -229,11 +233,7 @@ function Checkout() {
                   navigate(scoutSlug ? `/?scout=${scoutSlug}#products` : '/#products')
                 }}
               >
-                <span className="arrow-back">←</span> Take me back to shopping!
-              </button>
-
-              <button type="submit" className="btn btn-primary btn-submit-order">
-                Place Order
+                {config.content.checkout.continueShoppingButton}
               </button>
             </form>
           </div>
