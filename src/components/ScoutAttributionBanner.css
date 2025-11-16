@@ -14,6 +14,8 @@
     0 4px 16px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 .scout-attribution-corner-banner:hover {

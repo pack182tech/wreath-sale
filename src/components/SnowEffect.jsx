@@ -7,6 +7,17 @@ function SnowEffect() {
   const snowPileRef = useRef(0)
   const scoutTimerRef = useRef(null)
 
+  const triggerScoutAnimation = () => {
+    if (showScout) return // Don't trigger if already showing
+    setShowScout(true)
+
+    // Hide scout after animation completes
+    setTimeout(() => {
+      setShowScout(false)
+      snowPileRef.current = 0 // Reset snow pile
+    }, 5000)
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -14,6 +25,12 @@ function SnowEffect() {
     const ctx = canvas.getContext('2d')
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+
+    // Listen for banner click event
+    const handleTriggerScout = () => {
+      triggerScoutAnimation()
+    }
+    window.addEventListener('triggerScout', handleTriggerScout)
 
     // Snowflakes array
     const snowflakes = []
@@ -103,19 +120,10 @@ function SnowEffect() {
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('triggerScout', handleTriggerScout)
       clearInterval(randomScoutTimer)
     }
   }, [])
-
-  const triggerScoutAnimation = () => {
-    setShowScout(true)
-
-    // Hide scout after animation completes
-    setTimeout(() => {
-      setShowScout(false)
-      snowPileRef.current = 0 // Reset snow pile
-    }, 5000)
-  }
 
   return (
     <>

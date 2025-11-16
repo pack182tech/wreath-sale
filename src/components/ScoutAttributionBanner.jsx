@@ -19,6 +19,12 @@ function ScoutAttributionBanner() {
     }
   }, [scoutAttribution])
 
+  // Function to trigger scout animation
+  const handleBannerClick = () => {
+    // Dispatch custom event to trigger scout animation in SnowEffect
+    window.dispatchEvent(new CustomEvent('triggerScout'))
+  }
+
   // Don't show banner on admin routes or leaderboard
   if (location.pathname.includes('/admin') || location.pathname.includes('/leaderboard')) return null
 
@@ -26,7 +32,7 @@ function ScoutAttributionBanner() {
   if (scoutName === 'SCOUT_NOT_FOUND') {
     const notFoundText = config.scoutAttributionBanner?.notFoundText || "We'll attribute to the correct scout at pick up"
     return (
-      <div className="scout-attribution-corner-banner">
+      <div className="scout-attribution-corner-banner" onClick={handleBannerClick}>
         {notFoundText}
       </div>
     )
@@ -36,27 +42,33 @@ function ScoutAttributionBanner() {
   if (!scoutName) {
     const defaultText = config.scoutAttributionBanner?.defaultText || "Supporting Pack 182's Scouting adventure!"
     return (
-      <div className="scout-attribution-corner-banner">
+      <div className="scout-attribution-corner-banner" onClick={handleBannerClick}>
         {defaultText}
       </div>
     )
   }
 
-  // Determine proper possessive form based on whether name ends in 's'
-  const possessiveSuffix = scoutName.toLowerCase().endsWith('s') ? "'" : "'s"
+  // Parse scout name from "Lastname, Firstname" to "Firstname Lastname"
+  const nameParts = scoutName.split(',').map(part => part.trim())
+  const firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
+  const lastName = nameParts.length > 1 ? nameParts[0] : ''
+  const formattedName = lastName ? `${firstName} ${lastName}` : firstName
+
+  // Determine proper possessive form based on whether LAST NAME ends in 's'
+  const possessiveSuffix = lastName.toLowerCase().endsWith('s') ? "'" : "'s"
 
   // Replace $scoutname placeholder with actual scout name
   const bannerTemplate = config.scoutAttributionBanner?.scoutText || `Supporting $scoutname${possessiveSuffix} Scouting adventure!`
-  const displayText = bannerTemplate.replace(/\$scoutname/g, scoutName)
+  const displayText = bannerTemplate.replace(/\$scoutname/g, formattedName)
 
   return (
-    <div className="scout-attribution-corner-banner">
-      {displayText.split(scoutName).map((part, index, array) => {
+    <div className="scout-attribution-corner-banner" onClick={handleBannerClick}>
+      {displayText.split(formattedName).map((part, index, array) => {
         if (index < array.length - 1) {
           return (
             <span key={index}>
               {part}
-              <strong>{scoutName}</strong>
+              <strong>{formattedName}</strong>
             </span>
           )
         }
