@@ -5,11 +5,9 @@ import { QRCodeSVG } from 'qrcode.react'
 import {
   getScouts,
   getOrders,
-  updateOrder,
-  deleteOrder,
-  saveScout,
-  deleteScout
+  updateOrderStatus
 } from '../utils/dataService'
+// PRODUCTION: Scout/order editing disabled - use Google Sheets directly
 import { getConfig, saveConfig } from '../utils/configLoader'
 import EmailTemplateEditor from '../components/EmailTemplateEditor'
 import './AdminDashboard.css'
@@ -75,55 +73,34 @@ function AdminDashboard() {
     navigate('/login')
   }
 
-  const handleOrderStatusUpdate = (orderId, newStatus) => {
-    updateOrder(orderId, { status: newStatus })
-    loadData()
-  }
-
-  const handleDeleteOrder = (orderId) => {
-    if (window.confirm('Are you sure you want to delete this order?')) {
-      deleteOrder(orderId)
+  const handleOrderStatusUpdate = async (orderId, newStatus) => {
+    try {
+      await updateOrderStatus(orderId, newStatus)
       loadData()
-      setSelectedOrder(null)
+    } catch (error) {
+      alert('Failed to update order status: ' + error.message)
     }
   }
 
-  const handleEditScout = (scout) => {
-    setEditingScout(scout.id)
-    // Ensure parentEmails is an array
-    setScoutFormData({
-      ...scout,
-      parentEmails: Array.isArray(scout.parentEmails) ? scout.parentEmails : []
-    })
+  // PRODUCTION: Order deletion disabled - delete directly in Google Sheets
+  const handleDeleteOrder = (orderId) => {
+    alert('Order deletion is disabled in production. Please delete the order directly in Google Sheets.')
   }
 
+  // PRODUCTION: Scout editing disabled - edit directly in Google Sheets
+  const handleEditScout = (scout) => {
+    alert('Scout editing is disabled in production. Please update scout information directly in Google Sheets.')
+  }
+
+  // PRODUCTION: Scout saving disabled
   const handleSaveScout = (e) => {
     e.preventDefault()
-
-    const scoutData = {
-      ...scoutFormData,
-      id: editingScout || `scout-${Date.now()}`
-    }
-
-    saveScout(scoutData)
-    setEditingScout(null)
-    setScoutFormData({
-      name: '',
-      slug: '',
-      rank: '',
-      email: '',
-      parentName: '',
-      parentEmails: [],
-      active: true
-    })
-    loadData()
+    alert('Scout editing is disabled in production. Please update scout information directly in Google Sheets.')
   }
 
+  // PRODUCTION: Scout deletion disabled
   const handleDeleteScout = (scoutId) => {
-    if (window.confirm('Are you sure you want to delete this scout?')) {
-      deleteScout(scoutId)
-      loadData()
-    }
+    alert('Scout deletion is disabled in production. Please delete scouts directly in Google Sheets.')
   }
 
   const handleCancelEdit = () => {

@@ -46,9 +46,45 @@ export async function createOrder(order) {
   return result
 }
 
+export async function sendOrderConfirmationEmail(order) {
+  console.log('[AppsScript] Sending order confirmation email for order:', order.orderId)
+  const result = await appsScriptPost('sendOrderConfirmationEmail', order)
+  return result
+}
+
+export async function sendScoutWelcomeEmail(scout, qrCodeUrl, saleLink) {
+  console.log('[AppsScript] Sending scout welcome email for scout:', scout.name)
+  const result = await appsScriptPost('sendScoutWelcomeEmail', {
+    scout,
+    qrCodeUrl,
+    saleLink
+  })
+  return result
+}
+
+export async function updateOrderStatus(orderId, status) {
+  console.log('[AppsScript] Updating order status:', orderId, status)
+  const result = await appsScriptPost('updateOrderStatus', { orderId, status })
+  return result
+}
+
+export async function healthCheck() {
+  try {
+    const result = await appsScriptGet('healthCheck')
+    return result
+  } catch (error) {
+    console.error('[AppsScript] Health check failed:', error)
+    throw error
+  }
+}
+
 export default {
   getScouts,
   getOrders,
   getConfig,
-  createOrder
+  createOrder,
+  sendOrderConfirmationEmail,
+  sendScoutWelcomeEmail,
+  updateOrderStatus,
+  healthCheck
 }

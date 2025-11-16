@@ -1,15 +1,13 @@
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import EmailModal from './EmailModal'
+import { useEffect } from 'react'
 import { getConfig } from '../utils/configLoader'
-import { getScouts } from '../utils/dataService'
 import './OrderConfirmation.css'
 
 function OrderConfirmation() {
   const location = useLocation()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const [showEmailModal, setShowEmailModal] = useState(false)
+  // PRODUCTION: Emails are sent server-side, no modal display needed
   const order = location.state?.order
   const config = getConfig()
 
@@ -20,101 +18,15 @@ function OrderConfirmation() {
       navigate(scoutSlug ? `/?scout=${scoutSlug}` : '/')
       return
     }
-    // Show email modal automatically
-    setShowEmailModal(true)
+    // PRODUCTION: Email sent server-side when order is created
   }, [order, navigate, searchParams])
 
   if (!order) {
     return null
   }
 
-  // Get scout info if applicable
-  const [scoutInfo, setScoutInfo] = useState({ scoutName: null, scoutFirstName: null })
-
-  useEffect(() => {
-    const loadScoutInfo = async () => {
-      if (!order?.scoutId) {
-        setScoutInfo({ scoutName: null, scoutFirstName: null })
-        return
-      }
-
-      const scouts = await getScouts()
-      const scout = scouts.find(s => s.id === order.scoutId)
-      if (!scout) {
-        setScoutInfo({ scoutName: null, scoutFirstName: null })
-        return
-      }
-
-      // Parse scout name from "Lastname, Firstname" to get first name
-      const nameParts = scout.name.split(',').map(part => part.trim())
-      const firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
-      const lastName = nameParts.length > 1 ? nameParts[0] : ''
-      const formattedName = lastName ? `${firstName} ${lastName}` : firstName
-
-      setScoutInfo({
-        scoutName: formattedName,
-        scoutFirstName: firstName
-      })
-    }
-
-    loadScoutInfo()
-  }, [order?.scoutId])
-
-  // Build order items table HTML
-  const orderItemsTable = order.items.map(item => `
-    <tr>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">${item.name}</td>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: center;">x${item.quantity}</td>
-      <td style="padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: right;">$${(item.price * item.quantity).toFixed(2)}</td>
-    </tr>
-  `).join('')
-
-  // Get email template
-  const template = config.emailTemplates?.orderConfirmation || {}
-
-  // Replace placeholders in subject
-  let subject = template.subject || 'Order Confirmation - {{orderId}}'
-  subject = subject.replace(/\{\{orderId\}\}/g, order.orderId)
-
-  // Replace placeholders in body
-  let body = template.htmlBody || ''
-  body = body
-    .replace(/\{\{customerName\}\}/g, order.customer.name)
-    .replace(/\{\{orderId\}\}/g, order.orderId)
-    .replace(/\{\{orderDate\}\}/g, new Date(order.orderDate).toLocaleDateString())
-    .replace(/\{\{total\}\}/g, order.total.toFixed(2))
-    .replace(/\{\{orderItemsTable\}\}/g, orderItemsTable)
-    .replace(/\{\{pickupDate\}\}/g, config.campaign.pickupDate)
-    .replace(/\{\{pickupTime\}\}/g, config.campaign.pickupTime)
-    .replace(/\{\{pickupLocation\}\}/g, config.campaign.pickupLocation)
-    .replace(/\{\{zelleRecipientFirstName\}\}/g, config.zelle.recipientFirstName || 'Boy Scouts')
-    .replace(/\{\{zelleRecipientLastName\}\}/g, config.zelle.recipientLastName || 'of America')
-    .replace(/\{\{zelleContact\}\}/g, config.zelle.recipientContact)
-    .replace(/\{\{leaderEmail\}\}/g, config.pack.leaderEmail)
-    .replace(/\{\{packName\}\}/g, config.pack.name)
-    .replace(/\{\{scoutName\}\}/g, scoutInfo.scoutName || '')
-    .replace(/\{\{scoutFirstName\}\}/g, scoutInfo.scoutFirstName || '')
-    .replace(/\{\{donationRecipient\}\}/g, config.donation?.recipient || '')
-
-  // Handle conditional blocks for isDonation
-  if (order.isDonation) {
-    body = body.replace(/\{\{#if isDonation\}\}/g, '').replace(/\{\{\/if\}\}/g, '')
-  } else {
-    body = body.replace(/\{\{#if isDonation\}\}[\s\S]*?\{\{\/if\}\}/g, '')
-  }
-
-  // Handle conditional blocks for scoutName
-  if (scoutInfo.scoutName) {
-    body = body.replace(/\{\{#if scoutName\}\}/g, '').replace(/\{\{\/if\}\}/g, '')
-  } else {
-    body = body.replace(/\{\{#if scoutName\}\}[\s\S]*?\{\{\/if\}\}/g, '')
-  }
-
-  const emailContent = {
-    to: order.customer.email,
-    subject: subject,
-    body: body
-  }
+  // PRODUCTION: Email template rendering removed - emails are sent server-side
+  // All email logic is now in APPS_SCRIPT_BACKEND.js
 
   return (
     <div className="confirmation-container">
@@ -190,18 +102,8 @@ function OrderConfirmation() {
           }}>
             Go Shopping
           </button>
-          <button className="btn btn-secondary" onClick={() => setShowEmailModal(true)}>
-            View Confirmation Email
-          </button>
         </div>
       </div>
-
-      {showEmailModal && (
-        <EmailModal
-          email={emailContent}
-          onClose={() => setShowEmailModal(false)}
-        />
-      )}
     </div>
   )
 }

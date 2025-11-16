@@ -1,6 +1,6 @@
 // Pack 182 Wreath Sale Platform
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { CartProvider } from './context/CartContext'
 import { ScoutProvider } from './context/ScoutContext'
 import { AuthProvider } from './context/AuthContext'
@@ -20,19 +20,62 @@ import AdminDashboard from './pages/AdminDashboard'
 import ScoutLawAnimated from './components/ScoutLawAnimated'
 import VersionDisplay from './components/VersionDisplay'
 import SnowEffect from './components/SnowEffect'
-import { initializeMockData } from './utils/mockData'
-import { getConfig } from './utils/configLoader'
+import { getConfig, getConfigSync } from './utils/configLoader'
+import { runProductionCheck } from './utils/productionCheck'
 import './styles/App.css'
 
 function App() {
   const basePath = import.meta.env.BASE_URL
+  const [configLoaded, setConfigLoaded] = useState(false)
 
+  // PRODUCTION: Load configuration from Google Sheets on app startup
   useEffect(() => {
-    // Initialize mock data on app load
-    initializeMockData()
+    const initialize = async () => {
+      // Run production checks
+      await runProductionCheck()
+
+      // Load config from Google Sheets (will cache it)
+      await getConfig()
+      setConfigLoaded(true)
+    }
+
+    initialize()
   }, [])
 
-  const config = getConfig()
+  // Use sync version (returns cached config after initial load)
+  const config = getConfigSync()
+
+  // Show loading state while config loads
+  if (!configLoaded) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontFamily: 'Arial, sans-serif'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '50px',
+            height: '50px',
+            border: '5px solid #f3f3f3',
+            borderTop: '5px solid #1a472a',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 20px'
+          }}></div>
+          <p>Loading Pack 182 Wreath Sale...</p>
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <AuthProvider>

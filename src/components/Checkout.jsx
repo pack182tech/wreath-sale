@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
 import { saveOrder } from '../utils/dataService'
+import { sendOrderConfirmationEmail } from '../services/appsScriptService'
 import './Checkout.css'
 
 function Checkout() {
@@ -91,9 +92,20 @@ function Checkout() {
     try {
       await saveOrder(order)
       console.log('[Checkout] Order saved successfully to backend')
+
+      // PRODUCTION: Send order confirmation email
+      try {
+        await sendOrderConfirmationEmail(order)
+        console.log('[Checkout] Order confirmation email sent successfully')
+      } catch (emailError) {
+        console.error('[Checkout] Failed to send confirmation email:', emailError)
+        // Continue - order was saved, just email failed
+        alert('Your order was placed successfully, but we couldn\'t send the confirmation email. Please save your order number: ' + order.orderId)
+      }
     } catch (error) {
       console.error('[Checkout] Failed to save order to backend:', error)
-      // Continue anyway - order is in state for confirmation page
+      alert('There was an error placing your order. Please try again or contact us at ' + config.pack.leaderEmail)
+      return // Don't proceed if order save failed
     }
 
     // Clear cart

@@ -1,5 +1,16 @@
-// Initialize mock data for local development
+// ⚠️ ⚠️ ⚠️ DEPRECATED - DO NOT USE IN PRODUCTION ⚠️ ⚠️ ⚠️
+// This file contains mock data for DEVELOPMENT/TESTING ONLY
+// ALL production data comes from Google Sheets via Apps Script
+// This code should NEVER execute in production builds
+
+console.warn('❌ WARNING: mockData.js is loaded. This should NOT happen in production!')
+console.warn('All data should come from Google Sheets via Apps Script')
+
+// Initialize mock data for local development ONLY
 export const initializeMockData = () => {
+  console.error('❌ CRITICAL: initializeMockData() called! This should NOT happen in production!')
+  console.error('Check that App.jsx is not calling this function')
+  return // Exit immediately in production
   // Initialize scouts - Pack 182 Real Scout Data (Force update to latest)
   // Always update scouts to ensure we have the latest roster
   const SCOUT_DATA_VERSION = '3.1'; // Increment this to force update all users

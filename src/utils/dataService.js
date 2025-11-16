@@ -1,194 +1,115 @@
-// Data Service - Unified interface for scout and order data
-// Switches between Google Apps Script, Google Sheets API, or localStorage
+// Data Service - PRODUCTION ONLY interface for scout and order data
+// ALL data comes from Google Apps Script → Google Sheets
+// NO localStorage fallbacks - failures throw errors to alert users
 
 import * as appsScriptService from '../services/appsScriptService'
-import * as sheetsService from '../services/sheetsService'
-import * as mockData from './mockData'
 
-// Check if we should use Google Apps Script (NO CREDIT CARD)
+// PRODUCTION: Only Apps Script is supported
 const USE_APPS_SCRIPT = import.meta.env.VITE_USE_APPS_SCRIPT === 'true'
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL
 
-// Check if we should use Google Sheets API (requires credit card)
-const USE_SHEETS = import.meta.env.VITE_USE_GOOGLE_SHEETS === 'true'
-const SHEET_ID = import.meta.env.VITE_GOOGLE_SHEET_ID
-const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY
-
 // Verify configuration
 const appsScriptConfigured = USE_APPS_SCRIPT && APPS_SCRIPT_URL
-const sheetsConfigured = USE_SHEETS && SHEET_ID && API_KEY
 
-// Determine which backend to use
-const useAppsScript = appsScriptConfigured
-const useSheets = !useAppsScript && sheetsConfigured
-
-if (USE_APPS_SCRIPT && !appsScriptConfigured) {
-  console.warn('Apps Script mode enabled but not properly configured. Falling back to localStorage.')
-}
-
-if (USE_SHEETS && !sheetsConfigured) {
-  console.warn('Google Sheets mode enabled but not properly configured. Falling back to localStorage.')
+if (!appsScriptConfigured) {
+  console.error('❌ PRODUCTION ERROR: Apps Script not configured! Set VITE_USE_APPS_SCRIPT=true and VITE_APPS_SCRIPT_URL')
+  throw new Error('Production backend not configured. Please contact support.')
 }
 
 // Get all scouts
 export async function getScouts() {
-  if (useAppsScript) {
-    try {
-      console.log('[DataService] Fetching scouts from Apps Script...')
-      const scouts = await appsScriptService.getScouts()
-      console.log(`[DataService] Loaded ${scouts.length} scouts from Apps Script`)
-      return scouts
-    } catch (error) {
-      console.error('[DataService] Failed to fetch from Apps Script, falling back to localStorage:', error)
-    }
+  try {
+    console.log('[DataService] Fetching scouts from Apps Script...')
+    const scouts = await appsScriptService.getScouts()
+    console.log(`[DataService] Loaded ${scouts.length} scouts from Apps Script`)
+    return scouts
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to fetch scouts from Apps Script:', error)
+    throw new Error('Unable to load scout data. Please check your internet connection and try again.')
   }
-
-  if (useSheets) {
-    try {
-      console.log('[DataService] Fetching scouts from Google Sheets...')
-      const scouts = await sheetsService.getScouts()
-      console.log(`[DataService] Loaded ${scouts.length} scouts from Google Sheets`)
-      return scouts
-    } catch (error) {
-      console.error('[DataService] Failed to fetch from Google Sheets, falling back to localStorage:', error)
-    }
-  }
-
-  // Fallback to localStorage
-  return mockData.getScouts()
 }
 
 // Get all orders
 export async function getOrders() {
-  if (useAppsScript) {
-    try {
-      console.log('[DataService] Fetching orders from Apps Script...')
-      const orders = await appsScriptService.getOrders()
-      console.log(`[DataService] Loaded ${orders.length} orders from Apps Script`)
-      return orders
-    } catch (error) {
-      console.error('[DataService] Failed to fetch from Apps Script, falling back to localStorage:', error)
-    }
+  try {
+    console.log('[DataService] Fetching orders from Apps Script...')
+    const orders = await appsScriptService.getOrders()
+    console.log(`[DataService] Loaded ${orders.length} orders from Apps Script`)
+    return orders
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to fetch orders from Apps Script:', error)
+    throw new Error('Unable to load order data. Please check your internet connection and try again.')
   }
-
-  if (useSheets) {
-    try {
-      console.log('[DataService] Fetching orders from Google Sheets...')
-      const orders = await sheetsService.getOrders()
-      console.log(`[DataService] Loaded ${orders.length} orders from Google Sheets`)
-      return orders
-    } catch (error) {
-      console.error('[DataService] Failed to fetch orders from Google Sheets, falling back to localStorage:', error)
-    }
-  }
-
-  // Fallback to localStorage
-  return mockData.getOrders()
 }
 
 // Save order
 export async function saveOrder(order) {
-  if (useAppsScript) {
-    try {
-      console.log('[DataService] Saving order to Apps Script...')
-      const result = await appsScriptService.createOrder(order)
-      console.log('[DataService] Order saved to Apps Script:', result)
-      return result
-    } catch (error) {
-      console.error('[DataService] Failed to save to Apps Script, falling back to localStorage:', error)
-    }
+  try {
+    console.log('[DataService] Saving order to Apps Script...')
+    const result = await appsScriptService.createOrder(order)
+    console.log('[DataService] Order saved to Apps Script:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to save order to Apps Script:', error)
+    throw new Error('Unable to save order. Please check your internet connection and try again.')
   }
+}
 
-  if (useSheets) {
-    try {
-      console.log('[DataService] Saving order to Google Sheets...')
-      const result = await sheetsService.createOrder(order)
-      console.log('[DataService] Order saved to Google Sheets:', result)
-      return result
-    } catch (error) {
-      console.error('[DataService] Failed to save to Google Sheets, falling back to localStorage:', error)
-    }
+// Update order status (PRODUCTION ONLY - used by Admin Dashboard)
+export async function updateOrderStatus(orderId, status) {
+  try {
+    console.log('[DataService] Updating order status via Apps Script...')
+    const result = await appsScriptService.updateOrderStatus(orderId, status)
+    console.log('[DataService] Order status updated:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to update order status:', error)
+    throw new Error('Unable to update order status. Please try again.')
   }
-
-  // Fallback to localStorage
-  return mockData.saveOrder(order)
 }
 
-// Update order
-export function updateOrder(orderId, updates) {
-  // For now, only localStorage supports updates
-  // In production with sheets, you'd need a server-side endpoint
-  return mockData.updateOrder(orderId, updates)
+// PRODUCTION: Admin functions disabled - manage scouts/orders directly in Google Sheets
+// These functions are intentionally removed to prevent localStorage usage
+export function updateOrder() {
+  throw new Error('Order editing disabled. Please update orders directly in Google Sheets.')
 }
 
-// Delete order
-export function deleteOrder(orderId) {
-  // For now, only localStorage supports deletes
-  return mockData.deleteOrder(orderId)
+export function deleteOrder() {
+  throw new Error('Order deletion disabled. Please delete orders directly in Google Sheets.')
 }
 
-// Save scout
-export function saveScout(scout) {
-  // For now, only localStorage supports scout updates
-  return mockData.saveScout(scout)
+export function saveScout() {
+  throw new Error('Scout editing disabled. Please update scouts directly in Google Sheets.')
 }
 
-// Delete scout
-export function deleteScout(scoutId) {
-  // For now, only localStorage supports scout deletes
-  return mockData.deleteScout(scoutId)
+export function deleteScout() {
+  throw new Error('Scout deletion disabled. Please delete scouts directly in Google Sheets.')
 }
 
 // Get config
 export async function getConfig() {
-  if (useAppsScript) {
-    try {
-      const config = await appsScriptService.getConfig()
-      if (config) {
-        console.log('[DataService] Loaded config from Apps Script')
-        return config
-      }
-    } catch (error) {
-      console.error('[DataService] Failed to fetch config from Apps Script:', error)
-    }
+  try {
+    const config = await appsScriptService.getConfig()
+    console.log('[DataService] Loaded config from Apps Script')
+    return config
+  } catch (error) {
+    console.error('[DataService] ❌ WARNING: Failed to fetch config from Apps Script:', error)
+    // Config is less critical - return null and let local config file be used
+    return null
   }
-
-  if (useSheets) {
-    try {
-      const config = await sheetsService.getConfig()
-      if (config) {
-        console.log('[DataService] Loaded config from Google Sheets')
-        return config
-      }
-    } catch (error) {
-      console.error('[DataService] Failed to fetch config from Google Sheets:', error)
-    }
-  }
-
-  // Fallback to local config
-  return mockData.getConfig()
 }
 
-// Save config
-export function saveConfig(config) {
-  // For now, only localStorage supports config updates
-  return mockData.saveConfig(config)
-}
-
-// Initialize data
-export function initializeMockData() {
-  return mockData.initializeMockData()
+// PRODUCTION: Config editing disabled - update config directly in Google Sheets
+export function saveConfig() {
+  throw new Error('Config editing disabled. Please update configuration directly in Google Sheets.')
 }
 
 export default {
   getScouts,
   getOrders,
   saveOrder,
-  updateOrder,
-  deleteOrder,
-  saveScout,
-  deleteScout,
-  getConfig,
-  saveConfig,
-  initializeMockData
+  updateOrderStatus,
+  getConfig
+  // REMOVED: updateOrder, deleteOrder, saveScout, deleteScout, saveConfig, initializeMockData
+  // These functions are disabled in production - use Google Sheets directly
 }

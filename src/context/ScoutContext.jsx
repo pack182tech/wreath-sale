@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ScoutNotFoundModal from '../components/ScoutNotFoundModal'
+import { getScouts } from '../utils/dataService'
 
 const ScoutContext = createContext()
 
@@ -18,60 +19,68 @@ export const ScoutProvider = ({ children }) => {
   const [showNotFoundModal, setShowNotFoundModal] = useState(false)
 
   useEffect(() => {
-    // Check data version and clear sessionStorage if mismatched
-    const CURRENT_DATA_VERSION = '2.8'
-    const storedVersion = localStorage.getItem('scoutDataVersion')
+    const loadScoutData = async () => {
+      // Check data version and clear sessionStorage if mismatched
+      const CURRENT_DATA_VERSION = '2.8'
+      const storedVersion = localStorage.getItem('scoutDataVersion')
 
-    if (storedVersion !== CURRENT_DATA_VERSION) {
-      console.log('[ScoutContext] Data version mismatch, clearing sessionStorage')
-      sessionStorage.clear()
-    }
+      if (storedVersion !== CURRENT_DATA_VERSION) {
+        console.log('[ScoutContext] Data version mismatch, clearing sessionStorage')
+        sessionStorage.clear()
+      }
 
-    // Clear old scout attribution if it's from the demo/example scouts
-    const existingScoutName = sessionStorage.getItem('scoutName')
-    const demoScouts = ['Tommy Anderson', 'Sarah Martinez', 'Michael Chen', 'Emma Johnson', 'Alex Rivera']
-    if (existingScoutName && demoScouts.includes(existingScoutName)) {
-      sessionStorage.removeItem('scoutAttribution')
-      sessionStorage.removeItem('scoutName')
-    }
+      // Clear old scout attribution if it's from the demo/example scouts
+      const existingScoutName = sessionStorage.getItem('scoutName')
+      const demoScouts = ['Tommy Anderson', 'Sarah Martinez', 'Michael Chen', 'Emma Johnson', 'Alex Rivera']
+      if (existingScoutName && demoScouts.includes(existingScoutName)) {
+        sessionStorage.removeItem('scoutAttribution')
+        sessionStorage.removeItem('scoutName')
+      }
 
-    // Check if there's a scout parameter in the URL
-    const scoutSlug = searchParams.get('scout')
-    console.log('[ScoutContext] Scout slug from URL:', scoutSlug)
+      // Check if there's a scout parameter in the URL
+      const scoutSlug = searchParams.get('scout')
+      console.log('[ScoutContext] Scout slug from URL:', scoutSlug)
 
-    if (scoutSlug) {
-      // Mark that this session was initiated with a scout slug
-      sessionStorage.setItem('hasActiveScoutSession', 'true')
+      if (scoutSlug) {
+        // Mark that this session was initiated with a scout slug
+        sessionStorage.setItem('hasActiveScoutSession', 'true')
 
-      // Load scout data from localStorage (would be from API in production)
-      const scouts = JSON.parse(localStorage.getItem('scouts') || '[]')
-      console.log('[ScoutContext] Total scouts in localStorage:', scouts.length)
+        // PRODUCTION: Load scout data from Google Sheets via API
+        try {
+          const scouts = await getScouts()
+          console.log('[ScoutContext] Loaded scouts from API:', scouts.length)
 
-      const scout = scouts.find(s => s.slug === scoutSlug)
-      console.log('[ScoutContext] Found scout:', scout)
+          const scout = scouts.find(s => s.slug === scoutSlug)
+          console.log('[ScoutContext] Found scout:', scout)
 
-      if (scout) {
-        setScoutAttribution(scout)
-        // Store in sessionStorage to persist across page navigation
-        sessionStorage.setItem('scoutAttribution', scout.id)
-        sessionStorage.setItem('scoutName', scout.name)
-        console.log('[ScoutContext] Set scout attribution:', scout.name)
-      } else {
-        // Scout slug provided but not found - still allow order with placeholder
-        console.warn('[ScoutContext] No scout found with slug:', scoutSlug)
+          if (scout) {
+            setScoutAttribution(scout)
+            // Store in sessionStorage to persist across page navigation
+            sessionStorage.setItem('scoutAttribution', scout.id)
+            sessionStorage.setItem('scoutName', scout.name)
+            console.log('[ScoutContext] Set scout attribution:', scout.name)
+          } else {
+            // Scout slug provided but not found - still allow order with placeholder
+            console.warn('[ScoutContext] No scout found with slug:', scoutSlug)
 
-        const notFoundName = 'SCOUT_NOT_FOUND'
-        setScoutAttribution({ id: 'not-found', name: notFoundName, slug: scoutSlug })
-        sessionStorage.setItem('scoutAttribution', 'not-found')
-        sessionStorage.setItem('scoutName', notFoundName)
-        sessionStorage.setItem('scoutSlug', scoutSlug)
+            const notFoundName = 'SCOUT_NOT_FOUND'
+            setScoutAttribution({ id: 'not-found', name: notFoundName, slug: scoutSlug })
+            sessionStorage.setItem('scoutAttribution', 'not-found')
+            sessionStorage.setItem('scoutName', notFoundName)
+            sessionStorage.setItem('scoutSlug', scoutSlug)
 
-        // Show modal notification (only once per session)
-        if (!sessionStorage.getItem('scoutNotFoundModalShown')) {
-          setTimeout(() => {
-            setShowNotFoundModal(true)
-            sessionStorage.setItem('scoutNotFoundModalShown', 'true')
-          }, 500)
+            // Show modal notification (only once per session)
+            if (!sessionStorage.getItem('scoutNotFoundModalShown')) {
+              setTimeout(() => {
+                setShowNotFoundModal(true)
+                sessionStorage.setItem('scoutNotFoundModalShown', 'true')
+              }, 500)
+            }
+          }
+        } catch (error) {
+          console.error('[ScoutContext] Failed to load scouts from API:', error)
+          // Show error to user - this is a critical failure
+          alert('Unable to load scout information. Please check your internet connection and try again.')
         }
       }
     } else {
@@ -93,6 +102,8 @@ export const ScoutProvider = ({ children }) => {
         setScoutAttribution(null)
       }
     }
+
+    loadScoutData()
   }, [searchParams])
 
   const clearAttribution = () => {
