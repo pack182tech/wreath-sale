@@ -223,7 +223,6 @@ function Leaderboard() {
 
                 <div className="scout-info">
                   <h3>{scout.name}</h3>
-                  <span className="scout-rank">{scout.rank}</span>
                 </div>
 
                 <div className="scout-stats">
@@ -232,7 +231,7 @@ function Leaderboard() {
                       {viewMode === 'revenue' ? `$${scout.revenue.toFixed(2)}` : scout.units}
                     </span>
                     <span className="stat-label">
-                      {viewMode === 'revenue' ? 'Revenue' : 'Units'}
+                      {viewMode === 'revenue' ? scout.rank : 'Units'}
                     </span>
                   </div>
                   {getMilestoneBadge(scout.units) && (
