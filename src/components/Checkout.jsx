@@ -221,21 +221,20 @@ function Checkout() {
                 </div>
               )}
 
-              <div className="checkout-actions">
-                <button type="submit" className="btn btn-primary btn-submit-order">
-                  Place Order
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-continue-shopping"
-                  onClick={() => {
-                    const scoutSlug = searchParams.get('scout')
-                    navigate(scoutSlug ? `/?scout=${scoutSlug}#products` : '/#products')
-                  }}
-                >
-                  🎄 Wait! I want to shop more!
-                </button>
-              </div>
+              <button
+                type="button"
+                className="btn btn-secondary btn-continue-shopping"
+                onClick={() => {
+                  const scoutSlug = searchParams.get('scout')
+                  navigate(scoutSlug ? `/?scout=${scoutSlug}#products` : '/#products')
+                }}
+              >
+                <span className="arrow-back">←</span> Take me back to shopping!
+              </button>
+
+              <button type="submit" className="btn btn-primary btn-submit-order">
+                Place Order
+              </button>
             </form>
           </div>
 
