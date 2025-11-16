@@ -26,7 +26,7 @@ dist-ssr
 # Environment files
 .env
 .env.local
-.env.production
+# .env.production - committed for GitHub Pages deployment (contains only public URLs)
 
 # Testing
 coverage
