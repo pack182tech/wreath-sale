@@ -114,50 +114,32 @@ function Leaderboard() {
         <div className="moon"></div>
 
         {/* Pine Trees */}
-        {[...Array(43)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <div
             key={i}
             className="pine-tree"
             style={{
-              left: `${(i * 2.4)}%`,
-              transform: `scale(${0.4 + Math.random() * 0.5})`,
-              animationDelay: `${i * 0.3}s`,
+              left: `${(i * 10)}%`,
+              transform: `scale(${0.5 + Math.random() * 0.4})`,
+              animationDelay: `${i * 0.5}s`,
               bottom: `${10 + Math.random() * 10}%`
             }}
           />
         ))}
 
-        {/* Camping Tents - 6 large family tents and 3 small ones */}
+        {/* Camping Tents - 3 tents */}
         <div className="tent tent-large tent-1">
           <div className="tent-light"></div>
         </div>
         <div className="tent tent-large tent-2">
           <div className="tent-light"></div>
         </div>
-        <div className="tent tent-large tent-3">
-          <div className="tent-light"></div>
-        </div>
-        <div className="tent tent-large tent-4">
-          <div className="tent-light"></div>
-        </div>
-        <div className="tent tent-large tent-5">
-          <div className="tent-light"></div>
-        </div>
-        <div className="tent tent-large tent-6">
-          <div className="tent-light"></div>
-        </div>
         <div className="tent tent-small tent-7">
           <div className="tent-light"></div>
         </div>
-        <div className="tent tent-small tent-8">
-          <div className="tent-light"></div>
-        </div>
-        <div className="tent tent-small tent-9">
-          <div className="tent-light"></div>
-        </div>
 
-        {/* Campfires - 3 fires */}
-        <div className="campfire campfire-1">
+        {/* Campfire - 1 fire */}
+        <div className="campfire campfire-2">
           <div className="fire-flame flame-1"></div>
           <div className="fire-flame flame-2"></div>
           <div className="fire-flame flame-3"></div>
@@ -169,33 +151,9 @@ function Leaderboard() {
           ))}
         </div>
 
-        <div className="campfire campfire-2">
-          <div className="fire-flame flame-1"></div>
-          <div className="fire-flame flame-2"></div>
-          <div className="fire-flame flame-3"></div>
-          <div className="fire-glow"></div>
-          {[...Array(10)].map((_, i) => (
-            <div key={`fire2-${i}`} className="ember" style={{
-              animationDelay: `${i * 0.5}s`
-            }} />
-          ))}
-        </div>
-
-        <div className="campfire campfire-3">
-          <div className="fire-flame flame-1"></div>
-          <div className="fire-flame flame-2"></div>
-          <div className="fire-flame flame-3"></div>
-          <div className="fire-glow"></div>
-          {[...Array(10)].map((_, i) => (
-            <div key={`fire3-${i}`} className="ember" style={{
-              animationDelay: `${i * 0.5}s`
-            }} />
-          ))}
-        </div>
-
-        {/* Scouts Around Fires - 15 scouts total (5 per fire) */}
-        {[...Array(15)].map((_, i) => (
-          <div key={i} className={`scout-figure scout-${i + 1}`}>
+        {/* Scouts Around Fire - 5 scouts */}
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className={`scout-figure scout-${i + 6}`}>
             <div className={i % 2 === 0 ? 'marshmallow-stick' : 'hotdog-stick'}></div>
           </div>
         ))}
