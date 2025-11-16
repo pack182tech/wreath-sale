@@ -187,7 +187,7 @@ function Leaderboard() {
         {loading && (
           <div className="loading-spinner">
             <div className="spinner"></div>
-            <p>Loading leaderboard...</p>
+            <p>Counting everyone's sales...</p>
           </div>
         )}
 
