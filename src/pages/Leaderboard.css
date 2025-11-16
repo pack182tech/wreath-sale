@@ -139,75 +139,138 @@
   animation: tentBreathe 3s infinite ease-in-out;
 }
 
-/* Large family-style tents */
+/* Large family-style tents - A-frame dome style */
 .tent-large {
-  width: 120px;
-  height: 90px;
+  width: 140px;
+  height: 80px;
 }
 
 .tent-large::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: 20px;
   width: 0;
   height: 0;
-  border-left: 60px solid transparent;
-  border-right: 60px solid transparent;
-  border-bottom: 90px solid #c84832;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 80px solid var(--tent-color-main);
+  filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.6));
 }
 
 .tent-large::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 60px;
+  left: 70px;
   width: 0;
   height: 0;
-  border-left: 60px solid transparent;
-  border-bottom: 90px solid #a03a28;
+  border-left: 70px solid transparent;
+  border-bottom: 80px solid var(--tent-color-shadow);
 }
 
-/* Small tents */
+/* Tent door/entrance detail for large tents */
+.tent-large .tent-light::before {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 25px solid rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* Small tents - pup tent style */
 .tent-small {
-  width: 60px;
-  height: 50px;
+  width: 70px;
+  height: 55px;
 }
 
 .tent-small::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10px;
   width: 0;
   height: 0;
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
-  border-bottom: 50px solid #c84832;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+  border-bottom: 55px solid var(--tent-color-main);
+  filter: drop-shadow(2px 3px 6px rgba(0, 0, 0, 0.6));
 }
 
 .tent-small::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 30px;
+  left: 40px;
   width: 0;
   height: 0;
   border-left: 30px solid transparent;
-  border-bottom: 50px solid #a03a28;
+  border-bottom: 55px solid var(--tent-color-shadow);
 }
 
-.tent-1 { left: 8%; }
-.tent-2 { left: 22%; }
-.tent-3 { left: 38%; }
-.tent-4 { right: 35%; }
-.tent-5 { right: 20%; }
-.tent-6 { right: 8%; }
-.tent-7 { left: 15%; bottom: 12%; }
-.tent-8 { left: 65%; bottom: 13%; }
-.tent-9 { right: 12%; bottom: 11%; }
+/* Tent positioning and colors */
+.tent-1 {
+  left: 8%;
+  --tent-color-main: #2d5f3f;
+  --tent-color-shadow: #1f4229;
+}
+
+.tent-2 {
+  left: 22%;
+  --tent-color-main: #8b4513;
+  --tent-color-shadow: #6b3410;
+}
+
+.tent-3 {
+  left: 38%;
+  --tent-color-main: #556b2f;
+  --tent-color-shadow: #3d4f21;
+}
+
+.tent-4 {
+  right: 35%;
+  --tent-color-main: #b8860b;
+  --tent-color-shadow: #9a7209;
+}
+
+.tent-5 {
+  right: 20%;
+  --tent-color-main: #4a5d23;
+  --tent-color-shadow: #363f1a;
+}
+
+.tent-6 {
+  right: 8%;
+  --tent-color-main: #704214;
+  --tent-color-shadow: #52310f;
+}
+
+.tent-7 {
+  left: 15%;
+  bottom: 12%;
+  --tent-color-main: #3d5941;
+  --tent-color-shadow: #2a3d2d;
+}
+
+.tent-8 {
+  left: 65%;
+  bottom: 13%;
+  --tent-color-main: #6b5b3d;
+  --tent-color-shadow: #4d4028;
+}
+
+.tent-9 {
+  right: 12%;
+  bottom: 11%;
+  --tent-color-main: #5a6b3f;
+  --tent-color-shadow: #42502e;
+}
 
 .tent-light {
   position: absolute;
