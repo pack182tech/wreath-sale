@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react'
+import { getScouts, getOrders } from '../utils/dataService'
 import './Leaderboard.css'
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([])
   const [rankStats, setRankStats] = useState([])
   const [viewMode, setViewMode] = useState('revenue') // revenue or units
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Load orders from localStorage
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]')
-    const scouts = JSON.parse(localStorage.getItem('scouts') || '[]')
+    loadLeaderboardData()
+  }, [viewMode])
+
+  const loadLeaderboardData = async () => {
+    setLoading(true)
+    try {
+      // Load orders and scouts from production backend
+      const orders = await getOrders()
+      const scouts = await getScouts()
 
     // Calculate sales per scout
     const salesByScout = {}
@@ -66,7 +74,12 @@ function Leaderboard() {
     rankStatsData.sort((a, b) => b[viewMode === 'revenue' ? 'totalRevenue' : 'totalUnits'] - a[viewMode === 'revenue' ? 'totalRevenue' : 'totalUnits'])
 
     setRankStats(rankStatsData)
-  }, [viewMode])
+    } catch (error) {
+      console.error('[Leaderboard] Failed to load data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const getRankBadge = (index) => {
     if (index === 0) return '🥇'
@@ -84,11 +97,96 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard-container">
+      {/* Animated Background Elements */}
+      <div className="camping-background">
+        {/* Starry Night Sky */}
+        <div className="stars-layer">
+          {[...Array(50)].map((_, i) => (
+            <div key={i} className="star" style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 60}%`,
+              animationDelay: `${Math.random() * 3}s`
+            }} />
+          ))}
+        </div>
+
+        {/* Moon */}
+        <div className="moon"></div>
+
+        {/* Pine Trees */}
+        <div className="pine-tree tree-1"></div>
+        <div className="pine-tree tree-2"></div>
+        <div className="pine-tree tree-3"></div>
+
+        {/* Camping Tents */}
+        <div className="tent tent-1">
+          <div className="tent-light"></div>
+        </div>
+        <div className="tent tent-2">
+          <div className="tent-light"></div>
+        </div>
+
+        {/* Campfire */}
+        <div className="campfire">
+          <div className="fire-flame flame-1"></div>
+          <div className="fire-flame flame-2"></div>
+          <div className="fire-flame flame-3"></div>
+          <div className="fire-glow"></div>
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="ember" style={{
+              animationDelay: `${i * 0.5}s`
+            }} />
+          ))}
+        </div>
+
+        {/* Scouts Around Fire */}
+        <div className="scout-figure scout-1">
+          <div className="marshmallow-stick"></div>
+        </div>
+        <div className="scout-figure scout-2">
+          <div className="hotdog-stick"></div>
+        </div>
+        <div className="scout-figure scout-3">
+          <div className="marshmallow-stick"></div>
+        </div>
+
+        {/* Smoke Wisps */}
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="smoke-wisp" style={{
+            animationDelay: `${i * 0.8}s`
+          }} />
+        ))}
+
+        {/* Pinewood Derby Cars */}
+        <div className="derby-car car-red"></div>
+        <div className="derby-car car-blue"></div>
+        <div className="derby-car car-green"></div>
+        <div className="derby-car car-yellow"></div>
+
+        {/* Fireflies */}
+        {[...Array(15)].map((_, i) => (
+          <div key={i} className="firefly" style={{
+            left: `${Math.random() * 100}%`,
+            top: `${20 + Math.random() * 60}%`,
+            animationDelay: `${Math.random() * 3}s`
+          }} />
+        ))}
+      </div>
+
       <div className="leaderboard-content">
-        <h1>Scout Leaderboard</h1>
+        <h1 className="leaderboard-title">
+          <span className="title-shine">Scout Leaderboard</span>
+        </h1>
         <p className="leaderboard-subtitle">
           Outstanding effort from our Cub Scouts!
         </p>
+
+        {loading && (
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+            <p>Loading leaderboard...</p>
+          </div>
+        )}
 
         <div className="view-toggle">
           <button
