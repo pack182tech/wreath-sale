@@ -793,30 +793,40 @@ function AdminDashboard() {
                             </span>
                           </td>
                           <td>
-                            <button
-                              onClick={() => setSelectedScoutQR(scout)}
-                              className="btn-view"
-                            >
-                              View QR/Link
-                            </button>
-                            <button
-                              onClick={() => setSelectedScoutEmail(scout)}
-                              className="btn-view"
-                            >
-                              Welcome Email
-                            </button>
-                            <button
-                              onClick={() => handleEditScout(scout)}
-                              className="btn-view"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleDeleteScout(scout.id)}
-                              className="btn-delete"
-                            >
-                              Delete
-                            </button>
+                            <div className="action-buttons">
+                              <div className="button-row">
+                                <button
+                                  onClick={() => setSelectedScoutQR(scout)}
+                                  className="btn-action btn-primary-action"
+                                  title="View QR Code and Link"
+                                >
+                                  QR/Link
+                                </button>
+                                <button
+                                  onClick={() => setSelectedScoutEmail(scout)}
+                                  className="btn-action btn-primary-action"
+                                  title="Generate Welcome Email"
+                                >
+                                  Email
+                                </button>
+                              </div>
+                              <div className="button-row">
+                                <button
+                                  onClick={() => handleEditScout(scout)}
+                                  className="btn-action btn-edit"
+                                  title="Edit Scout Information"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteScout(scout.id)}
+                                  className="btn-action btn-delete-action"
+                                  title="Delete Scout"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
                           </td>
                         </tr>
                         {isEditing && (
