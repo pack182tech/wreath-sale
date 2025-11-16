@@ -27,6 +27,7 @@ import './styles/App.css'
 function App() {
   const basePath = import.meta.env.BASE_URL
   const [configLoaded, setConfigLoaded] = useState(false)
+  const [config, setConfig] = useState(null)
 
   // PRODUCTION: Load configuration from Google Sheets on app startup
   useEffect(() => {
@@ -35,18 +36,16 @@ function App() {
       await runProductionCheck()
 
       // Load config from Google Sheets (will cache it)
-      await getConfig()
+      const loadedConfig = await getConfig()
+      setConfig(loadedConfig)
       setConfigLoaded(true)
     }
 
     initialize()
   }, [])
 
-  // Use sync version (returns cached config after initial load)
-  const config = getConfigSync()
-
   // Show loading state while config loads
-  if (!configLoaded) {
+  if (!configLoaded || !config) {
     return (
       <div style={{
         display: 'flex',
