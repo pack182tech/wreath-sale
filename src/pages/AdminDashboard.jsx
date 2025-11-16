@@ -273,38 +273,47 @@ function AdminDashboard() {
     // For now, we'll include a placeholder and instructions
     const scoutUrl = getScoutUrl(scout)
 
+    // Parse scout name from "Lastname, Firstname" to "Firstname Lastname"
+    const nameParts = scout.name.split(',').map(part => part.trim())
+    const scoutFirstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
+    const scoutLastName = nameParts.length > 1 ? nameParts[0] : ''
+
     // Use all parent emails if available, otherwise empty string
     const parentEmails = Array.isArray(scout.parentEmails) ? scout.parentEmails.join(', ') : ''
 
     return {
       to: parentEmails,
-      subject: `Pack 182 Wreath Sale - ${scout.name}'s Unique Sales Link & QR Code`,
+      subject: `Pack 182 Wreath Sale - ${scoutFirstName} ${scoutLastName}'s Unique Sales Link & QR Code`,
       body: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #1a472a; border-bottom: 3px solid #d4af37; padding-bottom: 10px;">
             Welcome to Pack 182's Wreath Sale!
           </h2>
 
-          <p>Dear ${scout.parentName},</p>
+          <p>Dear Parent,</p>
 
-          <p>Thank you for participating in our annual wreath sale fundraiser! This email contains ${scout.name}'s unique sales tracking information.</p>
+          <p>Thank you for participating in our annual wreath sale fundraiser! This email contains <strong>${scoutFirstName} ${scoutLastName}'s</strong> unique sales tracking information.</p>
 
-          <h3 style="color: #1a472a; margin-top: 30px;">🎯 ${scout.name}'s Personal Sales Link</h3>
+          <p style="background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50;">
+            <strong>🎯 Important:</strong> When customers use ${scoutFirstName}'s personalized link or QR code below, <strong>all sales are automatically credited to ${scoutFirstName}</strong>! This helps us track ${scoutFirstName}'s fundraising progress and ensures ${scoutFirstName} gets proper recognition for all sales.
+          </p>
+
+          <h3 style="color: #1a472a; margin-top: 30px;">🎯 ${scoutFirstName} ${scoutLastName}'s Personal Sales Link</h3>
           <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #1a472a;">
             <p style="margin: 0; word-break: break-all;"><strong>Link:</strong> <a href="${scoutUrl}" style="color: #1a472a;">${scoutUrl}</a></p>
           </div>
 
-          <h3 style="color: #1a472a; margin-top: 30px;">📱 ${scout.name}'s Personal QR Code</h3>
-          <p><strong>This QR code is specific to ${scout.name}</strong> and will automatically credit all sales to them!</p>
+          <h3 style="color: #1a472a; margin-top: 30px;">📱 ${scoutFirstName} ${scoutLastName}'s Personal QR Code</h3>
+          <p><strong>This QR code is specific to ${scoutFirstName} ${scoutLastName}</strong> and will automatically credit all sales to them!</p>
 
           <div style="text-align: center; background: white; padding: 20px; border: 3px solid #d4af37; border-radius: 12px; margin: 20px 0;">
-            <p style="color: #1a472a; font-weight: bold; margin-bottom: 15px;">Scan to Shop & Support ${scout.name}</p>
+            <p style="color: #1a472a; font-weight: bold; margin-bottom: 15px;">Scan to Shop & Support ${scoutFirstName} ${scoutLastName}</p>
             <div id="qr-code-placeholder" style="margin: 0 auto;">
               <svg viewBox="0 0 256 256" width="200" height="200">
                 <!-- QR Code will be generated here -->
                 <rect width="256" height="256" fill="#f8f8f8"/>
                 <text x="128" y="128" text-anchor="middle" font-size="14" fill="#666">
-                  [QR Code for ${scout.name}]
+                  [QR Code for ${scoutFirstName} ${scoutLastName}]
                 </text>
               </svg>
             </div>
@@ -314,20 +323,20 @@ function AdminDashboard() {
           <h3 style="color: #1a472a; margin-top: 30px;">How to Use</h3>
           <ul style="line-height: 1.8;">
             <li><strong>Share the link</strong> via text, email, or social media</li>
-            <li><strong>Print the QR code</strong> and share with neighbors, family, and friends</li>
-            <li><strong>All orders placed</strong> through this link or QR code are automatically credited to ${scout.name}</li>
+            <li><strong>Print the QR code</strong> and share with neighbors, family, and friends - or hang it up at your workplace!</li>
+            <li><strong>All orders placed</strong> through this link or QR code are automatically credited to ${scoutFirstName} ${scoutLastName}</li>
           </ul>
 
           <h3 style="color: #1a472a; margin-top: 30px;">What We're Selling</h3>
           <ul>
             <li>Fresh Evergreen Wreaths - $35 each</li>
-            <li>Poinsettias (6" & 10") - Starting at $7</li>
+            <li>Poinsettias (6" & 10") - Starting at $10</li>
             <li>Other Holiday Plants</li>
           </ul>
 
           <div style="background: #fffbeb; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37; margin-top: 30px;">
-            <p style="margin: 0;"><strong>Pickup Date:</strong> December 15, 2025</p>
-            <p style="margin: 5px 0 0 0;"><strong>Location:</strong> Readington Elementary School Parking Lot</p>
+            <p style="margin: 0;"><strong>Pickup Date:</strong> TBD - we'll let you know</p>
+            <p style="margin: 5px 0 0 0;"><strong>Location:</strong> We'll let you know</p>
           </div>
 
           <p style="margin-top: 30px;">For questions, please contact:</p>
