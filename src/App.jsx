@@ -129,6 +129,20 @@ function HomePage({ basePath, config }) {
     }
   }
 
+  // Safety check for config
+  if (!config || !config.content || !config.products) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh'
+      }}>
+        <p>Loading site content...</p>
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       {/* Hero Section with Background */}
