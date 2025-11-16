@@ -222,7 +222,7 @@ function Checkout() {
               )}
 
               <button type="submit" className="btn btn-primary btn-submit-order">
-                {config.content.checkout.placeOrderButton}
+                {config.content.checkout?.placeOrderButton || 'Place Order'}
               </button>
 
               <button
@@ -233,7 +233,7 @@ function Checkout() {
                   navigate(scoutSlug ? `/?scout=${scoutSlug}#products` : '/#products')
                 }}
               >
-                {config.content.checkout.continueShoppingButton}
+                {config.content.checkout?.continueShoppingButton || '← Take me back to shopping!'}
               </button>
             </form>
           </div>
