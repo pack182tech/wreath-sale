@@ -290,7 +290,7 @@ function AdminDashboard() {
             Welcome to Pack 182's Wreath Sale!
           </h2>
 
-          <p>Dear Parent,</p>
+          <p>Scouting Parent,</p>
 
           <p>Thank you for participating in our annual wreath sale fundraiser! This email contains <strong>${scoutFirstName} ${scoutLastName}'s</strong> unique sales tracking information.</p>
 
