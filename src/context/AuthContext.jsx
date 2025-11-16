@@ -1,7 +1,18 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { getUsers } from '../utils/mockData'
 
 const AuthContext = createContext()
+
+// PRODUCTION: Hardcoded admin users for authentication
+// In a real production system, this would be stored in Google Sheets or a secure backend
+const ADMIN_USERS = [
+  {
+    id: 'admin-1',
+    email: 'pack182tech@gmail.com',
+    password: 'pack182admin',
+    role: 'admin',
+    name: 'Pack 182 Admin'
+  }
+]
 
 export const useAuth = () => {
   const context = useContext(AuthContext)
@@ -25,8 +36,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = (email, password) => {
-    const users = getUsers()
-    const foundUser = users.find(u => u.email === email && u.password === password)
+    const foundUser = ADMIN_USERS.find(u => u.email === email && u.password === password)
 
     if (foundUser) {
       const userSession = {

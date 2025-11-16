@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
 import { QRCodeSVG } from 'qrcode.react'
-import { getScouts, getOrders, saveOrder } from '../utils/mockData'
-import { getConfig } from '../utils/configLoader'
+import { getScouts, getOrders, saveOrder } from '../utils/dataService'
+import { getConfigSync } from '../utils/configLoader'
 import './ScoutPortal.css'
 
 function ScoutPortal() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const [scout, setScout] = useState(null)
-  const config = getConfig()
+  const config = getConfigSync()
   const [stats, setStats] = useState({ revenue: 0, units: 0, orderCount: 0 })
   const [orders, setOrders] = useState([])
   const [showOfflineSaleForm, setShowOfflineSaleForm] = useState(false)
@@ -23,30 +23,42 @@ function ScoutPortal() {
 
   useEffect(() => {
     // Find the scout associated with this user
-    const scouts = getScouts()
-    const userScout = scouts.find(s => s.email === user.email)
+    const loadScout = async () => {
+      try {
+        const scouts = await getScouts()
+        const userScout = scouts.find(s => s.email === user.email)
 
-    if (userScout) {
-      setScout(userScout)
-      loadScoutData(userScout.id)
+        if (userScout) {
+          setScout(userScout)
+          await loadScoutData(userScout.id)
+        }
+      } catch (error) {
+        console.error('[ScoutPortal] Failed to load scout data:', error)
+      }
     }
+
+    loadScout()
   }, [user])
 
-  const loadScoutData = (scoutId) => {
-    const allOrders = getOrders()
-    const scoutOrders = allOrders.filter(order => order.scoutId === scoutId)
+  const loadScoutData = async (scoutId) => {
+    try {
+      const allOrders = await getOrders()
+      const scoutOrders = allOrders.filter(order => order.scoutId === scoutId)
 
-    const revenue = scoutOrders.reduce((sum, order) => sum + order.total, 0)
-    const units = scoutOrders.reduce((sum, order) =>
-      sum + order.items.reduce((itemSum, item) => itemSum + item.quantity, 0), 0
-    )
+      const revenue = scoutOrders.reduce((sum, order) => sum + order.total, 0)
+      const units = scoutOrders.reduce((sum, order) =>
+        sum + order.items.reduce((itemSum, item) => itemSum + item.quantity, 0), 0
+      )
 
-    setStats({
-      revenue,
-      units,
-      orderCount: scoutOrders.length
-    })
-    setOrders(scoutOrders)
+      setStats({
+        revenue,
+        units,
+        orderCount: scoutOrders.length
+      })
+      setOrders(scoutOrders)
+    } catch (error) {
+      console.error('[ScoutPortal] Failed to load scout orders:', error)
+    }
   }
 
   const handleLogout = () => {
@@ -83,7 +95,7 @@ function ScoutPortal() {
     setOfflineFormData({ ...offlineFormData, items: newItems })
   }
 
-  const handleSubmitOfflineSale = (e) => {
+  const handleSubmitOfflineSale = async (e) => {
     e.preventDefault()
 
     if (offlineFormData.items.length === 0) {
@@ -91,49 +103,54 @@ function ScoutPortal() {
       return
     }
 
-    // Build order items with product details
-    const orderItems = offlineFormData.items.map(item => {
-      const product = config.products.find(p => p.id === item.productId)
-      return {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: parseInt(item.quantity)
+    try {
+      // Build order items with product details
+      const orderItems = offlineFormData.items.map(item => {
+        const product = config.products.find(p => p.id === item.productId)
+        return {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: parseInt(item.quantity)
+        }
+      })
+
+      const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+
+      const order = {
+        orderId: String(Date.now()).slice(-6),
+        scoutId: scout.id,
+        customer: {
+          name: offlineFormData.customerName,
+          email: offlineFormData.customerEmail,
+          phone: offlineFormData.customerPhone
+        },
+        items: orderItems,
+        total,
+        status: 'pending',
+        type: 'offline',
+        createdAt: new Date().toISOString()
       }
-    })
 
-    const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      await saveOrder(order)
 
-    const order = {
-      orderId: String(Date.now()).slice(-6),
-      scoutId: scout.id,
-      customer: {
-        name: offlineFormData.customerName,
-        email: offlineFormData.customerEmail,
-        phone: offlineFormData.customerPhone
-      },
-      items: orderItems,
-      total,
-      status: 'pending',
-      type: 'offline',
-      createdAt: new Date().toISOString()
+      // Reset form
+      setOfflineFormData({
+        customerName: '',
+        customerEmail: '',
+        customerPhone: '',
+        items: []
+      })
+      setShowOfflineSaleForm(false)
+
+      // Reload data
+      await loadScoutData(scout.id)
+
+      alert('Offline sale recorded successfully!')
+    } catch (error) {
+      console.error('[ScoutPortal] Failed to save offline sale:', error)
+      alert('Failed to record offline sale. Please try again.')
     }
-
-    saveOrder(order)
-
-    // Reset form
-    setOfflineFormData({
-      customerName: '',
-      customerEmail: '',
-      customerPhone: '',
-      items: []
-    })
-    setShowOfflineSaleForm(false)
-
-    // Reload data
-    loadScoutData(scout.id)
-
-    alert('Offline sale recorded successfully!')
   }
 
   if (!scout) {
