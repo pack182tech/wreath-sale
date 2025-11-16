@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getConfig } from '../utils/configLoader'
+import { saveOrder } from '../utils/dataService'
 import './Checkout.css'
 
 function Checkout() {
@@ -61,7 +62,7 @@ function Checkout() {
     return newErrors
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = validateForm()
 
@@ -85,10 +86,14 @@ function Checkout() {
       paymentStatus: 'pending'
     }
 
-    // Store order in localStorage (would be sent to backend)
-    const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]')
-    existingOrders.push(order)
-    localStorage.setItem('orders', JSON.stringify(existingOrders))
+    // Save order to backend (Google Sheets via Apps Script)
+    try {
+      await saveOrder(order)
+      console.log('[Checkout] Order saved successfully to backend')
+    } catch (error) {
+      console.error('[Checkout] Failed to save order to backend:', error)
+      // Continue anyway - order is in state for confirmation page
+    }
 
     // Clear cart
     clearCart()

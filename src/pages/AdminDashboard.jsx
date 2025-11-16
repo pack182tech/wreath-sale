@@ -9,7 +9,7 @@ import {
   deleteOrder,
   saveScout,
   deleteScout
-} from '../utils/mockData'
+} from '../utils/dataService'
 import { getConfig, saveConfig } from '../utils/configLoader'
 import EmailTemplateEditor from '../components/EmailTemplateEditor'
 import './AdminDashboard.css'
@@ -52,9 +52,9 @@ function AdminDashboard() {
     loadData()
   }, [])
 
-  const loadData = () => {
-    const scoutsData = getScouts()
-    const ordersData = getOrders()
+  const loadData = async () => {
+    const scoutsData = await getScouts()
+    const ordersData = await getOrders()
 
     setScouts(scoutsData)
     setOrders(ordersData)

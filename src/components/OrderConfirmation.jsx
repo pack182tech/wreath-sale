@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import EmailModal from './EmailModal'
 import { getConfig } from '../utils/configLoader'
-import { getScouts } from '../utils/mockData'
+import { getScouts } from '../utils/dataService'
 import './OrderConfirmation.css'
 
 function OrderConfirmation() {
@@ -29,25 +29,36 @@ function OrderConfirmation() {
   }
 
   // Get scout info if applicable
-  const getScoutInfo = () => {
-    if (!order.scoutId) return { scoutName: null, scoutFirstName: null }
-    const scouts = getScouts()
-    const scout = scouts.find(s => s.id === order.scoutId)
-    if (!scout) return { scoutName: null, scoutFirstName: null }
+  const [scoutInfo, setScoutInfo] = useState({ scoutName: null, scoutFirstName: null })
 
-    // Parse scout name from "Lastname, Firstname" to get first name
-    const nameParts = scout.name.split(',').map(part => part.trim())
-    const firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
-    const lastName = nameParts.length > 1 ? nameParts[0] : ''
-    const formattedName = lastName ? `${firstName} ${lastName}` : firstName
+  useEffect(() => {
+    const loadScoutInfo = async () => {
+      if (!order?.scoutId) {
+        setScoutInfo({ scoutName: null, scoutFirstName: null })
+        return
+      }
 
-    return {
-      scoutName: formattedName,
-      scoutFirstName: firstName
+      const scouts = await getScouts()
+      const scout = scouts.find(s => s.id === order.scoutId)
+      if (!scout) {
+        setScoutInfo({ scoutName: null, scoutFirstName: null })
+        return
+      }
+
+      // Parse scout name from "Lastname, Firstname" to get first name
+      const nameParts = scout.name.split(',').map(part => part.trim())
+      const firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0]
+      const lastName = nameParts.length > 1 ? nameParts[0] : ''
+      const formattedName = lastName ? `${firstName} ${lastName}` : firstName
+
+      setScoutInfo({
+        scoutName: formattedName,
+        scoutFirstName: firstName
+      })
     }
-  }
 
-  const scoutInfo = getScoutInfo()
+    loadScoutInfo()
+  }, [order?.scoutId])
 
   // Build order items table HTML
   const orderItemsTable = order.items.map(item => `
