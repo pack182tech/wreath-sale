@@ -137,7 +137,7 @@
 
 .scout-character {
   position: relative;
-  width: 80px;
+  width: 40px;
   height: 120px;
   animation: scoutShoveling 0.8s ease-in-out infinite;
 }
@@ -180,7 +180,7 @@
   top: 35px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
+  width: 25px;
   height: 70px;
 }
 
@@ -199,9 +199,9 @@
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 15px solid #d4af37;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 8px solid #d4af37;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
@@ -323,7 +323,7 @@
   }
 
   .scout-character {
-    width: 60px;
+    width: 30px;
     height: 90px;
   }
 
@@ -332,7 +332,7 @@
   }
 
   .scout-body {
-    width: 40px;
+    width: 20px;
     height: 55px;
   }
 
