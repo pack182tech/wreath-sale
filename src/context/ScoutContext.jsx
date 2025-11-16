@@ -19,7 +19,7 @@ export const ScoutProvider = ({ children }) => {
 
   useEffect(() => {
     // Check data version and clear sessionStorage if mismatched
-    const CURRENT_DATA_VERSION = '2.7'
+    const CURRENT_DATA_VERSION = '2.8'
     const storedVersion = localStorage.getItem('scoutDataVersion')
 
     if (storedVersion !== CURRENT_DATA_VERSION) {

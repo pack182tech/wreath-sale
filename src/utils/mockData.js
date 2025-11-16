@@ -14,7 +14,7 @@ export const initializeMockData = () => {
     const scoutLookup = [
   {
     "id": "scout-1",
-    "name": "Brandt, Mason",
+    "name": "Mason Brandt",
     "slug": "brandt-mason",
     "rank": "Bear",
     "email": "shaylynroll@yahoo.com",
@@ -24,7 +24,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-2",
-    "name": "Cambria, Logan",
+    "name": "Logan Cambria",
     "slug": "cambria-logan",
     "rank": "Bear",
     "email": "smithcambria2016@gmail.com",
@@ -36,7 +36,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-3",
-    "name": "Canning, Declan",
+    "name": "Declan Canning",
     "slug": "canning-declan",
     "rank": "Tiger",
     "email": "",
@@ -48,7 +48,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-4",
-    "name": "Cofoni, SJ",
+    "name": "SJ Cofoni",
     "slug": "cofoni-sj",
     "rank": "Bear",
     "email": "",
@@ -61,7 +61,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-5",
-    "name": "Cofoni, Will",
+    "name": "Will Cofoni",
     "slug": "cofoni-will",
     "rank": "Tiger",
     "email": "",
@@ -74,7 +74,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-6",
-    "name": "Conte, Beau",
+    "name": "Beau Conte",
     "slug": "conte-beau",
     "rank": "Webelos",
     "email": "",
@@ -87,7 +87,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-7",
-    "name": "DaGraca, Ethan",
+    "name": "Ethan DaGraca",
     "slug": "dagraca-ethan",
     "rank": "Bear",
     "email": "",
@@ -99,7 +99,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-8",
-    "name": "DaGraca, Frank",
+    "name": "Frank DaGraca",
     "slug": "dagraca-frank",
     "rank": "Tiger",
     "email": "",
@@ -111,7 +111,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-9",
-    "name": "Doherty, River",
+    "name": "River Doherty",
     "slug": "doherty-river",
     "rank": "Wolf",
     "email": "dohertym1@gmail.com",
@@ -123,7 +123,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-10",
-    "name": "Facchina, Luca",
+    "name": "Luca Facchina",
     "slug": "facchina-luca",
     "rank": "Bear",
     "email": "",
@@ -135,7 +135,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-11",
-    "name": "Gamboa, John",
+    "name": "John Gamboa",
     "slug": "gamboa-john",
     "rank": "Bear",
     "email": "",
@@ -148,7 +148,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-12",
-    "name": "Giroud, Henry",
+    "name": "Henry Giroud",
     "slug": "giroud-henry",
     "rank": "Webelos",
     "email": "",
@@ -161,7 +161,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-13",
-    "name": "Gregorio, Russell",
+    "name": "Russell Gregorio",
     "slug": "gregorio-russell",
     "rank": "Wolf",
     "email": "",
@@ -173,7 +173,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-14",
-    "name": "Haines, Jackson",
+    "name": "Jackson Haines",
     "slug": "haines-jackson",
     "rank": "Lion",
     "email": "",
@@ -185,7 +185,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-15",
-    "name": "Herman, Arlo",
+    "name": "Arlo Herman",
     "slug": "herman-arlo",
     "rank": "Wolf",
     "email": "",
@@ -198,7 +198,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-16",
-    "name": "Hettenbach, Wesley",
+    "name": "Wesley Hettenbach",
     "slug": "hettenbach-wesley",
     "rank": "Tiger",
     "email": "",
@@ -210,7 +210,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-17",
-    "name": "Hosgood, Zachery",
+    "name": "Zachery Hosgood",
     "slug": "hosgood-zachery",
     "rank": "Wolf",
     "email": "",
@@ -222,7 +222,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-18",
-    "name": "Kalladeen, Sahil",
+    "name": "Sahil Kalladeen",
     "slug": "kalladeen-sahil",
     "rank": "Lion",
     "email": "",
@@ -234,7 +234,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-19",
-    "name": "Kilanowski, Gabriel",
+    "name": "Gabriel Kilanowski",
     "slug": "kilanowski-gabriel",
     "rank": "Tiger",
     "email": "",
@@ -246,7 +246,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-20",
-    "name": "Kilanowski, Raphael",
+    "name": "Raphael Kilanowski",
     "slug": "kilanowski-raphael",
     "rank": "Lion",
     "email": "",
@@ -258,7 +258,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-21",
-    "name": "Lutz-Polizzi, Parker",
+    "name": "Parker Lutz-Polizzi",
     "slug": "lutz-polizzi-parker",
     "rank": "Bear",
     "email": "biancapolizzi66@gmail.com",
@@ -270,7 +270,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-22",
-    "name": "Mamay, Jack",
+    "name": "Jack Mamay",
     "slug": "mamay-jack",
     "rank": "Webelos",
     "email": "adriana.kuzyszyn@gmail.com",
@@ -282,7 +282,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-23",
-    "name": "Marsh, Alex",
+    "name": "Alex Marsh",
     "slug": "marsh-alex",
     "rank": "Bear",
     "email": "Joncmarsh19@gmail.com",
@@ -294,7 +294,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-24",
-    "name": "Mcewan, Jacob",
+    "name": "Jacob Mcewan",
     "slug": "mcewan-jacob",
     "rank": "Lion",
     "email": "",
@@ -306,7 +306,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-25",
-    "name": "McGowan, Dylan",
+    "name": "Dylan McGowan",
     "slug": "mcgowan-dylan",
     "rank": "Bear",
     "email": "",
@@ -319,7 +319,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-26",
-    "name": "Mest, Declan",
+    "name": "Declan Mest",
     "slug": "mest-declan",
     "rank": "Bear",
     "email": "",
@@ -332,7 +332,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-27",
-    "name": "Molchan, Carter",
+    "name": "Carter Molchan",
     "slug": "molchan-carter",
     "rank": "Wolf",
     "email": "",
@@ -344,7 +344,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-28",
-    "name": "Morgan Allen, Clay",
+    "name": "Clay Morgan Allen",
     "slug": "morgan-allen-clay",
     "rank": "Lion",
     "email": "",
@@ -356,7 +356,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-29",
-    "name": "Mutz, Owen",
+    "name": "Owen Mutz",
     "slug": "mutz-owen",
     "rank": "Lion",
     "email": "",
@@ -368,7 +368,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-30",
-    "name": "Peterson, Levi",
+    "name": "Levi Peterson",
     "slug": "peterson-levi",
     "rank": "Tiger",
     "email": "",
@@ -380,7 +380,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-31",
-    "name": "Pidiath, Alexander",
+    "name": "Alexander Pidiath",
     "slug": "pidiath-alexander",
     "rank": "Tiger",
     "email": "",
@@ -392,7 +392,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-32",
-    "name": "Ranallo, Joshua",
+    "name": "Joshua Ranallo",
     "slug": "ranallo-joshua",
     "rank": "Bear",
     "email": "",
@@ -404,7 +404,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-33",
-    "name": "Rodriguez, Julian",
+    "name": "Julian Rodriguez",
     "slug": "rodriguez-julian",
     "rank": "Webelos",
     "email": "evelynszabela@yahoo.com",
@@ -416,7 +416,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-34",
-    "name": "Rodriguez, Sam",
+    "name": "Sam Rodriguez",
     "slug": "rodriguez-sam",
     "rank": "Webelos",
     "email": "",
@@ -429,7 +429,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-35",
-    "name": "Serafyn, Anthony",
+    "name": "Anthony Serafyn",
     "slug": "serafyn-anthony",
     "rank": "Bear",
     "email": "wserafyn@gmail.com",
@@ -442,7 +442,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-36",
-    "name": "Serafyn, Matthew",
+    "name": "Matthew Serafyn",
     "slug": "serafyn-matthew",
     "rank": "Wolf",
     "email": "wserafyn@gmail.com",
@@ -455,7 +455,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-37",
-    "name": "Shiminsky, Nathan",
+    "name": "Nathan Shiminsky",
     "slug": "shiminsky-nathan",
     "rank": "Tiger",
     "email": "",
@@ -467,7 +467,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-38",
-    "name": "Solberg, Alistair",
+    "name": "Alistair Solberg",
     "slug": "solberg-alistair",
     "rank": "Bear",
     "email": "",
@@ -479,7 +479,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-39",
-    "name": "Sullivan, Rory",
+    "name": "Rory Sullivan",
     "slug": "sullivan-rory",
     "rank": "Wolf",
     "email": "daniel.sullivan72@gmail.com",
@@ -491,7 +491,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-40",
-    "name": "Thompson, Garrett",
+    "name": "Garrett Thompson",
     "slug": "thompson-garrett",
     "rank": "Webelos",
     "email": "",
@@ -504,7 +504,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-41",
-    "name": "Thompson, Whitaker",
+    "name": "Whitaker Thompson",
     "slug": "thompson-whitaker",
     "rank": "Tiger",
     "email": "",
@@ -516,7 +516,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-42",
-    "name": "Uzarski, Maverick",
+    "name": "Maverick Uzarski",
     "slug": "uzarski-maverick",
     "rank": "Lion",
     "email": "",
@@ -529,7 +529,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-43",
-    "name": "Waidelich, Jacob",
+    "name": "Jacob Waidelich",
     "slug": "waidelich-jacob",
     "rank": "Wolf",
     "email": "",
@@ -541,7 +541,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-44",
-    "name": "Wallace, Ronan",
+    "name": "Ronan Wallace",
     "slug": "wallace-ronan",
     "rank": "Webelos",
     "email": "",
@@ -554,7 +554,7 @@ export const initializeMockData = () => {
   },
   {
     "id": "scout-45",
-    "name": "Wilson, Quinn",
+    "name": "Quinn Wilson",
     "slug": "wilson-quinn",
     "rank": "Bear",
     "email": "",
