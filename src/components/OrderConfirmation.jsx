@@ -188,7 +188,7 @@ function OrderConfirmation() {
             const scoutSlug = searchParams.get('scout')
             navigate(scoutSlug ? `/?scout=${scoutSlug}` : '/')
           }}>
-            Return to Home
+            Go Shopping
           </button>
           <button className="btn btn-secondary" onClick={() => setShowEmailModal(true)}>
             View Confirmation Email
