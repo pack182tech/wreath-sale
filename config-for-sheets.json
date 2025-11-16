@@ -1,0 +1,208 @@
+{
+  "campaign": {
+    "name": "Pack 182 Wreath Sale",
+    "startDate": "2025-11-08",
+    "endDate": "2025-12-05",
+    "pickupDate": "TBD",
+    "pickupTime": "10:00 AM - 2:00 PM",
+    "pickupLocation": "Readington Elementary School Parking Lot",
+    "status": "active"
+  },
+  "pack": {
+    "name": "Cub Scout Pack 182",
+    "location": "Readington, NJ",
+    "leaderName": "Walter Serafyn",
+    "leaderEmail": "threebridgespack182@gmail.com"
+  },
+  "products": [
+    {
+      "id": "red-bow",
+      "name": "Red Bow Wreath",
+      "category": "wreaths",
+      "description": "Evergreen wreath adorned with a festive red bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
+      "price": 35,
+      "image": "red-bow.png",
+      "active": true
+    },
+    {
+      "id": "plaid-bow",
+      "name": "Plaid Bow Wreath",
+      "category": "wreaths",
+      "description": "Evergreen wreath featuring a traditional plaid bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
+      "price": 35,
+      "image": "plaid-bow.png",
+      "active": true
+    },
+    {
+      "id": "gold-bow",
+      "name": "Gold Bow Wreath",
+      "category": "wreaths",
+      "description": "Evergreen wreath decorated with a golden bow and natural pinecones. Exact bow color may vary. 12\" is the inner ring diameter - actual outer diameter of wreath is larger.",
+      "price": 35,
+      "image": "gold-bow.png",
+      "active": true
+    },
+    {
+      "id": "poinsettia-6",
+      "name": "6\" Red Poinsettia",
+      "category": "poinsettias",
+      "description": "Beautiful 6-inch red poinsettia plant, perfect for holiday decorating.",
+      "price": 7,
+      "image": "6inch-red-poinsettias.png",
+      "active": true
+    },
+    {
+      "id": "poinsettia-10",
+      "name": "10\" Red Poinsettia",
+      "category": "poinsettias",
+      "description": "Stunning 10-inch red poinsettia plant, a festive centerpiece for your home.",
+      "price": 35,
+      "image": "10inch-red-poinsettias.png",
+      "active": true
+    },
+    {
+      "id": "alberta-spruce",
+      "name": "10\" Alberta Spruce",
+      "category": "plants",
+      "description": "Beautiful 10-inch Alberta Spruce plant, perfect for holiday decorating.",
+      "price": 45,
+      "image": "10inch-alberta-spruce.png",
+      "active": true
+    },
+    {
+      "id": "zygocactus",
+      "name": "6\" Zygocactus",
+      "category": "plants",
+      "description": "Hardy 6-inch Zygocactus (Christmas Cactus) plant.",
+      "price": 10,
+      "image": "6inch-zygocactus.png",
+      "active": true
+    }
+  ],
+  "productDisclaimer": "Images shown are stock photos and may not reflect the exact product you will receive. Actual products may vary in appearance.",
+  "donation": {
+    "enabled": true,
+    "recipient": "Three Bridges Reformed Church",
+    "popupTitle": "Support Our Community",
+    "popupText": "You can direct your donation to Three Bridges Reformed Church at checkout.",
+    "popupYesButton": "Yes, I want to donate",
+    "popupNoButton": "Maybe another time",
+    "confirmationTitle": "Supporting Our Community",
+    "confirmationText": "Your donation will be directed to Three Bridges Reformed Church.",
+    "confirmationYesButton": "That's great!",
+    "confirmationNoButton": "Maybe another time",
+    "description": "Support our local church's youth programs and community outreach",
+    "suggestedAmounts": [
+      10,
+      25,
+      50,
+      100
+    ]
+  },
+  "zelle": {
+    "recipientFirstName": "Boy Scouts",
+    "recipientLastName": "of America",
+    "recipientContact": "threebridgespack182@gmail.com",
+    "instructions": "Please include your order number in the Zelle memo field. Orders are confirmed upon payment receipt.",
+    "qrCodeImage": "zelle-qrcode.png",
+    "qrCodeText": "Scan to Pay"
+  },
+  "cart": {
+    "paymentInfoMessage": "Payment information will be sent to you via email after checkout."
+  },
+  "checkout": {
+    "placeOrderButton": "Place Order",
+    "continueShoppingButton": "← Take me back to shopping!"
+  },
+  "scoutAttributionBanner": {
+    "enabled": true,
+    "scoutText": "Supporting $scoutname Scouting adventure!",
+    "defaultText": "Supporting Pack 182's Scouting adventure!",
+    "notFoundText": "We'll attribute to the correct scout at pick up"
+  },
+  "emailTemplates": {
+    "orderConfirmation": {
+      "name": "Order Confirmation",
+      "description": "Sent to customers after they place an order",
+      "subject": "Order Confirmation - {{orderId}}",
+      "htmlBody": "<div style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px;\"><div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 25px; text-align: center; border-radius: 8px; margin-bottom: 30px;\"><h1 style=\"color: white; margin: 0; font-size: 28px;\">✅ Order Confirmed!</h1></div><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Dear <strong>{{customerName}}</strong>,</p><p style=\"font-size: 16px; line-height: 1.6; color: #333;\">Thank you for your order! Your order has been received and will be ready for pickup on <strong style=\"color: #1a472a;\">{{pickupDate}}</strong>.</p><div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #1a472a;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📦 Order Details</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Order Number:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{orderId}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Order Date:</strong> {{orderDate}}</p></div><div style=\"background: white; padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px; margin: 25px 0;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;\">🛍️ Items Ordered</h3><table style=\"width: 100%; border-collapse: collapse;\">{{orderItemsTable}}<tr style=\"border-top: 3px solid #1a472a;\"><td colspan=\"2\" style=\"padding: 15px 10px; font-weight: bold; font-size: 16px; color: #1a472a;\">Total:</td><td style=\"padding: 15px 10px; text-align: right; font-weight: bold; color: #c41e3a; font-size: 22px;\">${{total}}</td></tr></table></div>{{#if isDonation}}<div style=\"background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 10px; margin: 25px 0; border: 2px solid #4caf50; text-align: center;\"><p style=\"margin: 0 0 10px 0; font-size: 20px; color: #1a472a;\"><strong>🙏 Thank You for Your Generous Donation!</strong></p><p style=\"margin: 0; color: #2e7d32; font-size: 16px; line-height: 1.6;\">Your contribution to <strong>{{donationRecipient}}</strong> helps us show gratitude for their generosity to Pack 182. We deeply appreciate your support!</p></div>{{/if}}<div style=\"background: linear-gradient(135deg, #fffbeb 0%, #fff9e6 100%); padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #d4af37;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">💳 Payment Instructions</h3><p style=\"margin: 0 0 15px 0; color: #555; line-height: 1.6;\">Please send payment via <strong>Zelle</strong> to complete your order:</p><div style=\"background: white; padding: 15px; border-radius: 6px; margin: 15px 0;\"><p style=\"margin: 8px 0; color: #333;\"><strong>First name:</strong> {{zelleRecipientFirstName}}</p><p style=\"margin: 8px 0; color: #333;\"><strong>Last name:</strong> {{zelleRecipientLastName}}</p><p style=\"margin: 8px 0; color: #333;\"><strong>Email/Phone:</strong> <span style=\"color: #1a472a; font-weight: bold;\">{{zelleContact}}</span></p><p style=\"margin: 8px 0; color: #333;\"><strong>Memo:</strong> <span style=\"background: #ffeb3b; padding: 3px 8px; border-radius: 4px; font-weight: bold;\">{{orderId}}</span></p></div><div style=\"background: #fff3cd; border: 2px solid #ffc107; border-radius: 6px; padding: 12px; margin-top: 15px;\"><p style=\"margin: 0; color: #856404; font-weight: bold; font-size: 14px;\">⚠️ Important: Please include your order number (<strong>{{orderId}}</strong>) in the Zelle memo field.</p></div></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #2196f3;\"><p style=\"margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;\"><strong>💡 Alternative Payment Option:</strong> If you are unable to use Zelle, you may pay {{scoutFirstName}}'s parents directly.</p></div>{{/if}}<div style=\"background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #2196f3;\"><h3 style=\"color: #1a472a; margin: 0 0 15px 0; font-size: 18px;\">📍 Pickup Information</h3><p style=\"margin: 8px 0; color: #555;\"><strong>Date:</strong> <span style=\"color: #1a472a;\">{{pickupDate}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Time:</strong> <span style=\"color: #1a472a;\">{{pickupTime}}</span></p><p style=\"margin: 8px 0; color: #555;\"><strong>Location:</strong> <span style=\"color: #1a472a;\">{{pickupLocation}}</span></p></div>{{#if scoutName}}<div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 25px 0;\"><p style=\"margin: 0; font-size: 18px; color: white; font-weight: bold;\">🎗️ Thank you for supporting {{scoutName}}!</p></div>{{/if}}<div style=\"border-top: 3px solid #e0e0e0; margin-top: 30px; padding-top: 20px; text-align: center;\"><p style=\"margin: 10px 0; color: #666; font-size: 14px;\">If you have any questions, please contact us at <a href=\"mailto:{{leaderEmail}}\" style=\"color: #1a472a; text-decoration: none; font-weight: bold;\">{{leaderEmail}}</a></p><p style=\"margin: 10px 0; color: #1a472a; font-size: 16px; font-weight: bold;\">Thank you for supporting {{packName}}!</p></div></div>"
+    },
+    "scoutParentWelcome": {
+      "name": "Scout Parent Welcome",
+      "description": "Initial email sent to scout parents with their QR code and selling information",
+      "subject": "Welcome to the {{campaignName}} - {{scoutName}}",
+      "htmlBody": "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\"><div style=\"background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 30px; text-align: center; border-radius: 8px 8px 0 0;\"><h1 style=\"color: white; margin: 0;\">Welcome to the {{campaignName}}!</h1></div><div style=\"padding: 30px; background: white;\"><p style=\"font-size: 18px; color: #1a472a;\">Hello {{parentName}},</p><p>We're excited to have {{scoutFirstName}} participate in our {{campaignName}}! This fundraiser helps support our pack's activities, camping trips, and community service projects throughout the year.</p><h2 style=\"color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;\">{{scoutFirstName}}'s Unique Sales Tools</h2><div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;\"><h3 style=\"margin-top: 0; color: #1a472a;\">Personal QR Code</h3><p>Share this QR code with friends, family, and neighbors. When they scan it, they'll be taken directly to our sale website with {{scoutFirstName}}'s information automatically included!</p><div style=\"text-align: center; margin: 20px 0; padding: 20px; background: white; border-radius: 8px;\"><img src=\"{{scoutQRCodeUrl}}\" alt=\"{{scoutFirstName}}'s QR Code\" style=\"max-width: 250px; border: 3px solid #1a472a; border-radius: 8px; padding: 10px;\" /><p style=\"margin-top: 15px; font-size: 14px; color: #666;\">{{scoutFirstName}}'s Personal QR Code</p></div></div><div style=\"background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;\"><h3 style=\"margin-top: 0; color: #1a472a;\">Personal Sales Link</h3><p style=\"margin-bottom: 10px;\">You can also share this direct link:</p><div style=\"background: white; padding: 15px; border-radius: 6px; word-break: break-all; font-family: monospace; font-size: 14px; color: #1565c0;\">{{scoutLink}}</div><p style=\"margin-top: 10px; font-size: 14px; color: #666;\">Copy and paste this link into emails, text messages, or social media!</p></div><h2 style=\"color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-top: 2rem;\">Sale Information</h2><div style=\"background: #fffbeb; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #d4af37;\"><p style=\"margin: 0.5rem 0;\"><strong>Sale Period:</strong> {{saleStartDate}} - {{saleEndDate}}</p><p style=\"margin: 0.5rem 0;\"><strong>Pickup Date:</strong> {{pickupDate}}</p><p style=\"margin: 0.5rem 0;\"><strong>Pickup Time:</strong> {{pickupTime}}</p><p style=\"margin: 0.5rem 0;\"><strong>Pickup Location:</strong> {{pickupLocation}}</p></div><h2 style=\"color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-top: 2rem;\">Tips for Success</h2><ul style=\"line-height: 1.8; color: #333;\"><li>Share {{scoutFirstName}}'s QR code and link with your contacts via email, text, or social media</li><li>Print the QR code and take it with you to work, church, or community events</li><li>Remind people that orders placed online will automatically be credited to {{scoutFirstName}}</li><li>All orders can be paid via Zelle for easy, secure transactions</li><li>Check {{scoutFirstName}}'s progress anytime by logging into the Scout Portal</li><li>Want to see how everyone is doing? Check out our <a href=\"https://pack182tech.github.io/wreath-site/leaderboard\" style=\"color: #1a472a; font-weight: bold; text-decoration: underline;\">Scout Leaderboard</a> - it's just for fun!</li></ul><div style=\"background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 30px 0; text-align: center; border: 2px solid #1a472a;\"><p style=\"margin: 0; font-size: 18px; color: #1a472a;\"><strong>🎯 Let's make this sale a success for {{scoutFirstName}}!</strong></p></div><p style=\"margin-top: 2rem;\">If you have any questions, please don't hesitate to contact us at {{leaderEmail}}.</p><p style=\"margin-top: 1rem;\">Thank you for supporting {{packName}}!</p><div style=\"margin-top: 30px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #666; font-size: 14px;\"><p>Scout Name: {{scoutName}}</p><p>Parent: {{parentName}}</p></div></div></div>"
+    }
+  },
+  "scoutLaw": {
+    "enabled": true,
+    "text": "A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent",
+    "examples": [
+      "A Scout is Trustworthy ... by always telling the truth, even when it's difficult",
+      "A Scout is Trustworthy ... by keeping promises to friends and family",
+      "A Scout is Trustworthy ... by returning lost items to their rightful owner",
+      "A Scout is Loyal ... by standing by their friends in good times and bad",
+      "A Scout is Loyal ... by supporting their pack and fellow scouts",
+      "A Scout is Loyal ... by showing respect for their country and community",
+      "A Scout is Helpful ... by volunteering in their community",
+      "A Scout is Helpful ... by offering to assist someone who needs it",
+      "A Scout is Helpful ... by doing chores without being asked",
+      "A Scout is Friendly ... by welcoming the new scout who is sitting alone",
+      "A Scout is Friendly ... by smiling and greeting others warmly",
+      "A Scout is Friendly ... by including everyone in games and activities",
+      "A Scout is Courteous ... by saying please and thank you",
+      "A Scout is Courteous ... by holding the door open for others",
+      "A Scout is Courteous ... by listening when someone is speaking",
+      "A Scout is Kind ... by helping a younger sibling with homework",
+      "A Scout is Kind ... by comforting a friend who is upset",
+      "A Scout is Kind ... by being gentle with animals",
+      "A Scout is Obedient ... by following their parents' rules",
+      "A Scout is Obedient ... by listening to their scout leader's instructions",
+      "A Scout is Obedient ... by respecting authority and guidelines",
+      "A Scout is Cheerful ... by staying positive during challenging times",
+      "A Scout is Cheerful ... by bringing joy to others with a smile",
+      "A Scout is Cheerful ... by finding the good in every situation",
+      "A Scout is Thrifty ... by saving money for important goals",
+      "A Scout is Thrifty ... by not wasting food or resources",
+      "A Scout is Thrifty ... by reusing and recycling whenever possible",
+      "A Scout is Brave ... by standing up for what is right",
+      "A Scout is Brave ... by trying new things even when scared",
+      "A Scout is Brave ... by facing challenges with courage",
+      "A Scout is Clean ... by tidying up their room every weekend",
+      "A Scout is Clean ... by keeping their scout uniform neat and tidy",
+      "A Scout is Clean ... by washing their hands before meals",
+      "A Scout is Reverent ... by respecting others' beliefs and faiths",
+      "A Scout is Reverent ... by showing gratitude for what they have",
+      "A Scout is Reverent ... by taking time to reflect and be thankful"
+    ]
+  },
+  "content": {
+    "heroTitle": "Support Pack 182 Scouts",
+    "heroSubtitle": "Beautiful wreaths, poinsettias, and holiday plants",
+    "aboutTitle": "About Our Holiday Sale",
+    "aboutText": "Cub Scout Pack 182 of Readington, NJ is raising funds through our annual holiday sale. We offer beautiful wreaths, festive poinsettias, and other holiday plants. Each purchase supports our scouts' activities and helps develop future leaders in our community.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "question": "How do I pay for my order?",
+        "answer": "We accept payment via Zelle to threebridgespack182@gmail.com (Boy Scouts of America). You can also pay with cash or check for in-person orders entered by scouts."
+      },
+      {
+        "question": "When will I receive my wreath?",
+        "answer": "All wreaths are made to order. Pickup is scheduled for December 15, 2025 (tentative). You'll receive an email with final pickup details and location confirmation."
+      },
+      {
+        "question": "Can I support a specific scout?",
+        "answer": "Yes! If you received a link from a scout, your purchase will automatically be attributed to them. You can also ask any scout for their unique link or QR code."
+      },
+      {
+        "question": "What if I just want to make a donation?",
+        "answer": "We appreciate donations! You can add a donation to Three Bridges Reformed Church during checkout. All donations are welcome and help support our local community."
+      }
+    ]
+  },
+  "images": {
+    "logo": "pack182logo.png",
+    "background": "background-optimized.jpg"
+  }
+}
