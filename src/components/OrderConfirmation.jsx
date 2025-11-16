@@ -76,8 +76,16 @@ function OrderConfirmation() {
     .replace(/\{\{packName\}\}/g, config.pack.name)
     .replace(/\{\{scoutName\}\}/g, scoutInfo.scoutName || '')
     .replace(/\{\{scoutFirstName\}\}/g, scoutInfo.scoutFirstName || '')
+    .replace(/\{\{donationRecipient\}\}/g, config.donation?.recipient || '')
 
-  // Handle conditional blocks
+  // Handle conditional blocks for isDonation
+  if (order.isDonation) {
+    body = body.replace(/\{\{#if isDonation\}\}/g, '').replace(/\{\{\/if\}\}/g, '')
+  } else {
+    body = body.replace(/\{\{#if isDonation\}\}[\s\S]*?\{\{\/if\}\}/g, '')
+  }
+
+  // Handle conditional blocks for scoutName
   if (scoutInfo.scoutName) {
     body = body.replace(/\{\{#if scoutName\}\}/g, '').replace(/\{\{\/if\}\}/g, '')
   } else {
