@@ -154,8 +154,8 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2.5rem;
+  gap: 0rem;
+  padding: .5rem 2.5rem;
 }
 
 .shop-btn span {
@@ -163,9 +163,8 @@
 }
 
 .down-arrow {
-  font-size: 1.5rem;
-  animation: arrowBounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  font-size: 1.0rem;
+  animation: arrowBounce 2.5s ease-in-out infinite;
 }
 
 @keyframes arrowBounce {

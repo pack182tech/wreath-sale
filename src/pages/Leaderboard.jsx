@@ -95,6 +95,18 @@ function Leaderboard() {
     return null
   }
 
+  const getRankInsignia = (rank) => {
+    // Returns CSS class name for rank-specific styling
+    const rankMap = {
+      'Lion': 'rank-lion',
+      'Tiger': 'rank-tiger',
+      'Wolf': 'rank-wolf',
+      'Bear': 'rank-bear',
+      'Webelos': 'rank-webelos'
+    }
+    return rankMap[rank] || 'rank-default'
+  }
+
   return (
     <div className="leaderboard-container">
       {/* Animated Background Elements */}
@@ -232,9 +244,12 @@ function Leaderboard() {
                     <span className="stat-value">
                       {viewMode === 'revenue' ? `$${scout.revenue.toFixed(2)}` : scout.units}
                     </span>
-                    <span className="stat-label">
-                      {viewMode === 'revenue' ? scout.rank : 'Units'}
-                    </span>
+                    <div className="rank-badge-container">
+                      <div className={`rank-insignia ${getRankInsignia(scout.rank)}`}></div>
+                      <span className="stat-label">
+                        {viewMode === 'revenue' ? scout.rank : 'Units'}
+                      </span>
+                    </div>
                   </div>
                   {getMilestoneBadge(scout.units) && (
                     <div className="milestone-badge">

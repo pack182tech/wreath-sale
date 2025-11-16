@@ -897,10 +897,111 @@
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: #c0c0c0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  font-weight: 500;
+  font-size: 1.1rem;
+  color: #e8f4ff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+}
+
+/* Rank Badge Container */
+.rank-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* Rank Insignia Diamond Badge */
+.rank-insignia {
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+              0 0 15px var(--rank-glow);
+  position: relative;
+  animation: badgeGlow 3s infinite ease-in-out;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.rank-insignia::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 1.4rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Lion Rank - Gold/Yellow */
+.rank-lion {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  --rank-glow: rgba(255, 215, 0, 0.6);
+}
+
+.rank-lion::before {
+  content: '🦁';
+}
+
+/* Tiger Rank - Orange */
+.rank-tiger {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF6347 100%);
+  --rank-glow: rgba(255, 140, 0, 0.6);
+}
+
+.rank-tiger::before {
+  content: '🐯';
+}
+
+/* Wolf Rank - Red */
+.rank-wolf {
+  background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+  --rank-glow: rgba(220, 20, 60, 0.6);
+}
+
+.rank-wolf::before {
+  content: '🐺';
+}
+
+/* Bear Rank - Blue */
+.rank-bear {
+  background: linear-gradient(135deg, #4169E1 0%, #1E3A8A 100%);
+  --rank-glow: rgba(65, 105, 225, 0.6);
+}
+
+.rank-bear::before {
+  content: '🐻';
+}
+
+/* Webelos Rank - Green/Gold */
+.rank-webelos {
+  background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%);
+  --rank-glow: rgba(46, 139, 87, 0.6);
+}
+
+.rank-webelos::before {
+  content: '⚜️';
+}
+
+/* Default Rank */
+.rank-default {
+  background: linear-gradient(135deg, #808080 0%, #505050 100%);
+  --rank-glow: rgba(128, 128, 128, 0.4);
+}
+
+@keyframes badgeGlow {
+  0%, 100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 0 15px var(--rank-glow);
+  }
+  50% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 0 25px var(--rank-glow);
+  }
 }
 
 .milestone-badge {
