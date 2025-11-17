@@ -8,7 +8,7 @@ import {
   updateOrderStatus
 } from '../utils/dataService'
 // PRODUCTION: Scout/order editing disabled - use Google Sheets directly
-import { getConfig, saveConfig } from '../utils/configLoader'
+import { getConfigSync, saveConfig } from '../utils/configLoader'
 import EmailTemplateEditor from '../components/EmailTemplateEditor'
 import './AdminDashboard.css'
 
@@ -37,7 +37,7 @@ function AdminDashboard() {
     parentEmails: [], // Changed to array
     active: true
   })
-  const [siteConfig, setSiteConfig] = useState(getConfig())
+  const [siteConfig, setSiteConfig] = useState(getConfigSync())
 
   // Table controls state
   const [sortBy, setSortBy] = useState('name')

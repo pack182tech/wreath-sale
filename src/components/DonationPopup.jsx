@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import './DonationPopup.css'
 
 function DonationPopup() {
@@ -9,7 +9,7 @@ function DonationPopup() {
     sessionStorage.getItem('wantsToDonate') === 'true'
   )
   const location = useLocation()
-  const config = getConfig()
+  const config = getConfigSync()
 
   // Listen for donation state changes from checkout
   useEffect(() => {

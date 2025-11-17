@@ -1,13 +1,13 @@
 import { useCart } from '../context/CartContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import './Cart.css'
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const config = getConfig()
+  const config = getConfigSync()
 
   const handleCheckout = () => {
     setIsCartOpen(false)

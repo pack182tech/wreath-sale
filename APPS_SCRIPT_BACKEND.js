@@ -23,7 +23,7 @@
  * - Orders (columns: orderId, customerName, customerEmail, customerPhone, scoutId, scoutName, supportingScout, items, total, isDonation, orderDate, paymentStatus)
  * - Config (columns: key, value) - Optional, for storing configuration
  *
- * =====================================================================
+ * =======================================================``==============
  */
 
 // ============= CONFIGURATION =============

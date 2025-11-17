@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import './FAQ.css'
 
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
-  const config = getConfig()
+  const config = getConfigSync()
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index)

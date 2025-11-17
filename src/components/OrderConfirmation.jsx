@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import './OrderConfirmation.css'
 
 function OrderConfirmation() {
@@ -9,7 +9,7 @@ function OrderConfirmation() {
   const [searchParams] = useSearchParams()
   // PRODUCTION: Emails are sent server-side, no modal display needed
   const order = location.state?.order
-  const config = getConfig()
+  const config = getConfigSync()
 
   useEffect(() => {
     if (!order) {
@@ -27,6 +27,9 @@ function OrderConfirmation() {
 
   // PRODUCTION: Email template rendering removed - emails are sent server-side
   // All email logic is now in APPS_SCRIPT_BACKEND.js
+
+  // Get scout name from session storage if available
+  const scoutName = sessionStorage.getItem('scoutName')
 
   return (
     <div className="confirmation-container">
@@ -88,9 +91,9 @@ function OrderConfirmation() {
             <p><strong>Location:</strong> {config.campaign.pickupLocation}</p>
           </div>
 
-          {scoutInfo.scoutName && (
+          {scoutName && (
             <div className="scout-thank-you">
-              🎗️ Thank you for supporting {scoutInfo.scoutName}!
+              🎗️ Thank you for supporting {scoutName}!
             </div>
           )}
         </div>

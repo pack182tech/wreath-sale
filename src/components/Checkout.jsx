@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import { saveOrder } from '../utils/dataService'
 import { sendOrderConfirmationEmail } from '../services/appsScriptService'
 import './Checkout.css'
@@ -10,7 +10,7 @@ function Checkout() {
   const { cart, getCartTotal, clearCart } = useCart()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const config = getConfig()
+  const config = getConfigSync()
   const basePath = import.meta.env.BASE_URL
 
   // Check if user wants to donate from popup response
@@ -25,6 +25,7 @@ function Checkout() {
   })
   const [isDonating, setIsDonating] = useState(wantsToDonate)
   const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Listen for donation state changes from banner popup
   useEffect(() => {
@@ -72,6 +73,8 @@ function Checkout() {
       return
     }
 
+    setIsSubmitting(true)
+
     // Get scout attribution from sessionStorage
     const scoutAttribution = sessionStorage.getItem('scoutAttribution')
 
@@ -105,6 +108,7 @@ function Checkout() {
     } catch (error) {
       console.error('[Checkout] Failed to save order to backend:', error)
       alert('There was an error placing your order. Please try again or contact us at ' + config.pack.leaderEmail)
+      setIsSubmitting(false)
       return // Don't proceed if order save failed
     }
 
@@ -239,8 +243,15 @@ function Checkout() {
                 </div>
               )}
 
-              <button type="submit" className="btn btn-primary btn-submit-order">
-                {config.content.checkout?.placeOrderButton || 'Place Order'}
+              <button type="submit" className="btn btn-primary btn-submit-order" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner"></span>
+                    Processing Order...
+                  </>
+                ) : (
+                  config.content.checkout?.placeOrderButton || 'Place Order'
+                )}
               </button>
 
               <button

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useScout } from '../context/ScoutContext'
-import { getConfig } from '../utils/configLoader'
+import { getConfigSync } from '../utils/configLoader'
 import './ScoutAttributionBanner.css'
 
 function ScoutAttributionBanner() {
   const { scoutAttribution } = useScout()
   const [scoutName, setScoutName] = useState(null)
   const location = useLocation()
-  const config = getConfig()
+  const config = getConfigSync()
 
   useEffect(() => {
     if (scoutAttribution?.name) {
