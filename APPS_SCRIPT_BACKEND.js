@@ -439,6 +439,10 @@ function saveEmailTemplate(templateKey, templateData) {
 
 // ============= EMAIL FUNCTIONS =============
 function sendOrderConfirmationEmail(orderData) {
+  Logger.log('[Email] Starting sendOrderConfirmationEmail');
+  Logger.log('[Email] Order ID: ' + orderData.orderId);
+  Logger.log('[Email] Recipient: ' + orderData.customer.email);
+
   const recipient = orderData.customer.email;
   const subject = `Order Confirmation - ${orderData.orderId}`;
 
@@ -553,13 +557,19 @@ function sendOrderConfirmationEmail(orderData) {
   `;
 
   try {
+    Logger.log('[Email] About to call GmailApp.sendEmail');
+    Logger.log('[Email] From: ' + EMAIL_FROM);
+    Logger.log('[Email] To: ' + recipient);
+    Logger.log('[Email] Subject: ' + subject);
+
     // Send email to customer
     GmailApp.sendEmail(recipient, subject, '', {
       from: EMAIL_FROM,
       htmlBody: htmlBody,
       name: 'Pack 182 Wreath Sale'
     });
-    Logger.log(`Sent order confirmation email to ${recipient} for order ${orderData.orderId}`);
+
+    Logger.log('[Email] ✅ SUCCESS: Sent order confirmation email to ' + recipient + ' for order ' + orderData.orderId);
 
     // If order is attributed to a scout, also send to scout's parents
     if (scoutName && scoutName !== 'SCOUT_NOT_FOUND') {
@@ -587,9 +597,11 @@ function sendOrderConfirmationEmail(orderData) {
       }
     }
 
+    Logger.log('[Email] Returning success response');
     return { success: true, recipient };
   } catch (error) {
-    Logger.log(`Failed to send email: ${error.toString()}`);
+    Logger.log('[Email] ❌ ERROR: ' + error.toString());
+    Logger.log('[Email] Error stack: ' + error.stack);
     throw new Error(`Failed to send email: ${error.toString()}`);
   }
 }
