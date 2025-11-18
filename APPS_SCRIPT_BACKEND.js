@@ -543,7 +543,7 @@ function sendOrderConfirmationEmail(orderData) {
       ${scoutSection}
 
       <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #2196f3;">
-        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">📍 Pickup Information</h3>
+        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">Pickup Information</h3>
         <p style="margin: 8px 0; color: #555;"><strong>Date:</strong> <span style="color: #1a472a;">${pickupDate}</span></p>
         <p style="margin: 8px 0; color: #555;"><strong>Time:</strong> <span style="color: #1a472a;">${pickupTime}</span></p>
         <p style="margin: 8px 0; color: #555;"><strong>Location:</strong> <span style="color: #1a472a;">${pickupLocation}</span></p>
@@ -569,7 +569,7 @@ function sendOrderConfirmationEmail(orderData) {
       name: 'Pack 182 Wreath Sale'
     });
 
-    Logger.log('[Email] ✅ SUCCESS: Sent order confirmation email to ' + recipient + ' for order ' + orderData.orderId);
+    Logger.log('[Email] SUCCESS: Sent order confirmation email to ' + recipient + ' for order ' + orderData.orderId);
 
     // If order is attributed to a scout, also send to scout's parents
     if (scoutName && scoutName !== 'SCOUT_NOT_FOUND') {
@@ -579,7 +579,7 @@ function sendOrderConfirmationEmail(orderData) {
       if (scout && scout.parentEmails && scout.parentEmails.length > 0) {
         const parentEmails = Array.isArray(scout.parentEmails) ? scout.parentEmails : [scout.parentEmails];
         const parentSubject = `Order for ${scoutName} - ${orderData.orderId}`;
-        const parentNote = `<div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196f3;"><p style="margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;"><strong>📧 Parent Notification:</strong> This is a copy of the order confirmation sent to ${orderData.customer.name}. An order has been placed and attributed to ${scoutName}!</p></div>`;
+        const parentNote = `<div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196f3;"><p style="margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;"><strong>Parent Notification:</strong> This is a copy of the order confirmation sent to ${orderData.customer.name}. An order has been placed and attributed to ${scoutName}!</p></div>`;
 
         parentEmails.forEach(parentEmail => {
           try {
@@ -600,7 +600,7 @@ function sendOrderConfirmationEmail(orderData) {
     Logger.log('[Email] Returning success response');
     return { success: true, recipient };
   } catch (error) {
-    Logger.log('[Email] ❌ ERROR: ' + error.toString());
+    Logger.log('[Email] ERROR: ' + error.toString());
     Logger.log('[Email] Error stack: ' + error.stack);
     throw new Error(`Failed to send email: ${error.toString()}`);
   }
@@ -626,7 +626,7 @@ function testEmailSimple() {
       orderId: 'MANUAL-TEST-' + Date.now(),
       customer: {
         name: 'Manual Test',
-        email: 'YOUR_EMAIL_HERE@gmail.com', // CHANGE THIS TO YOUR EMAIL
+        email: 'jimmcgowan@live.com', // CHANGE THIS TO YOUR EMAIL
         phone: '555-1234'
       },
       items: [
