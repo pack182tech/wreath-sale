@@ -1154,7 +1154,7 @@ function AdminDashboard() {
                   onChange={(e) => handleConfigChange('content', 'faqTitle', e.target.value)}
                 />
               </div>
-              {siteConfig.content?.faq.map((item, index) => (
+              {siteConfig.content?.faq?.map((item, index) => (
                 <div key={index} className="faq-item">
                   <h4>FAQ {index + 1}</h4>
                   <div className="form-group">
@@ -1163,7 +1163,7 @@ function AdminDashboard() {
                       type="text"
                       value={item.question}
                       onChange={(e) => {
-                        const newFaq = [...siteConfig.content?.faq]
+                        const newFaq = [...(siteConfig.content?.faq || [])]
                         newFaq[index] = { ...newFaq[index], question: e.target.value }
                         handleConfigChange('content', 'faq', newFaq)
                       }}
@@ -1175,7 +1175,7 @@ function AdminDashboard() {
                       rows="3"
                       value={item.answer}
                       onChange={(e) => {
-                        const newFaq = [...siteConfig.content?.faq]
+                        const newFaq = [...(siteConfig.content?.faq || [])]
                         newFaq[index] = { ...newFaq[index], answer: e.target.value }
                         handleConfigChange('content', 'faq', newFaq)
                       }}
@@ -1405,7 +1405,7 @@ function AdminDashboard() {
                 <label>
                   <input
                     type="checkbox"
-                    checked={siteConfig.scoutLaw.enabled}
+                    checked={siteConfig.scoutLaw?.enabled}
                     onChange={(e) => handleConfigChange('scoutLaw', 'enabled', e.target.checked)}
                   />
                   Display Scout Law
@@ -1415,7 +1415,7 @@ function AdminDashboard() {
                 <label>Scout Law Text</label>
                 <textarea
                   rows="2"
-                  value={siteConfig.scoutLaw.text}
+                  value={siteConfig.scoutLaw?.text}
                   onChange={(e) => handleConfigChange('scoutLaw', 'text', e.target.value)}
                 />
               </div>
@@ -1424,7 +1424,7 @@ function AdminDashboard() {
             <div className="section-header">
               <h2>Products</h2>
             </div>
-            {siteConfig.products.map((product, index) => (
+            {siteConfig.products?.map((product, index) => (
               <div key={product.id} className="config-section product-config">
                 <h3>{product.name} <span className="product-id">({product.id})</span></h3>
                 <div className="form-row">
