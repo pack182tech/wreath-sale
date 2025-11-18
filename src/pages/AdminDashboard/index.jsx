@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getScouts, getOrders, updateOrderStatus, deleteOrder, saveScout, deleteScout, saveConfig, saveEmailTemplate } from '../../utils/dataService';
-import { getConfigSync } from '../../utils/configLoader';
+import { getConfig, getConfigSync, clearConfigCache } from '../../utils/configLoader';
 import LoadingSpinner from '../../components/admin/LoadingSpinner';
 import { ToastContainer } from '../../components/admin/Toast';
 import { useToast } from '../../hooks/useToast';
@@ -115,14 +115,18 @@ const AdminDashboard = () => {
 
   const handleSaveTemplate = async (templateKey, templateData) => {
     await saveEmailTemplate(templateKey, templateData);
-    // Reload config to reflect changes
-    setConfig(getConfigSync());
+    // Clear cache and reload config to reflect changes
+    clearConfigCache();
+    const freshConfig = await getConfig();
+    setConfig(freshConfig);
   };
 
   const handleSaveConfig = async (newConfig) => {
     await saveConfig(newConfig);
-    // Reload config to reflect changes
-    setConfig(getConfigSync());
+    // Clear cache and reload config to reflect changes
+    clearConfigCache();
+    const freshConfig = await getConfig();
+    setConfig(freshConfig);
   };
 
   // Strict null checks - prevent rendering until ALL data is ready

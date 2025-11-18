@@ -86,6 +86,24 @@ function doPost(e) {
       case 'updateOrderStatus':
         return jsonResponse(updateOrderStatus(data.orderId, data.status));
 
+      case 'deleteOrder':
+        return jsonResponse(deleteOrder(data.orderId));
+
+      case 'createScout':
+        return jsonResponse(createScout(data));
+
+      case 'updateScout':
+        return jsonResponse(updateScout(data));
+
+      case 'deleteScout':
+        return jsonResponse(deleteScout(data.scoutId));
+
+      case 'saveConfig':
+        return jsonResponse(saveConfig(data));
+
+      case 'saveEmailTemplate':
+        return jsonResponse(saveEmailTemplate(data.templateKey, data.templateData));
+
       default:
         return jsonResponse({ error: 'Unknown action' }, 400);
     }
@@ -245,6 +263,116 @@ function updateOrderStatus(orderId, newStatus) {
   throw new Error(`Order ${orderId} not found`);
 }
 
+function deleteOrder(orderId) {
+  const sheet = getSheet('Orders');
+  if (!sheet) {
+    throw new Error('Orders sheet not found');
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const orderIdColumnIndex = headers.indexOf('orderId');
+
+  if (orderIdColumnIndex === -1) {
+    throw new Error('orderId column not found in Orders sheet');
+  }
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][orderIdColumnIndex] === orderId) {
+      sheet.deleteRow(i + 1);
+      Logger.log(`Deleted order ${orderId}`);
+      return { success: true, orderId };
+    }
+  }
+
+  throw new Error(`Order ${orderId} not found`);
+}
+
+// ============= SCOUT CRUD FUNCTIONS =============
+function createScout(scoutData) {
+  const sheet = getSheet('Scouts');
+  if (!sheet) {
+    throw new Error('Scouts sheet not found');
+  }
+
+  // Generate ID if not provided
+  const id = scoutData.id || 'scout-' + new Date().getTime();
+
+  const row = [
+    id,
+    scoutData.name,
+    scoutData.slug,
+    scoutData.rank,
+    scoutData.email || '',
+    scoutData.parentName || '',
+    JSON.stringify(scoutData.parentEmails || []),
+    scoutData.active !== undefined ? scoutData.active : true
+  ];
+
+  sheet.appendRow(row);
+  Logger.log(`Created scout ${id}`);
+
+  return { success: true, scoutId: id };
+}
+
+function updateScout(scoutData) {
+  const sheet = getSheet('Scouts');
+  if (!sheet) {
+    throw new Error('Scouts sheet not found');
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const idColumnIndex = headers.indexOf('id');
+
+  if (idColumnIndex === -1) {
+    throw new Error('id column not found in Scouts sheet');
+  }
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][idColumnIndex] === scoutData.id) {
+      // Update each column based on headers
+      headers.forEach((header, index) => {
+        if (header === 'parentEmails') {
+          sheet.getRange(i + 1, index + 1).setValue(JSON.stringify(scoutData.parentEmails || []));
+        } else if (scoutData[header] !== undefined) {
+          sheet.getRange(i + 1, index + 1).setValue(scoutData[header]);
+        }
+      });
+
+      Logger.log(`Updated scout ${scoutData.id}`);
+      return { success: true, scoutId: scoutData.id };
+    }
+  }
+
+  throw new Error(`Scout ${scoutData.id} not found`);
+}
+
+function deleteScout(scoutId) {
+  const sheet = getSheet('Scouts');
+  if (!sheet) {
+    throw new Error('Scouts sheet not found');
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+  const idColumnIndex = headers.indexOf('id');
+
+  if (idColumnIndex === -1) {
+    throw new Error('id column not found in Scouts sheet');
+  }
+
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][idColumnIndex] === scoutId) {
+      sheet.deleteRow(i + 1);
+      Logger.log(`Deleted scout ${scoutId}`);
+      return { success: true, scoutId };
+    }
+  }
+
+  throw new Error(`Scout ${scoutId} not found`);
+}
+
 // ============= CONFIG FUNCTIONS =============
 function getConfig() {
   const sheet = getSheet('Config');
@@ -271,6 +399,42 @@ function getConfig() {
     Logger.log('Error parsing config JSON: ' + error.toString());
     return null;
   }
+}
+
+function saveConfig(configData) {
+  const sheet = getSheet('Config');
+  if (!sheet) {
+    throw new Error('Config sheet not found');
+  }
+
+  // Save config as JSON in cell B2
+  // Row 1: Headers (Key | Value)
+  // Row 2: "siteConfig" | {entire JSON config object}
+  sheet.getRange('B2').setValue(JSON.stringify(configData));
+  Logger.log('Successfully saved config to Sheets');
+
+  return { success: true };
+}
+
+function saveEmailTemplate(templateKey, templateData) {
+  // Get current config
+  const config = getConfig();
+  if (!config) {
+    throw new Error('Config not found');
+  }
+
+  // Update email template in config
+  if (!config.emailTemplates) {
+    config.emailTemplates = {};
+  }
+
+  config.emailTemplates[templateKey] = {
+    ...config.emailTemplates[templateKey],
+    ...templateData
+  };
+
+  // Save updated config
+  return saveConfig(config);
 }
 
 // ============= EMAIL FUNCTIONS =============

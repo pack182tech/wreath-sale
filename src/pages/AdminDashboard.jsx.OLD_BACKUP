@@ -435,9 +435,9 @@ function AdminDashboard() {
                       return (
                         <tr key={order.orderId}>
                           <td className="order-id-cell">{order.orderId}</td>
-                          <td>{order.customer.name}</td>
+                          <td>{order?.customer?.name}</td>
                           <td>{scout?.name || 'N/A'}</td>
-                          <td>${order.total.toFixed(2)}</td>
+                          <td>${order?.total.toFixed(2)}</td>
                           <td>
                             <span className={`status-badge ${order.status || 'pending'}`}>
                               {order.status || 'pending'}
@@ -478,12 +478,12 @@ function AdminDashboard() {
                       <tr key={order.orderId}>
                         <td className="order-id-cell">{order.orderId}</td>
                         <td>
-                          <div>{order.customer.name}</div>
-                          <div className="sub-info">{order.customer.email}</div>
+                          <div>{order?.customer?.name}</div>
+                          <div className="sub-info">{order?.customer?.email}</div>
                         </td>
                         <td>{scout?.name || 'No Attribution'}</td>
-                        <td>{order.items.length} item(s)</td>
-                        <td>${order.total.toFixed(2)}</td>
+                        <td>{order?.items?.length} item(s)</td>
+                        <td>${order?.total.toFixed(2)}</td>
                         <td>
                           <span className={`type-badge ${order.type || 'online'}`}>
                             {order.type || 'online'}
@@ -542,9 +542,9 @@ function AdminDashboard() {
                     <div className="detail-row">
                       <strong>Customer:</strong>
                       <div>
-                        <div>{selectedOrder.customer.name}</div>
-                        <div>{selectedOrder.customer.email}</div>
-                        <div>{selectedOrder.customer.phone}</div>
+                        <div>{selectedOrder?.customer?.name}</div>
+                        <div>{selectedOrder?.customer?.email}</div>
+                        <div>{selectedOrder?.customer?.phone}</div>
                       </div>
                     </div>
                     <div className="detail-row">

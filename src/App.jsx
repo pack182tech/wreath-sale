@@ -16,7 +16,7 @@ import Leaderboard from './pages/Leaderboard'
 import FAQ from './pages/FAQ'
 import Login from './pages/Login'
 import ScoutPortal from './pages/ScoutPortal'
-import AdminDashboard from './pages/AdminDashboard'
+import AdminDashboard from './pages/AdminDashboard' // New admin dashboard
 import ScoutLawAnimated from './components/ScoutLawAnimated'
 import VersionDisplay from './components/VersionDisplay'
 import SnowEffect from './components/SnowEffect'

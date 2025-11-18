@@ -68,6 +68,42 @@ export async function updateOrderStatus(orderId, status) {
   return result
 }
 
+export async function deleteOrder(orderId) {
+  console.log('[AppsScript] Deleting order:', orderId)
+  const result = await appsScriptPost('deleteOrder', { orderId })
+  return result
+}
+
+export async function createScout(scout) {
+  console.log('[AppsScript] Creating scout:', scout.name)
+  const result = await appsScriptPost('createScout', scout)
+  return result
+}
+
+export async function updateScout(scout) {
+  console.log('[AppsScript] Updating scout:', scout.name)
+  const result = await appsScriptPost('updateScout', scout)
+  return result
+}
+
+export async function deleteScout(scoutId) {
+  console.log('[AppsScript] Deleting scout:', scoutId)
+  const result = await appsScriptPost('deleteScout', { scoutId })
+  return result
+}
+
+export async function saveConfig(config) {
+  console.log('[AppsScript] Saving configuration')
+  const result = await appsScriptPost('saveConfig', config)
+  return result
+}
+
+export async function saveEmailTemplate(templateKey, templateData) {
+  console.log('[AppsScript] Saving email template:', templateKey)
+  const result = await appsScriptPost('saveEmailTemplate', { templateKey, templateData })
+  return result
+}
+
 export async function healthCheck() {
   try {
     const result = await appsScriptGet('healthCheck')
@@ -86,5 +122,11 @@ export default {
   sendOrderConfirmationEmail,
   sendScoutWelcomeEmail,
   updateOrderStatus,
+  deleteOrder,
+  createScout,
+  updateScout,
+  deleteScout,
+  saveConfig,
+  saveEmailTemplate,
   healthCheck
 }

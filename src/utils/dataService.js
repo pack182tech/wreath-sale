@@ -55,7 +55,7 @@ export async function saveOrder(order) {
   }
 }
 
-// Update order status (PRODUCTION ONLY - used by Admin Dashboard)
+// Update order status
 export async function updateOrderStatus(orderId, status) {
   try {
     console.log('[DataService] Updating order status via Apps Script...')
@@ -68,22 +68,45 @@ export async function updateOrderStatus(orderId, status) {
   }
 }
 
-// PRODUCTION: Admin functions disabled - manage scouts/orders directly in Google Sheets
-// These functions are intentionally removed to prevent localStorage usage
-export function updateOrder() {
-  throw new Error('Order editing disabled. Please update orders directly in Google Sheets.')
+// Delete order
+export async function deleteOrder(orderId) {
+  try {
+    console.log('[DataService] Deleting order via Apps Script...')
+    const result = await appsScriptService.deleteOrder(orderId)
+    console.log('[DataService] Order deleted:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to delete order:', error)
+    throw new Error('Unable to delete order. Please try again.')
+  }
 }
 
-export function deleteOrder() {
-  throw new Error('Order deletion disabled. Please delete orders directly in Google Sheets.')
+// Save scout (create or update)
+export async function saveScout(scout) {
+  try {
+    console.log('[DataService] Saving scout via Apps Script...')
+    const result = scout.id
+      ? await appsScriptService.updateScout(scout)
+      : await appsScriptService.createScout(scout)
+    console.log('[DataService] Scout saved:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to save scout:', error)
+    throw new Error('Unable to save scout. Please try again.')
+  }
 }
 
-export function saveScout() {
-  throw new Error('Scout editing disabled. Please update scouts directly in Google Sheets.')
-}
-
-export function deleteScout() {
-  throw new Error('Scout deletion disabled. Please delete scouts directly in Google Sheets.')
+// Delete scout
+export async function deleteScout(scoutId) {
+  try {
+    console.log('[DataService] Deleting scout via Apps Script...')
+    const result = await appsScriptService.deleteScout(scoutId)
+    console.log('[DataService] Scout deleted:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to delete scout:', error)
+    throw new Error('Unable to delete scout. Please try again.')
+  }
 }
 
 // Get config
@@ -99,9 +122,30 @@ export async function getConfig() {
   }
 }
 
-// PRODUCTION: Config editing disabled - update config directly in Google Sheets
-export function saveConfig() {
-  throw new Error('Config editing disabled. Please update configuration directly in Google Sheets.')
+// Save configuration
+export async function saveConfig(config) {
+  try {
+    console.log('[DataService] Saving config via Apps Script...')
+    const result = await appsScriptService.saveConfig(config)
+    console.log('[DataService] Config saved:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to save config:', error)
+    throw new Error('Unable to save configuration. Please try again.')
+  }
+}
+
+// Save email template
+export async function saveEmailTemplate(templateKey, templateData) {
+  try {
+    console.log('[DataService] Saving email template via Apps Script...')
+    const result = await appsScriptService.saveEmailTemplate(templateKey, templateData)
+    console.log('[DataService] Email template saved:', result)
+    return result
+  } catch (error) {
+    console.error('[DataService] ❌ CRITICAL: Failed to save email template:', error)
+    throw new Error('Unable to save email template. Please try again.')
+  }
 }
 
 export default {
@@ -109,7 +153,10 @@ export default {
   getOrders,
   saveOrder,
   updateOrderStatus,
-  getConfig
-  // REMOVED: updateOrder, deleteOrder, saveScout, deleteScout, saveConfig, initializeMockData
-  // These functions are disabled in production - use Google Sheets directly
+  deleteOrder,
+  saveScout,
+  deleteScout,
+  getConfig,
+  saveConfig,
+  saveEmailTemplate
 }
