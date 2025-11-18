@@ -476,7 +476,7 @@ function sendOrderConfirmationEmail(orderData) {
   if (orderData.isDonation) {
     donationSection = `
       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 10px; margin: 25px 0; border: 2px solid #4caf50; text-align: center;">
-        <p style="margin: 0 0 10px 0; font-size: 20px; color: #1a472a;"><strong>🙏 Thank You for Your Generous Donation!</strong></p>
+        <p style="margin: 0 0 10px 0; font-size: 20px; color: #1a472a;"><strong>Thank You for Your Generous Donation!</strong></p>
         <p style="margin: 0; color: #2e7d32; font-size: 16px; line-height: 1.6;">Your contribution to <strong>${donationRecipient}</strong> helps us show gratitude for their generosity to Pack 182. We deeply appreciate your support!</p>
       </div>
     `;
@@ -490,10 +490,10 @@ function sendOrderConfirmationEmail(orderData) {
   if (scoutName && scoutName !== 'SCOUT_NOT_FOUND') {
     scoutSection = `
       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 15px; border-radius: 8px; margin: 20px 0; border: 2px solid #2196f3;">
-        <p style="margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;"><strong>💡 Alternative Payment Option:</strong> If you are unable to use Zelle, you may pay ${scoutFirstName}'s parents directly.</p>
+        <p style="margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;"><strong>Alternative Payment Option:</strong> If you are unable to use Zelle, you may pay ${scoutFirstName}'s parents directly.</p>
       </div>
       <div style="background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 20px; border-radius: 8px; text-align: center; margin: 25px 0;">
-        <p style="margin: 0; font-size: 18px; color: white; font-weight: bold;">🎗️ Thank you for supporting ${scoutName}!</p>
+        <p style="margin: 0; font-size: 18px; color: white; font-weight: bold;">Thank you for supporting ${scoutName}!</p>
       </div>
     `;
   }
@@ -501,20 +501,20 @@ function sendOrderConfirmationEmail(orderData) {
   const htmlBody = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px;">
       <div style="background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); padding: 25px; text-align: center; border-radius: 8px; margin-bottom: 30px;">
-        <h1 style="color: white; margin: 0; font-size: 28px;">✅ Order Confirmed!</h1>
+        <h1 style="color: white; margin: 0; font-size: 28px;">Order Confirmed!</h1>
       </div>
 
       <p style="font-size: 16px; line-height: 1.6; color: #333;">Dear <strong>${orderData.customer.name}</strong>,</p>
       <p style="font-size: 16px; line-height: 1.6; color: #333;">Thank you for your order! Your order has been received and will be ready for pickup on <strong style="color: #1a472a;">${pickupDate}</strong>.</p>
 
       <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #1a472a;">
-        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">📦 Order Details</h3>
+        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">Order Details</h3>
         <p style="margin: 8px 0; color: #555;"><strong>Order Number:</strong> <span style="color: #1a472a; font-weight: bold;">${orderData.orderId}</span></p>
         <p style="margin: 8px 0; color: #555;"><strong>Order Date:</strong> ${new Date(orderData.orderDate).toLocaleDateString()}</p>
       </div>
 
       <div style="background: white; padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px; margin: 25px 0;">
-        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">🛍️ Items Ordered</h3>
+        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">Items Ordered</h3>
         <table style="width: 100%; border-collapse: collapse;">
           ${itemsTable}
           <tr style="border-top: 3px solid #1a472a;">
@@ -527,7 +527,7 @@ function sendOrderConfirmationEmail(orderData) {
       ${donationSection}
 
       <div style="background: linear-gradient(135deg, #fffbeb 0%, #fff9e6 100%); padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #d4af37;">
-        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">💳 Payment Instructions</h3>
+        <h3 style="color: #1a472a; margin: 0 0 15px 0; font-size: 18px;">Payment Instructions</h3>
         <p style="margin: 0 0 15px 0; color: #555; line-height: 1.6;">Please send payment via <strong>Zelle</strong> to complete your order:</p>
         <div style="background: white; padding: 15px; border-radius: 6px; margin: 15px 0;">
           <p style="margin: 8px 0; color: #333;"><strong>First name:</strong> ${zelle.recipientFirstName || 'Boy Scouts'}</p>
@@ -536,7 +536,7 @@ function sendOrderConfirmationEmail(orderData) {
           <p style="margin: 8px 0; color: #333;"><strong>Memo:</strong> <span style="background: #ffeb3b; padding: 3px 8px; border-radius: 4px; font-weight: bold;">${orderData.orderId}</span></p>
         </div>
         <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 6px; padding: 12px; margin-top: 15px;">
-          <p style="margin: 0; color: #856404; font-weight: bold; font-size: 14px;">⚠️ Important: Please include your order number (<strong>${orderData.orderId}</strong>) in the Zelle memo field.</p>
+          <p style="margin: 0; color: #856404; font-weight: bold; font-size: 14px;">IMPORTANT: Please include your order number (<strong>${orderData.orderId}</strong>) in the Zelle memo field.</p>
         </div>
       </div>
 
