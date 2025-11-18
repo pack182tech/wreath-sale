@@ -615,3 +615,40 @@ function sendScoutWelcomeEmail(data) {
   Logger.log(`Scout welcome email would be sent to ${scout.email}`);
   return { success: true, message: 'Scout welcome email functionality not yet implemented' };
 }
+
+// ============= TEST FUNCTIONS =============
+// Use this function to test email sending directly from Apps Script
+function testEmailSimple() {
+  Logger.log('=== EMAIL TEST START ===');
+
+  try {
+    const testOrder = {
+      orderId: 'MANUAL-TEST-' + Date.now(),
+      customer: {
+        name: 'Manual Test',
+        email: 'YOUR_EMAIL_HERE@gmail.com', // CHANGE THIS TO YOUR EMAIL
+        phone: '555-1234'
+      },
+      items: [
+        { name: 'Test Wreath', quantity: 1, price: 30.00 }
+      ],
+      total: 30.00,
+      orderDate: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      isDonation: false,
+      scoutId: null
+    };
+
+    Logger.log('Calling sendOrderConfirmationEmail...');
+    const result = sendOrderConfirmationEmail(testOrder);
+    Logger.log('Result: ' + JSON.stringify(result));
+    Logger.log('=== EMAIL TEST SUCCESS ===');
+
+    return 'Email test completed. Check logs and your inbox!';
+  } catch (error) {
+    Logger.log('=== EMAIL TEST FAILED ===');
+    Logger.log('Error: ' + error.toString());
+    Logger.log('Stack: ' + error.stack);
+    throw error;
+  }
+}
