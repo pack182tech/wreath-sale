@@ -42,7 +42,15 @@ function AdminDashboard() {
     pack: {},
     products: [],
     donation: {},
-    zelle: {}
+    zelle: {},
+    content: {},
+    scoutAttributionBanner: {},
+    cart: {},
+    checkout: {},
+    scoutLaw: {},
+    productDisclaimer: '',
+    emailTemplates: {},
+    images: {}
   })
 
   // Table controls state
@@ -367,12 +375,12 @@ function AdminDashboard() {
         >
           Scouts
         </button>
-        <button
+        {/* <button
           className={`tab-btn ${activeTab === 'config' ? 'active' : ''}`}
           onClick={() => setActiveTab('config')}
         >
           Site Configuration
-        </button>
+        </button> */}
         <button
           className={`tab-btn ${activeTab === 'email-templates' ? 'active' : ''}`}
           onClick={() => setActiveTab('email-templates')}
@@ -1102,7 +1110,7 @@ function AdminDashboard() {
                 <label>Hero Title</label>
                 <input
                   type="text"
-                  value={siteConfig.content.heroTitle}
+                  value={siteConfig.content?.heroTitle}
                   onChange={(e) => handleConfigChange('content', 'heroTitle', e.target.value)}
                 />
               </div>
@@ -1110,7 +1118,7 @@ function AdminDashboard() {
                 <label>Hero Subtitle</label>
                 <input
                   type="text"
-                  value={siteConfig.content.heroSubtitle}
+                  value={siteConfig.content?.heroSubtitle}
                   onChange={(e) => handleConfigChange('content', 'heroSubtitle', e.target.value)}
                 />
               </div>
@@ -1122,7 +1130,7 @@ function AdminDashboard() {
                 <label>About Title</label>
                 <input
                   type="text"
-                  value={siteConfig.content.aboutTitle}
+                  value={siteConfig.content?.aboutTitle}
                   onChange={(e) => handleConfigChange('content', 'aboutTitle', e.target.value)}
                 />
               </div>
@@ -1130,7 +1138,7 @@ function AdminDashboard() {
                 <label>About Text</label>
                 <textarea
                   rows="4"
-                  value={siteConfig.content.aboutText}
+                  value={siteConfig.content?.aboutText}
                   onChange={(e) => handleConfigChange('content', 'aboutText', e.target.value)}
                 />
               </div>
@@ -1142,11 +1150,11 @@ function AdminDashboard() {
                 <label>FAQ Title</label>
                 <input
                   type="text"
-                  value={siteConfig.content.faqTitle}
+                  value={siteConfig.content?.faqTitle}
                   onChange={(e) => handleConfigChange('content', 'faqTitle', e.target.value)}
                 />
               </div>
-              {siteConfig.content.faq.map((item, index) => (
+              {siteConfig.content?.faq.map((item, index) => (
                 <div key={index} className="faq-item">
                   <h4>FAQ {index + 1}</h4>
                   <div className="form-group">
@@ -1155,7 +1163,7 @@ function AdminDashboard() {
                       type="text"
                       value={item.question}
                       onChange={(e) => {
-                        const newFaq = [...siteConfig.content.faq]
+                        const newFaq = [...siteConfig.content?.faq]
                         newFaq[index] = { ...newFaq[index], question: e.target.value }
                         handleConfigChange('content', 'faq', newFaq)
                       }}
@@ -1167,7 +1175,7 @@ function AdminDashboard() {
                       rows="3"
                       value={item.answer}
                       onChange={(e) => {
-                        const newFaq = [...siteConfig.content.faq]
+                        const newFaq = [...siteConfig.content?.faq]
                         newFaq[index] = { ...newFaq[index], answer: e.target.value }
                         handleConfigChange('content', 'faq', newFaq)
                       }}
@@ -1184,7 +1192,7 @@ function AdminDashboard() {
                   <label>Recipient First Name</label>
                   <input
                     type="text"
-                    value={siteConfig.zelle.recipientFirstName || 'Boy Scouts'}
+                    value={siteConfig.zelle?.recipientFirstName || 'Boy Scouts'}
                     onChange={(e) => handleConfigChange('zelle', 'recipientFirstName', e.target.value)}
                   />
                 </div>
@@ -1192,7 +1200,7 @@ function AdminDashboard() {
                   <label>Recipient Last Name</label>
                   <input
                     type="text"
-                    value={siteConfig.zelle.recipientLastName || 'of America'}
+                    value={siteConfig.zelle?.recipientLastName || 'of America'}
                     onChange={(e) => handleConfigChange('zelle', 'recipientLastName', e.target.value)}
                   />
                 </div>
@@ -1201,7 +1209,7 @@ function AdminDashboard() {
                 <label>Recipient Contact</label>
                 <input
                   type="text"
-                  value={siteConfig.zelle.recipientContact}
+                  value={siteConfig.zelle?.recipientContact}
                   onChange={(e) => handleConfigChange('zelle', 'recipientContact', e.target.value)}
                 />
               </div>
@@ -1209,7 +1217,7 @@ function AdminDashboard() {
                 <label>Payment Instructions</label>
                 <textarea
                   rows="3"
-                  value={siteConfig.zelle.instructions}
+                  value={siteConfig.zelle?.instructions}
                   onChange={(e) => handleConfigChange('zelle', 'instructions', e.target.value)}
                 />
               </div>
@@ -1217,7 +1225,7 @@ function AdminDashboard() {
                 <label>QR Code Text</label>
                 <input
                   type="text"
-                  value={siteConfig.zelle.qrCodeText || 'Scan to Pay'}
+                  value={siteConfig.zelle?.qrCodeText || 'Scan to Pay'}
                   onChange={(e) => handleConfigChange('zelle', 'qrCodeText', e.target.value)}
                   placeholder="e.g., Scan to Pay"
                 />
@@ -1247,7 +1255,7 @@ function AdminDashboard() {
                 <label>
                   <input
                     type="checkbox"
-                    checked={siteConfig.donation.enabled}
+                    checked={siteConfig.donation?.enabled}
                     onChange={(e) => handleConfigChange('donation', 'enabled', e.target.checked)}
                   />
                   Enable Donations
@@ -1257,7 +1265,7 @@ function AdminDashboard() {
                 <label>Donation Recipient</label>
                 <input
                   type="text"
-                  value={siteConfig.donation.recipient}
+                  value={siteConfig.donation?.recipient}
                   onChange={(e) => handleConfigChange('donation', 'recipient', e.target.value)}
                 />
               </div>
@@ -1265,7 +1273,7 @@ function AdminDashboard() {
                 <label>Donation Description</label>
                 <input
                   type="text"
-                  value={siteConfig.donation.description}
+                  value={siteConfig.donation?.description}
                   onChange={(e) => handleConfigChange('donation', 'description', e.target.value)}
                 />
               </div>
@@ -1287,7 +1295,7 @@ function AdminDashboard() {
                 <label>Popup Message</label>
                 <input
                   type="text"
-                  value={siteConfig.donation.popupText || ''}
+                  value={siteConfig.donation?.popupText || ''}
                   onChange={(e) => handleConfigChange('donation', 'popupText', e.target.value)}
                   placeholder="You can direct your donation to Three Bridges Reformed Church at checkout."
                 />

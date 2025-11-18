@@ -29,7 +29,7 @@
 // ============= CONFIGURATION =============
 const EMAIL_FROM = 'pack182tech@gmail.com';
 const SPREADSHEET_ID = SpreadsheetApp.getActiveSpreadsheet().getId();
-const BACKEND_VERSION = '1.1.0'; // Version tracking - increment when deploying
+const BACKEND_VERSION = '1.2.0'; // Version tracking - increment when deploying
 
 // ============= MAIN HANDLER =============
 function doGet(e) {
@@ -75,7 +75,10 @@ function doPost(e) {
         return jsonResponse(createOrder(data));
 
       case 'sendOrderConfirmationEmail':
-        return jsonResponse(sendOrderConfirmationEmail(data));
+        Logger.log('[doPost] Calling sendOrderConfirmationEmail with data: ' + JSON.stringify(data).substring(0, 100));
+        const emailResult = sendOrderConfirmationEmail(data);
+        Logger.log('[doPost] Email result: ' + JSON.stringify(emailResult));
+        return jsonResponse(emailResult);
 
       case 'sendScoutWelcomeEmail':
         return jsonResponse(sendScoutWelcomeEmail(data));
