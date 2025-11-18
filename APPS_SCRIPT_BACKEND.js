@@ -606,14 +606,120 @@ function sendOrderConfirmationEmail(orderData) {
   }
 }
 
-function sendScoutWelcomeEmail(data) {
-  const scout = data.scout;
-  // Note: qrCodeUrl and saleLink would be used when implementing full welcome email template
+function sendScoutWelcomeEmail(emailData) {
+  Logger.log('[WelcomeEmail] Starting sendScoutWelcomeEmail');
+  Logger.log('[WelcomeEmail] Scout: ' + emailData.scoutName);
+  Logger.log('[WelcomeEmail] Parent Emails: ' + JSON.stringify(emailData.parentEmails));
 
-  // This would require implementing the welcome email template
-  // For now, return success
-  Logger.log(`Scout welcome email would be sent to ${scout.email}`);
-  return { success: true, message: 'Scout welcome email functionality not yet implemented' };
+  try {
+    const config = getConfig();
+    const firstName = emailData.firstName;
+    const lastName = emailData.lastName;
+    const scoutUrl = emailData.scoutUrl;
+    const parentName = emailData.parentName;
+
+    // Prepare recipient list
+    const recipients = Array.isArray(emailData.parentEmails)
+      ? emailData.parentEmails
+      : [emailData.parentEmails];
+
+    const subject = emailData.subject;
+
+    // Build HTML email body
+    const htmlBody = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #333;">
+        <div style="background: linear-gradient(135deg, #1a472a 0%, #2a5f3d 100%); color: white; padding: 30px 20px; border-radius: 12px 12px 0 0; text-align: center;">
+          <h1 style="margin: 0 0 10px 0; font-size: 28px;">${config.pack.name} Wreath Sale</h1>
+          <p style="margin: 0; font-size: 16px; opacity: 0.95;">Annual Fundraiser</p>
+        </div>
+
+        <div style="padding: 30px 20px;">
+          <p style="font-size: 16px; line-height: 1.6; margin-top: 0;">Dear ${parentName},</p>
+
+          <p style="font-size: 16px; line-height: 1.6;">
+            Thank you for supporting ${firstName} ${lastName} in this year's wreath sale fundraiser!
+            Below is ${firstName}'s unique sales link.
+          </p>
+
+          <div style="background: #f8fffe; border: 2px solid #d4af37; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">
+            <h2 style="color: #1a472a; margin-top: 0;">${firstName}'s Sales Link</h2>
+            <p style="margin: 10px 0;">
+              <a href="${scoutUrl}" style="color: #2563eb; word-break: break-all; font-size: 14px;">${scoutUrl}</a>
+            </p>
+          </div>
+
+          <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px 20px; border-radius: 4px; margin: 20px 0;">
+            <h3 style="color: #1565c0; margin-top: 0;">How It Works</h3>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li style="margin-bottom: 8px;">Share this link with family, friends, and neighbors</li>
+              <li style="margin-bottom: 8px;">When they make a purchase, ${firstName} gets credit automatically</li>
+              <li style="margin-bottom: 8px;">Track sales progress on the leaderboard</li>
+            </ul>
+          </div>
+
+          <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">What We're Selling</h3>
+          <ul style="line-height: 1.8;">
+            ${config.products.filter(p => p.active).map(product =>
+              `<li><strong>${product.name}</strong> - $${product.price.toFixed(2)}</li>`
+            ).join('')}
+          </ul>
+
+          <h3 style="color: #1a472a; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">Pickup Information</h3>
+          <p style="line-height: 1.6;">
+            <strong>Date:</strong> ${config.campaign.pickupDate || 'TBD'}<br />
+            <strong>Time:</strong> ${config.campaign.pickupTime || 'TBD'}<br />
+            <strong>Location:</strong> ${config.campaign.pickupLocation || 'TBD'}
+          </p>
+
+          <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px 20px; border-radius: 4px; margin: 20px 0;">
+            <p style="margin: 0; font-size: 14px; color: #e65100;">
+              <strong>Important:</strong> All orders must be paid via Zelle. Payment information will be provided at checkout.
+            </p>
+          </div>
+
+          <p style="font-size: 16px; line-height: 1.6;">
+            Thank you for your support! If you have any questions, please contact ${config.pack.leaderName} at ${config.pack.leaderEmail}.
+          </p>
+
+          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 0;">
+            Yours in Scouting,<br />
+            <strong>${config.pack.name}</strong>
+          </p>
+        </div>
+
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 0 0 12px 12px; text-align: center; font-size: 12px; color: #666;">
+          <p style="margin: 0;">${config.pack.name} • ${config.pack.location}</p>
+        </div>
+      </div>
+    `;
+
+    // Send email to all parent emails
+    recipients.forEach(recipientEmail => {
+      if (recipientEmail && recipientEmail.trim() !== '') {
+        Logger.log('[WelcomeEmail] Sending to: ' + recipientEmail);
+        GmailApp.sendEmail(recipientEmail, subject, '', {
+          from: EMAIL_FROM,
+          htmlBody: htmlBody,
+          name: config.pack.name + ' Wreath Sale'
+        });
+        Logger.log('[WelcomeEmail] Successfully sent to: ' + recipientEmail);
+      }
+    });
+
+    Logger.log('[WelcomeEmail] SUCCESS: Sent welcome email to ' + recipients.join(', '));
+    return {
+      success: true,
+      message: 'Welcome email sent successfully to ' + recipients.join(', ')
+    };
+
+  } catch (error) {
+    Logger.log('[WelcomeEmail] ERROR: ' + error.toString());
+    Logger.log('[WelcomeEmail] Stack: ' + error.stack);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
 }
 
 // ============= TEST FUNCTIONS =============

@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { getConfigSync } from '../../../utils/configLoader';
+import { sendScoutWelcomeEmail } from '../../../services/appsScriptService';
 import './WelcomeEmailModal.css';
 
-const WelcomeEmailModal = ({ scout, onClose }) => {
+const WelcomeEmailModal = ({ scout, onClose, showToast }) => {
   if (!scout) return null;
 
   const config = getConfigSync();
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSendWelcomeEmail = async () => {
+    if (!scout.parentEmails || scout.parentEmails.length === 0) {
+      showToast('No parent email addresses available for this scout', 'error');
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const scoutUrl = getScoutUrl();
+      const emailData = {
+        scoutName: getDisplayName(),
+        firstName: getFirstName(),
+        lastName: getLastName(),
+        parentName: scout.parentName || 'Scout Parent',
+        parentEmails: scout.parentEmails,
+        scoutUrl: scoutUrl,
+        subject: emailSubject,
+        config: config
+      };
+
+      await sendScoutWelcomeEmail(emailData);
+      showToast(`Welcome email sent successfully to ${Array.isArray(scout.parentEmails) ? scout.parentEmails.join(', ') : scout.parentEmails}`, 'success');
+      onClose();
+    } catch (error) {
+      console.error('[WelcomeEmail] Failed to send:', error);
+      showToast(`Failed to send welcome email: ${error.message}`, 'error');
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const getScoutUrl = () => {
     const baseUrl = window.location.origin + import.meta.env.BASE_URL;
@@ -60,9 +93,6 @@ const WelcomeEmailModal = ({ scout, onClose }) => {
             </div>
             <div className="email-meta-row">
               <strong>Subject:</strong> {emailSubject}
-            </div>
-            <div className="email-note">
-              <strong>Note:</strong> This is a preview. In production, this email would be sent automatically.
             </div>
           </div>
 
@@ -216,6 +246,30 @@ const WelcomeEmailModal = ({ scout, onClose }) => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="modal-footer" style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '1rem',
+          padding: '1rem 1.5rem',
+          borderTop: '1px solid #e0e0e0',
+          background: '#f9f9f9'
+        }}>
+          <button
+            className="btn btn-secondary"
+            onClick={onClose}
+            disabled={isSending}
+          >
+            Close
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={handleSendWelcomeEmail}
+            disabled={isSending}
+          >
+            {isSending ? 'Sending Email...' : 'Send Welcome Email'}
+          </button>
         </div>
       </div>
     </div>
