@@ -37,7 +37,13 @@ function AdminDashboard() {
     parentEmails: [], // Changed to array
     active: true
   })
-  const [siteConfig, setSiteConfig] = useState(getConfigSync())
+  const [siteConfig, setSiteConfig] = useState({
+    campaign: {},
+    pack: {},
+    products: [],
+    donation: {},
+    zelle: {}
+  })
 
   // Table controls state
   const [sortBy, setSortBy] = useState('name')
@@ -53,9 +59,13 @@ function AdminDashboard() {
   const loadData = async () => {
     const scoutsData = await getScouts()
     const ordersData = await getOrders()
+    const configData = getConfigSync()
 
     setScouts(scoutsData)
     setOrders(ordersData)
+    if (configData && configData.campaign) {
+      setSiteConfig(configData)
+    }
 
     // Calculate stats
     const totalRevenue = ordersData.reduce((sum, order) => sum + order.total, 0)
@@ -938,14 +948,14 @@ function AdminDashboard() {
                   <label>Campaign Name</label>
                   <input
                     type="text"
-                    value={siteConfig.campaign.name}
+                    value={siteConfig.campaign?.name}
                     onChange={(e) => handleConfigChange('campaign', 'name', e.target.value)}
                   />
                 </div>
                 <div className="form-group">
                   <label>Status</label>
                   <select
-                    value={siteConfig.campaign.status}
+                    value={siteConfig.campaign?.status}
                     onChange={(e) => handleConfigChange('campaign', 'status', e.target.value)}
                   >
                     <option value="active">Active</option>
@@ -959,7 +969,7 @@ function AdminDashboard() {
                   <label>Start Date</label>
                   <input
                     type="date"
-                    value={siteConfig.campaign.startDate}
+                    value={siteConfig.campaign?.startDate}
                     onChange={(e) => handleConfigChange('campaign', 'startDate', e.target.value)}
                   />
                 </div>
@@ -967,7 +977,7 @@ function AdminDashboard() {
                   <label>End Date</label>
                   <input
                     type="date"
-                    value={siteConfig.campaign.endDate}
+                    value={siteConfig.campaign?.endDate}
                     onChange={(e) => handleConfigChange('campaign', 'endDate', e.target.value)}
                   />
                 </div>
@@ -978,7 +988,7 @@ function AdminDashboard() {
                   <label>Pickup Date</label>
                   <input
                     type="text"
-                    value={siteConfig.campaign.pickupDate}
+                    value={siteConfig.campaign?.pickupDate}
                     onChange={(e) => handleConfigChange('campaign', 'pickupDate', e.target.value)}
                   />
                 </div>
@@ -986,7 +996,7 @@ function AdminDashboard() {
                   <label>Pickup Time</label>
                   <input
                     type="text"
-                    value={siteConfig.campaign.pickupTime}
+                    value={siteConfig.campaign?.pickupTime}
                     onChange={(e) => handleConfigChange('campaign', 'pickupTime', e.target.value)}
                   />
                 </div>
@@ -996,7 +1006,7 @@ function AdminDashboard() {
                 <label>Pickup Location</label>
                 <input
                   type="text"
-                  value={siteConfig.campaign.pickupLocation}
+                  value={siteConfig.campaign?.pickupLocation}
                   onChange={(e) => handleConfigChange('campaign', 'pickupLocation', e.target.value)}
                 />
               </div>
@@ -1009,7 +1019,7 @@ function AdminDashboard() {
                   <label>Pack Name</label>
                   <input
                     type="text"
-                    value={siteConfig.pack.name}
+                    value={siteConfig.pack?.name}
                     onChange={(e) => handleConfigChange('pack', 'name', e.target.value)}
                   />
                 </div>
@@ -1017,7 +1027,7 @@ function AdminDashboard() {
                   <label>Location</label>
                   <input
                     type="text"
-                    value={siteConfig.pack.location}
+                    value={siteConfig.pack?.location}
                     onChange={(e) => handleConfigChange('pack', 'location', e.target.value)}
                   />
                 </div>
@@ -1028,7 +1038,7 @@ function AdminDashboard() {
                   <label>Leader Name</label>
                   <input
                     type="text"
-                    value={siteConfig.pack.leaderName}
+                    value={siteConfig.pack?.leaderName}
                     onChange={(e) => handleConfigChange('pack', 'leaderName', e.target.value)}
                   />
                 </div>
@@ -1036,7 +1046,7 @@ function AdminDashboard() {
                   <label>Leader Email</label>
                   <input
                     type="email"
-                    value={siteConfig.pack.leaderEmail}
+                    value={siteConfig.pack?.leaderEmail}
                     onChange={(e) => handleConfigChange('pack', 'leaderEmail', e.target.value)}
                   />
                 </div>

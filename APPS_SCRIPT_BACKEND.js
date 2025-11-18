@@ -29,6 +29,7 @@
 // ============= CONFIGURATION =============
 const EMAIL_FROM = 'pack182tech@gmail.com';
 const SPREADSHEET_ID = SpreadsheetApp.getActiveSpreadsheet().getId();
+const BACKEND_VERSION = '1.1.0'; // Version tracking - increment when deploying
 
 // ============= MAIN HANDLER =============
 function doGet(e) {
@@ -37,7 +38,13 @@ function doGet(e) {
   try {
     switch (action) {
       case 'healthCheck':
-        return jsonResponse({ status: 'ok', message: 'Apps Script backend is running' });
+        return jsonResponse({
+          status: 'ok',
+          message: 'Apps Script backend is running',
+          version: BACKEND_VERSION,
+          timestamp: new Date().toISOString(),
+          hasEmailFunction: typeof sendOrderConfirmationEmail === 'function'
+        });
 
       case 'getScouts':
         return jsonResponse({ scouts: getScouts() });
@@ -379,12 +386,40 @@ function sendOrderConfirmationEmail(orderData) {
   `;
 
   try {
+    // Send email to customer
     GmailApp.sendEmail(recipient, subject, '', {
       from: EMAIL_FROM,
       htmlBody: htmlBody,
       name: 'Pack 182 Wreath Sale'
     });
     Logger.log(`Sent order confirmation email to ${recipient} for order ${orderData.orderId}`);
+
+    // If order is attributed to a scout, also send to scout's parents
+    if (scoutName && scoutName !== 'SCOUT_NOT_FOUND') {
+      const scouts = getScouts();
+      const scout = scouts.find(s => s.id === orderData.scoutId);
+
+      if (scout && scout.parentEmails && scout.parentEmails.length > 0) {
+        const parentEmails = Array.isArray(scout.parentEmails) ? scout.parentEmails : [scout.parentEmails];
+        const parentSubject = `Order for ${scoutName} - ${orderData.orderId}`;
+        const parentNote = `<div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196f3;"><p style="margin: 0; font-size: 14px; color: #1565c0; line-height: 1.6;"><strong>📧 Parent Notification:</strong> This is a copy of the order confirmation sent to ${orderData.customer.name}. An order has been placed and attributed to ${scoutName}!</p></div>`;
+
+        parentEmails.forEach(parentEmail => {
+          try {
+            GmailApp.sendEmail(parentEmail, parentSubject, '', {
+              from: EMAIL_FROM,
+              htmlBody: parentNote + htmlBody,
+              name: 'Pack 182 Wreath Sale'
+            });
+            Logger.log(`Sent parent notification to ${parentEmail} for scout ${scoutName}`);
+          } catch (parentEmailError) {
+            Logger.log(`Failed to send parent email to ${parentEmail}: ${parentEmailError.toString()}`);
+            // Don't fail the whole operation if parent email fails
+          }
+        });
+      }
+    }
+
     return { success: true, recipient };
   } catch (error) {
     Logger.log(`Failed to send email: ${error.toString()}`);

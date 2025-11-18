@@ -67,12 +67,6 @@ function Login() {
           </button>
         </form>
 
-        <div className="login-demo-info">
-          <h3>Demo Credentials:</h3>
-          <p><strong>Admin:</strong> admin@pack182.org / admin123</p>
-          <p><strong>Scout:</strong> tommy.anderson@email.com / scout123</p>
-        </div>
-
         <div className="login-footer">
           <Link to="/">← Back to Home</Link>
         </div>
