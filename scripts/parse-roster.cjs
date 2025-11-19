@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the HTML file
-const htmlPath = path.join(__dirname, '..', 'Cub Scout Pack 182 _ Scout with Parents - Active.html');
+const htmlPath = path.join(__dirname, '..', 'updated_roster.html');
 const html = fs.readFileSync(htmlPath, 'utf8');
 
 // Helper function to extract text from HTML
@@ -34,40 +34,58 @@ function slugify(name) {
     .replace(/^-|-$/g, '');
 }
 
-// Parse the HTML table
-const tbody = html.match(/<tbody>([\s\S]*?)<\/tbody>/)[1];
-const rows = tbody.split(/<tr class="row/);
+// Parse the HTML table - extract all rows with scout/adult classes
+const scoutRowRegex = /<tr class="rowscout[^"]*">(.*?)<\/tr>/g;
+const adultRowRegex = /<tr class="rowadult[^"]*">(.*?)<\/tr>/g;
+
+// Extract all scout and adult rows
+const allRows = [];
+let match;
+
+// Get all rowscout and rowadult rows in order
+const rowPattern = /<tr class="row(scout|adult)[^"]*">(.*?)<\/tr>/g;
+while ((match = rowPattern.exec(html)) !== null) {
+  allRows.push({
+    type: match[1], // 'scout' or 'adult'
+    html: match[2]
+  });
+}
 
 const scouts = [];
 let currentScout = null;
 let scoutCounter = 1;
 
-for (const row of rows) {
-  if (!row.trim() || row.indexOf('<th') >= 0) continue;
-
-  const isScoutRow = row.startsWith('scout');
-  const isAdultRow = row.startsWith('adult');
-
-  if (isScoutRow) {
-    // Extract scout name
-    const nameMatch = row.match(/<a href="[^"]+">([^<]+)<\/a>/);
+for (const row of allRows) {
+  if (row.type === 'scout') {
+    // Extract scout name from link
+    const nameMatch = row.html.match(/<a href="[^"]+">([^<]+)<\/a>/);
     if (!nameMatch) continue;
 
     const name = extractText(nameMatch[1]);
 
-    // Extract rank
-    const rankMatch = row.match(/<td><span class="nowrap">([^<]+)</);
-    const rank = rankMatch ? extractText(rankMatch[1]) : '';
-
-    // Extract scout email
-    const scoutEmails = extractEmails(row);
+    // Extract rank - look for text directly in td tags (3rd column)
+    // Simple approach: split by </td> and get segments
+    const tdContents = row.html.split('</td>');
+    let rank = '';
+    if (tdContents.length >= 3) {
+      // Get the 3rd td content (index 2)
+      const rankTd = tdContents[2];
+      // Extract just the text after the last >
+      const textMatch = rankTd.match(/>([^<>]+)$/);
+      if (textMatch) {
+        rank = textMatch[1].trim();
+      } else {
+        // If no match, just extract all text
+        rank = extractText(rankTd);
+      }
+    }
 
     currentScout = {
       id: `scout-${scoutCounter}`,
       name: name,
       slug: slugify(name),
       rank: rank,
-      email: scoutEmails[0] || '',
+      email: '',
       parentName: '',
       parentEmails: [],
       active: true
@@ -75,21 +93,22 @@ for (const row of rows) {
 
     scouts.push(currentScout);
     scoutCounter++;
-  } else if (isAdultRow && currentScout) {
+  } else if (row.type === 'adult' && currentScout) {
     // Extract parent name
-    const nameMatch = row.match(/<a href="[^"]+">([^<]+)<\/a>/);
+    const nameMatch = row.html.match(/<a href="[^"]+">([^<]+)<\/a>/);
     if (nameMatch) {
-      const parentName = extractText(nameMatch[1]);
-      // Remove repeated scout surname from parent name
-      const cleanParentName = parentName.replace(/^.*?,\s*/, '');
+      const parentFullName = extractText(nameMatch[1]);
+      // Extract first name from "Lastname, Firstname"
+      const parts = parentFullName.split(',').map(p => p.trim());
+      const parentFirstName = parts.length >= 2 ? parts[1] : parts[0];
 
       if (!currentScout.parentName) {
-        currentScout.parentName = cleanParentName;
+        currentScout.parentName = parentFirstName;
       }
     }
 
     // Extract parent emails
-    const parentEmails = extractEmails(row);
+    const parentEmails = extractEmails(row.html);
     for (const email of parentEmails) {
       if (!currentScout.parentEmails.includes(email)) {
         currentScout.parentEmails.push(email);
