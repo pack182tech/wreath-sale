@@ -80,68 +80,165 @@ function App() {
 
         <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
           {/* Campfire */}
-          <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 30px' }}>
-            {/* Flames */}
+          <div style={{ position: 'relative', width: '100px', height: '100px', margin: '0 auto 30px' }}>
+            {/* Main Flame - Center */}
             <div style={{
               position: 'absolute',
               bottom: '15px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '25px',
-              height: '40px',
-              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500, #ffff00)',
-              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
-              animation: 'flicker 1.5s infinite alternate',
-              boxShadow: '0 0 20px #ff6b00, 0 0 40px #ff4500'
+              width: '0',
+              height: '0',
+              borderLeft: '15px solid transparent',
+              borderRight: '15px solid transparent',
+              borderBottom: '50px solid #ff4500',
+              filter: 'blur(2px)',
+              animation: 'flicker-main 0.8s ease-in-out infinite',
+              opacity: 0.9
             }}></div>
             <div style={{
               position: 'absolute',
               bottom: '15px',
-              left: '30%',
+              left: '50%',
               transform: 'translateX(-50%)',
-              width: '20px',
-              height: '35px',
-              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500)',
-              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
-              animation: 'flicker 1.3s infinite alternate',
-              animationDelay: '0.3s',
-              boxShadow: '0 0 15px #ff6b00'
+              width: '0',
+              height: '0',
+              borderLeft: '12px solid transparent',
+              borderRight: '12px solid transparent',
+              borderBottom: '45px solid #ff6b00',
+              filter: 'blur(1px)',
+              animation: 'flicker-main 0.9s ease-in-out infinite',
+              animationDelay: '0.1s'
             }}></div>
             <div style={{
               position: 'absolute',
               bottom: '15px',
-              left: '70%',
+              left: '50%',
               transform: 'translateX(-50%)',
-              width: '20px',
-              height: '35px',
-              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500)',
-              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
-              animation: 'flicker 1.7s infinite alternate',
+              width: '0',
+              height: '0',
+              borderLeft: '8px solid transparent',
+              borderRight: '8px solid transparent',
+              borderBottom: '35px solid #ffa500',
+              animation: 'flicker-main 0.7s ease-in-out infinite',
+              animationDelay: '0.2s'
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '0',
+              height: '0',
+              borderLeft: '5px solid transparent',
+              borderRight: '5px solid transparent',
+              borderBottom: '25px solid #ffff00',
+              animation: 'flicker-tip 0.6s ease-in-out infinite',
+              animationDelay: '0.3s'
+            }}></div>
+
+            {/* Left Flame */}
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '25%',
+              width: '0',
+              height: '0',
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderBottom: '35px solid #ff4500',
+              filter: 'blur(1px)',
+              animation: 'flicker-side 0.9s ease-in-out infinite',
+              animationDelay: '0.4s',
+              opacity: 0.85
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '25%',
+              width: '0',
+              height: '0',
+              borderLeft: '7px solid transparent',
+              borderRight: '7px solid transparent',
+              borderBottom: '28px solid #ffa500',
+              animation: 'flicker-side 0.8s ease-in-out infinite',
+              animationDelay: '0.5s'
+            }}></div>
+
+            {/* Right Flame */}
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '75%',
+              width: '0',
+              height: '0',
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderBottom: '35px solid #ff4500',
+              filter: 'blur(1px)',
+              animation: 'flicker-side 1s ease-in-out infinite',
               animationDelay: '0.6s',
-              boxShadow: '0 0 15px #ff6b00'
+              opacity: 0.85
             }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '75%',
+              width: '0',
+              height: '0',
+              borderLeft: '7px solid transparent',
+              borderRight: '7px solid transparent',
+              borderBottom: '28px solid #ffa500',
+              animation: 'flicker-side 0.85s ease-in-out infinite',
+              animationDelay: '0.7s'
+            }}></div>
+
+            {/* Glow effect */}
+            <div style={{
+              position: 'absolute',
+              bottom: '10px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '70px',
+              height: '70px',
+              background: 'radial-gradient(circle, rgba(255,100,0,0.4) 0%, transparent 70%)',
+              animation: 'pulse 1.5s ease-in-out infinite',
+              pointerEvents: 'none'
+            }}></div>
+
             {/* Logs */}
             <div style={{
               position: 'absolute',
               bottom: '5px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '60px',
-              height: '12px',
-              background: '#654321',
-              borderRadius: '6px',
-              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.3)'
+              width: '70px',
+              height: '14px',
+              background: 'linear-gradient(to bottom, #654321, #3d2817)',
+              borderRadius: '7px',
+              boxShadow: 'inset 0 -3px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3)'
             }}></div>
             <div style={{
               position: 'absolute',
               bottom: '0px',
-              left: '40%',
-              transform: 'translateX(-50%) rotate(-20deg)',
-              width: '50px',
-              height: '10px',
-              background: '#5a3a1a',
-              borderRadius: '5px',
-              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.3)'
+              left: '35%',
+              transform: 'rotate(-15deg)',
+              width: '55px',
+              height: '12px',
+              background: 'linear-gradient(to bottom, #5a3a1a, #3d2817)',
+              borderRadius: '6px',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.4)'
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '0px',
+              left: '55%',
+              transform: 'rotate(15deg)',
+              width: '55px',
+              height: '12px',
+              background: 'linear-gradient(to bottom, #5a3a1a, #3d2817)',
+              borderRadius: '6px',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.4)'
             }}></div>
           </div>
 
@@ -155,12 +252,34 @@ function App() {
           </p>
 
           <style>{`
-            @keyframes flicker {
-              0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
-              25% { transform: translateX(-50%) scaleY(1.1) scaleX(0.95); opacity: 0.95; }
-              50% { transform: translateX(-50%) scaleY(0.95) scaleX(1.05); opacity: 0.9; }
-              75% { transform: translateX(-50%) scaleY(1.05) scaleX(0.9); opacity: 0.95; }
-              100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+            @keyframes flicker-main {
+              0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 0.9; }
+              15% { transform: translateX(-50%) scaleY(1.15) scaleX(0.92); opacity: 0.95; }
+              30% { transform: translateX(-50%) scaleY(0.88) scaleX(1.08); opacity: 0.85; }
+              45% { transform: translateX(-50%) scaleY(1.08) scaleX(0.95); opacity: 0.92; }
+              60% { transform: translateX(-50%) scaleY(0.95) scaleX(1.05); opacity: 0.88; }
+              75% { transform: translateX(-50%) scaleY(1.12) scaleX(0.9); opacity: 0.94; }
+              90% { transform: translateX(-50%) scaleY(0.92) scaleX(1.06); opacity: 0.87; }
+              100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 0.9; }
+            }
+            @keyframes flicker-side {
+              0% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 0.85; }
+              20% { transform: scaleY(1.2) scaleX(0.9) translateY(-3px); opacity: 0.9; }
+              40% { transform: scaleY(0.85) scaleX(1.1) translateY(2px); opacity: 0.8; }
+              60% { transform: scaleY(1.1) scaleX(0.95) translateY(-2px); opacity: 0.88; }
+              80% { transform: scaleY(0.9) scaleX(1.08) translateY(1px); opacity: 0.82; }
+              100% { transform: scaleY(1) scaleX(1) translateY(0); opacity: 0.85; }
+            }
+            @keyframes flicker-tip {
+              0% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+              25% { transform: translateX(-50%) scaleY(1.3); opacity: 0.9; }
+              50% { transform: translateX(-50%) scaleY(0.8); opacity: 0.95; }
+              75% { transform: translateX(-50%) scaleY(1.2); opacity: 0.85; }
+              100% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+            }
+            @keyframes pulse {
+              0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+              50% { opacity: 0.6; transform: translateX(-50%) scale(1.1); }
             }
             @keyframes snowfall {
               0% { transform: translateY(-10px) translateX(0); }
