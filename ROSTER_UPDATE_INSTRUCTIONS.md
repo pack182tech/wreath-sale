@@ -2,9 +2,9 @@
 
 ## Files Generated
 
-The new roster from `updated_roster.xls` has been parsed and converted to:
+The new roster from `updated_roster.html` has been parsed and converted to:
 
-1. **scouts-data.json** - JSON format with 49 scouts
+1. **scouts-data.json** - JSON format with 46 scouts
 2. **scouts-data.csv** - CSV format ready for Google Sheets import
 
 ## Update Steps
@@ -24,7 +24,7 @@ The new roster from `updated_roster.xls` has been parsed and converted to:
    - Convert text to numbers: Uncheck this option
 6. Verify the import:
    - Check that parent emails are in the correct format
-   - Ensure 49 scouts are imported
+   - Ensure 46 scouts are imported
    - Verify column headers match: `id,name,slug,rank,email,parentName,parentEmails,active`
 
 ### Option 2: Manual Update via Apps Script
@@ -67,10 +67,15 @@ function updateScoutsFromNewRoster() {
 
 ## New Roster Summary
 
-- **Total Scouts**: 49 (up from previous count)
-- **Scouts with Parent Emails**: Most scouts have parent contact info
-- **Ranks included**: Lion, Tiger, Wolf, Bear, Webelos
-- **Dens included**: Various den assignments
+- **Total Scouts**: 46
+- **Scouts with Parent Emails**: All 46 scouts have parent contact info
+- **Ranks Breakdown**:
+  - Lion: 9 scouts
+  - Tiger: 9 scouts
+  - Wolf: 8 scouts
+  - Bear: 14 scouts
+  - Webelos: 6 scouts
+- **Dens included**: Lion Den 2, Tiger Den 8, Wolf Den 7, Bear Den 3, Webelos Den 1
 
 ## Notable Changes
 
