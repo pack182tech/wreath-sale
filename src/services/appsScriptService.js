@@ -52,13 +52,9 @@ export async function sendOrderConfirmationEmail(order) {
   return result
 }
 
-export async function sendScoutWelcomeEmail(scout, qrCodeUrl, saleLink) {
-  console.log('[AppsScript] Sending scout welcome email for scout:', scout.name)
-  const result = await appsScriptPost('sendScoutWelcomeEmail', {
-    scout,
-    qrCodeUrl,
-    saleLink
-  })
+export async function sendScoutWelcomeEmail(emailData) {
+  console.log('[AppsScript] Sending scout welcome email for scout:', emailData.scoutName)
+  const result = await appsScriptPost('sendScoutWelcomeEmail', emailData)
   return result
 }
 
