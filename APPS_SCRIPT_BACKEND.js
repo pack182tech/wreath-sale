@@ -662,7 +662,7 @@ function sendScoutWelcomeEmail(emailData) {
             <ul style="margin: 10px 0; padding-left: 20px;">
               <li style="margin-bottom: 8px;">Share this link with family, friends, and neighbors</li>
               <li style="margin-bottom: 8px;">When they make a purchase, ${firstName} gets credit automatically</li>
-              <li style="margin-bottom: 8px;">Track sales progress on the leaderboard</li>
+              <li style="margin-bottom: 8px;">Track sales progress on <a href="https://pack182tech.github.io/wreath-sale/leaderboard" style="color: #2563eb; text-decoration: underline;">the leaderboard</a></li>
             </ul>
           </div>
 
