@@ -648,6 +648,15 @@ function sendScoutWelcomeEmail(emailData) {
             </p>
           </div>
 
+          <div style="text-align: center; margin: 30px 0;">
+            <div style="display: inline-block; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(scoutUrl)}" alt="QR Code for ${firstName}'s sales page" width="200" height="200" style="display: block;" />
+            </div>
+            <p style="font-size: 14px; color: #666; margin-top: 15px;">
+              Scan this QR code to visit ${firstName}'s sales page
+            </p>
+          </div>
+
           <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px 20px; border-radius: 4px; margin: 20px 0;">
             <h3 style="color: #1565c0; margin-top: 0;">How It Works</h3>
             <ul style="margin: 10px 0; padding-left: 20px;">
