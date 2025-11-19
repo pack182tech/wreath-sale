@@ -221,9 +221,7 @@ const WelcomeEmailModal = ({ scout, onClose, showToast }) => {
                 </div>
 
                 <p style={{ fontSize: '16px', lineHeight: '1.6' }}>
-                  Thank you for your support! If you have any questions, please contact{' '}
-                  {config?.pack?.leaderName || 'Pack Leadership'} at{' '}
-                  {config?.pack?.leaderEmail || 'pack182tech@gmail.com'}.
+                  Thank you for your support! If you have any questions, please contact the pack at fundraising@pack182.mypack.us.
                 </p>
 
                 <p style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: 0 }}>
