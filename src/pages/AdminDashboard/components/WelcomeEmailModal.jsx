@@ -122,7 +122,7 @@ const WelcomeEmailModal = ({ scout, onClose, showToast }) => {
 
               <div style={{ padding: '30px 20px' }}>
                 <p style={{ fontSize: '16px', lineHeight: '1.6', marginTop: 0 }}>
-                  Dear {scout.parentName || 'Scout Parent'},
+                  Proud Scouting Parent,
                 </p>
 
                 <p style={{ fontSize: '16px', lineHeight: '1.6' }}>
