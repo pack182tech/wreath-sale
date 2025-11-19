@@ -52,23 +52,119 @@ function App() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        fontFamily: 'Arial, sans-serif'
+        background: 'linear-gradient(to bottom, #1a2332 0%, #2d3e50 100%)',
+        fontFamily: 'Arial, sans-serif',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '50px',
-            height: '50px',
-            border: '5px solid #f3f3f3',
-            borderTop: '5px solid #1a472a',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 20px'
-          }}></div>
-          <p>Loading Pack 182 Wreath Sale...</p>
+        {/* Heavy Snow Effect */}
+        <div style={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              style={{
+                position: 'absolute',
+                top: '-10px',
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 4 + 2}px`,
+                height: `${Math.random() * 4 + 2}px`,
+                background: 'white',
+                borderRadius: '50%',
+                opacity: Math.random() * 0.6 + 0.4,
+                animation: `snowfall ${Math.random() * 3 + 2}s linear infinite`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          {/* Campfire */}
+          <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 30px' }}>
+            {/* Flames */}
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '25px',
+              height: '40px',
+              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500, #ffff00)',
+              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
+              animation: 'flicker 1.5s infinite alternate',
+              boxShadow: '0 0 20px #ff6b00, 0 0 40px #ff4500'
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '30%',
+              transform: 'translateX(-50%)',
+              width: '20px',
+              height: '35px',
+              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500)',
+              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
+              animation: 'flicker 1.3s infinite alternate',
+              animationDelay: '0.3s',
+              boxShadow: '0 0 15px #ff6b00'
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '15px',
+              left: '70%',
+              transform: 'translateX(-50%)',
+              width: '20px',
+              height: '35px',
+              background: 'linear-gradient(to top, #ff4500, #ff6b00, #ffa500)',
+              borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
+              animation: 'flicker 1.7s infinite alternate',
+              animationDelay: '0.6s',
+              boxShadow: '0 0 15px #ff6b00'
+            }}></div>
+            {/* Logs */}
+            <div style={{
+              position: 'absolute',
+              bottom: '5px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '60px',
+              height: '12px',
+              background: '#654321',
+              borderRadius: '6px',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.3)'
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '0px',
+              left: '40%',
+              transform: 'translateX(-50%) rotate(-20deg)',
+              width: '50px',
+              height: '10px',
+              background: '#5a3a1a',
+              borderRadius: '5px',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.3)'
+            }}></div>
+          </div>
+
+          <p style={{
+            color: 'white',
+            fontSize: '18px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+            margin: 0
+          }}>
+            Setting Up Camp for the Wreath Sale...
+          </p>
+
           <style>{`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
+            @keyframes flicker {
+              0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+              25% { transform: translateX(-50%) scaleY(1.1) scaleX(0.95); opacity: 0.95; }
+              50% { transform: translateX(-50%) scaleY(0.95) scaleX(1.05); opacity: 0.9; }
+              75% { transform: translateX(-50%) scaleY(1.05) scaleX(0.9); opacity: 0.95; }
+              100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+            }
+            @keyframes snowfall {
+              0% { transform: translateY(-10px) translateX(0); }
+              100% { transform: translateY(100vh) translateX(${Math.random() * 100 - 50}px); }
             }
           `}</style>
         </div>
