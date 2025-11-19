@@ -634,7 +634,7 @@ function sendScoutWelcomeEmail(emailData) {
         </div>
 
         <div style="padding: 30px 20px;">
-          <p style="font-size: 16px; line-height: 1.6; margin-top: 0;">Dear ${parentName},</p>
+          <p style="font-size: 16px; line-height: 1.6; margin-top: 0;">Proud Scouting Parent,</p>
 
           <p style="font-size: 16px; line-height: 1.6;">
             Thank you for supporting ${firstName} ${lastName} in this year's wreath sale fundraiser!
