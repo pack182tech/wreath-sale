@@ -550,7 +550,7 @@ function sendOrderConfirmationEmail(orderData) {
       </div>
 
       <div style="border-top: 3px solid #e0e0e0; margin-top: 30px; padding-top: 20px; text-align: center;">
-        <p style="margin: 10px 0; color: #666; font-size: 14px;">If you have any questions, please contact us at <a href="mailto:${pack.leaderEmail || 'threebridgespack182@gmail.com'}" style="color: #1a472a; text-decoration: none; font-weight: bold;">${pack.leaderEmail || 'threebridgespack182@gmail.com'}</a></p>
+        <p style="margin: 10px 0; color: #666; font-size: 14px;">If you have any questions, please contact the pack at <a href="mailto:fundraising@pack182.mypack.us" style="color: #1a472a; text-decoration: none; font-weight: bold;">fundraising@pack182.mypack.us</a></p>
         <p style="margin: 10px 0; color: #1a472a; font-size: 16px; font-weight: bold;">Thank you for supporting ${pack.name || 'Cub Scout Pack 182'}!</p>
       </div>
     </div>
@@ -687,7 +687,7 @@ function sendScoutWelcomeEmail(emailData) {
           </div>
 
           <p style="font-size: 16px; line-height: 1.6;">
-            Thank you for your support! If you have any questions, please contact ${config.pack.leaderName} at ${config.pack.leaderEmail}.
+            Thank you for your support! If you have any questions, please contact the pack at fundraising@pack182.mypack.us.
           </p>
 
           <p style="font-size: 16px; line-height: 1.6; margin-bottom: 0;">
