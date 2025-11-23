@@ -331,9 +331,9 @@ Error generating stack: `+s.message+`
                 <th>Order ID</th>
                 <th>Scout Name</th>
                 <th>Rank</th>
-                <th>Customer Name</th>
-                <th>Email</th>
-                <th>Phone</th>
+                <th>customerName</th>
+                <th>customerEmail</th>
+                <th>customerPhone</th>
                 <th class="text-right">Total</th>
               </tr>
             </thead>
