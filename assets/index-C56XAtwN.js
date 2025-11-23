@@ -85,7 +85,7 @@ Error generating stack: `+s.message+`
 
           body {
             font-family: Arial, sans-serif;
-            font-size: 9pt;
+            font-size: 4.5pt;
             line-height: 1.3;
             margin: 0;
             padding: 0;
@@ -107,19 +107,19 @@ Error generating stack: `+s.message+`
 
           .header h1 {
             margin: 0 0 4px 0;
-            font-size: 18pt;
+            font-size: 9pt;
             color: #003366;
           }
 
           .header h2 {
             margin: 0 0 4px 0;
-            font-size: 14pt;
+            font-size: 7pt;
             color: #003366;
           }
 
           .header p {
             margin: 0;
-            font-size: 9pt;
+            font-size: 4.5pt;
             color: #666;
           }
 
@@ -130,7 +130,7 @@ Error generating stack: `+s.message+`
             padding: 8px;
             margin-bottom: 12px;
             border-radius: 4px;
-            font-size: 8pt;
+            font-size: 4pt;
           }
 
           .summary-item {
@@ -145,7 +145,7 @@ Error generating stack: `+s.message+`
           }
 
           .summary-item .value {
-            font-size: 11pt;
+            font-size: 5.5pt;
             font-weight: bold;
             color: #003366;
           }
@@ -156,18 +156,18 @@ Error generating stack: `+s.message+`
 
           .cover-products h3 {
             color: #003366;
-            font-size: 12pt;
+            font-size: 6pt;
             margin-bottom: 10px;
             text-align: center;
           }
 
           .cover-products table {
-            font-size: 10pt;
+            font-size: 5pt;
           }
 
           .cover-products th {
             padding: 8px 6px;
-            font-size: 10pt;
+            font-size: 5pt;
           }
 
           .cover-products td {
@@ -184,7 +184,7 @@ Error generating stack: `+s.message+`
             color: white;
             padding: 4px 8px;
             font-weight: bold;
-            font-size: 10pt;
+            font-size: 5pt;
             border-radius: 3px;
             display: flex;
             justify-content: space-between;
@@ -192,7 +192,7 @@ Error generating stack: `+s.message+`
           }
 
           .scout-stats {
-            font-size: 8pt;
+            font-size: 4pt;
             font-weight: normal;
           }
 
@@ -200,7 +200,7 @@ Error generating stack: `+s.message+`
             width: 100%;
             border-collapse: collapse;
             margin-top: 4px;
-            font-size: 8pt;
+            font-size: 4pt;
           }
 
           th {
